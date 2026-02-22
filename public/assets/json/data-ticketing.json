@@ -1,0 +1,37 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "uuid": "550e8400-e29b-41d4-a716-446655440000",
+            "user_id": "User 1",
+            "category_id": "Kategori 1",
+            "request_name": "Request 1",
+            "description": "Description for request 1",
+            "status": "Open",
+            "created_at": "2023-02-22 00:00:00",
+            "updated_at": "2023-02-22 00:00:00"
+        },
+        {
+            "id": 2,
+            "uuid": "550e8400-e29b-41d4-a716-446655440001",
+            "user_id": "User 2",
+            "category_id": "Kategori 2",
+            "request_name": "Request 2",
+            "description": "Description for request 2",
+            "status": "On Progress",
+            "created_at": "2023-02-22 00:00:00",
+            "updated_at": "2023-02-22 00:00:00"
+        },
+        {
+            "id": 3,
+            "uuid": "550e8400-e29b-41d4-a716-446655440003",
+            "user_id": "User 3",
+            "category_id": "Kategori 3",
+            "request_name": "Request 3",
+            "description": "Description for request 3",
+            "status": "Not Started",
+            "created_at": "2023-02-22 00:00:00",
+            "updated_at": "2023-02-22 00:00:00"
+        }
+    ]
+}
