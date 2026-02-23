@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+    public function index()
+    {
+        return view('dataMaster.indexRequest');
+    }
     public function store(Request $request)
     {
         $ticket = Ticket::create([

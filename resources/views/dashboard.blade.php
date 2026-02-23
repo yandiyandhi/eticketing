@@ -87,7 +87,7 @@
             <hr class="my-4" />
             <!-- Column Search -->
             <div class="card">
-                <h5 class="card-header">List Antrian Tiket</h5>
+                <h5 class="card-header">List Request</h5>
                 <div class="card-datatable text-nowrap">
                     <table class="dt-column-search table">
                         <thead>

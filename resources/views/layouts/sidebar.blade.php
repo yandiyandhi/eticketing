@@ -31,23 +31,26 @@
         </li>
 
         <!-- Layouts -->
-        {{-- <li class="menu-item {{ Route::is('kuantitas.index', 'level.index') ? 'open' : '' }}"> --}}
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('department.index') ? 'open' : '' }}">        
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
             </a>
 
             <ul class="menu-sub">
-                {{-- <li class="menu-item {{ Route::is('kuantitas.index') ? 'active' : '' }}"> --}}
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('department.index') ? 'active' : '' }}">                
+                    <a href="{{ route('department.index') }}" class="menu-link">
                         <div data-i18n="Departemen">Departemen</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="#" class="menu-link">
                         <div data-i18n="Kategori">Kategori</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Status">Status</div>
                     </a>
                 </li>
             </ul>
@@ -59,15 +62,15 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('ticketing.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Master Data">Master Data</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
+                    <a href="{{ route('ticketing.index') }}" class="menu-link">
                         <div data-i18n="Request Ticketing">Request Ticketing</div>
                     </a>
                 </li>
