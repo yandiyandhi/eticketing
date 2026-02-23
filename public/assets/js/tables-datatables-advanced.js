@@ -181,7 +181,6 @@ $(function () {
                                 class: "bg-label-danger",
                             },
                         };
-                        console.log(status);
 
                         if (!map[status]) {
                             return status; // kalau status tidak dikenali

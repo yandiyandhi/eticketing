@@ -15,12 +15,15 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::controller(TicketController::class)->group(function(){
+    Route::controller(TicketController::class)->group(function () {
         Route::get('/ticketing', 'index')->name('ticketing.index');
     });
 
-    Route::controller(DepartmentController::class)->group(function(){
+    Route::controller(DepartmentController::class)->group(function () {
         Route::get('/department', 'index')->name('department.index');
+        Route::post('/department', 'store')->name('department.store');
+        Route::put('/departments/{department}', 'update')->name('department.update');
+        Route::delete('/departments/{department}', 'destroy')->name('department.destroy');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,3 +32,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/api.php';
