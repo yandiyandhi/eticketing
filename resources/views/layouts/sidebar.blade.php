@@ -31,14 +31,14 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Route::is('department.index') ? 'open' : '' }}">        
+        <li class="menu-item {{ Route::is('department.index', 'statuses.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('department.index') ? 'active' : '' }}">                
+                <li class="menu-item {{ Route::is('department.index') ? 'active' : '' }}">
                     <a href="{{ route('department.index') }}" class="menu-link">
                         <div data-i18n="Departemen">Departemen</div>
                     </a>
@@ -48,8 +48,8 @@
                         <div data-i18n="Kategori">Kategori</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('statuses.index') ? 'active' : '' }}">
+                    <a href="{{ route('statuses.index') }}" class="menu-link">
                         <div data-i18n="Status">Status</div>
                     </a>
                 </li>

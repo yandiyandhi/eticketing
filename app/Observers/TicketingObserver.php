@@ -2,9 +2,10 @@
 
 namespace App\Observers;
 
+use App\Models\ActivityLog;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
-use App\Models\ActivityLog;
+use Illuminate\Support\Str;
 
 class TicketingObserver
 {
@@ -18,5 +19,12 @@ class TicketingObserver
             'new_data'    => $ticket->toArray(),
             'description' => "Departemen baru dibuat: {$ticket->name}",
         ]);
+    }
+
+    public function saving(Ticket $ticket): void
+    {
+        $ticket->name = Str::title(
+            strtolower($ticket->name)
+        );
     }
 }

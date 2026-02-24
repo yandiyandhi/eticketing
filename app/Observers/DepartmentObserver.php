@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\ActivityLog;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DepartmentObserver
 {
@@ -35,5 +36,12 @@ class DepartmentObserver
     public function creating(Department $department): void
     {
         $department->updated_at = null;
+    }
+
+    public function saving(Department $department): void
+    {
+        $department->name = Str::title(
+            strtolower($department->name)
+        );
     }
 }

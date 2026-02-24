@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Department')
+@section('title', 'Status')
 @section('content')
     <div class="layout-page">
         <!-- Navbar -->
@@ -11,17 +11,15 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Departemen</h5>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalAddDepartment"><i class="ti ti-plus me-1"></i> Tambah Departemen</a>
+                    <h5 class="mb-0">List Status</h5>
+                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddStatus"><i
+                            class="ti ti-plus me-1"></i> Tambah Status</a>
                 </div>
-
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="text-center">
                             <tr>
                                 <th>No</th>
-                                <th>UUID</th>
                                 <th>Name</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
@@ -29,19 +27,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $item)
+                            @forelse ($status as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->uuid }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditDepartment"
+                                            data-bs-toggle="modal" data-bs-target="#modalEditStatus"
                                             data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteDepartment"
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteStatus"
                                             data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
                                             id="confirm-text">
                                             <i class="fa-solid fa-trash"></i>
@@ -50,7 +47,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">Data tidak ditemukan.</td>
+                                    <td colspan="5" class="text-center">Data tidak ditemukan.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -60,18 +57,8 @@
             <!--/ Column Search -->
         </div>
 
-        <form id="formDeleteDepartment" method="POST">
-            @csrf
-            @method('DELETE')
-        </form>
-
-        @include('dataRef.dept.addDept');
-        @include('dataRef.dept.editDept');
+        @include('dataRef.status.addStatus')
 
         @include('layouts.footercontent')
     </div>
 @endsection
-
-@push('myscript')
-    <script src="{{ asset('js/script/script.js') }}"></script>
-@endpush

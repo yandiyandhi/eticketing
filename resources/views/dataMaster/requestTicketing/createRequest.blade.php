@@ -16,7 +16,15 @@
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Request By</label>
-                        <input type="text" name="request_by" class="form-control" required>
+                        <input type="text" name="request_by" value="{{ $user->name }}" class="form-control"
+                            required readonly>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Department</label>
+                        <input type="text" name="department_id" value="{{ $user->department->id }}"
+                            class="form-control" hidden>
+                        <input type="text" name="" value="{{ $user->department->name }}" class="form-control"
+                            readonly required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Category Task</label>
