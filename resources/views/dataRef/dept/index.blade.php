@@ -36,14 +36,15 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#modalEditDepartment" data-id="{{ $item->uuid }}"
-                                            data-name="{{ $item->name }}">Edit</a>
-                                        <form action="#" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
+                                            data-name="{{ $item->name }}" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="javascript:void(0)"
+                                            class="btn btn-sm btn-icon btn-danger deleteDepartment"
+                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}"
+                                            title="Hapus" id="confirm-text">
+                                            <i class="fa-solid fa-trash"></i>
+                                    </a>
                                     </td>
                                 </tr>
                             @empty
@@ -57,6 +58,11 @@
             </div>
             <!--/ Column Search -->
         </div>
+
+        <form id="formDeleteDepartment" method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
 
         @include('dataRef.dept.addDept');
         @include('dataRef.dept.editDept');

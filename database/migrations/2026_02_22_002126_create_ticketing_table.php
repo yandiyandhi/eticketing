@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
+            $table->foreignId('department_id');
             $table->string('request_name');
             $table->text('description');
             $table->enum('status', ['Open', 'On Progress', 'Not Started', 'Success'])->default('Open');

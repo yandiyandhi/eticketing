@@ -4,6 +4,7 @@ namespace App\Services\Department;
 
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
+use DomainException;
 
 class DepartmentService
 {
@@ -28,6 +29,20 @@ class DepartmentService
         return DB::transaction(function () use ($department, $data) {
             $department->update($data);
             return $department->save();
+        });
+    }
+
+    public function delete(Department $department): void
+    {
+        DB::transaction(function () use ($department) {
+
+            if ($department->users()->exists()) {
+                throw new DomainException(
+                    'Departemen tidak bisa dihapus karena masih digunakan oleh User.'
+                );
+            }
+
+            $department->delete();
         });
     }
 }

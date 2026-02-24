@@ -25,5 +25,4 @@
 <script src="{{ asset('assets/js/app-logistics-dashboard.js') }}"></script>
 <script src="{{ asset('assets/js/tables-datatables-advanced.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-
 <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>

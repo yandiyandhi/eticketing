@@ -10,3 +10,36 @@ $(document).ready(function () {
         $("#formEditDepartment").attr("action", `/departments/${id}`);
     });
 });
+
+// Delete Department
+$(document).on("click", ".deleteDepartment", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `Kategori "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteDepartment").attr("action", `/departments/${id}`);
+            $("#formDeleteDepartment").submit();
+        }
+    });
+});
+
+// Close Alert
+document.addEventListener("DOMContentLoaded", function () {
+    const alerts = document.querySelectorAll(".alert-dismissible");
+
+    alerts.forEach((alert) => {
+        setTimeout(() => {
+            const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+            bsAlert.close();
+        }, 2000);
+    });
+});

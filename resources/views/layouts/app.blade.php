@@ -4,7 +4,7 @@
     data-style="light">
 
 <head>
-    @include('layouts.head')
+    @include('layouts.head')    
 </head>
 
 <body>
@@ -25,8 +25,6 @@
     @include('layouts.footer')
 
     @stack('myscript')
-
-
 </body>
 
 </html>
