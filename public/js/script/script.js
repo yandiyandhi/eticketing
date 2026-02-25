@@ -45,7 +45,7 @@ $(document).ready(function () {
     });
 });
 
-// Delete Department
+// Delete Status
 $(document).on("click", ".deleteStatus", function () {
     const id = $(this).data("id");
     const name = $(this).data("name");
