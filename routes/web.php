@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
@@ -33,6 +34,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/statuses', 'store')->name('statuses.store');
         Route::put('/statuses/{status}', 'update')->name('statuses.update');
         Route::delete('/statuses/{status}', 'destroy')->name('statuses.destroy');
+    });
+
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'index')->name('category.index');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class StatusObserver
 {
-    public function created(\App\Models\Status $status): void
+    public function created(Status $status): void
     {
         ActivityLog::create([
             'user_name'   => Auth::user()?->username ?? 'Guest',

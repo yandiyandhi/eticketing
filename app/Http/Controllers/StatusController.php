@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditStatusRequest;
 use App\Models\Status;
+use App\Services\Status\StatusService;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -24,13 +26,9 @@ class StatusController extends Controller
         return redirect()->route('statuses.index')->with('success', 'Status created successfully.');
     }
 
-    public function update(Request $request, \App\Models\Status $status)
+    public function update(EditStatusRequest $request, Status $status, StatusService $statusService)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $status->update($request->only('name'));
+        $statusService->updateStatus($status, $request->validated());
 
         return redirect()->route('statuses.index')->with('success', 'Status updated successfully.');
     }

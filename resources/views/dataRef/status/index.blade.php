@@ -57,8 +57,18 @@
             <!--/ Column Search -->
         </div>
 
+        <form id="formDeleteStatus" method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
+
         @include('dataRef.status.addStatus')
+        @include('dataRef.status.editStatus')
 
         @include('layouts.footercontent')
     </div>
 @endsection
+
+@push('myscript')
+    <script src="{{ asset('js/script/script.js') }}"></script>
+@endpush

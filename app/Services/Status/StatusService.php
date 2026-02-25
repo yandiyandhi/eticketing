@@ -27,10 +27,9 @@ class StatusService
     public function updateStatus(Status $status, array $data): bool
     {
         // Mulai transaksi
-        return DB::transaction(function () use ($status, $data) {
-            // Update status
+        return DB::transaction(function () use ($status, $data) {            
             $status->update($data);
-            return $status;
+            return $status->save();
         });
     }
 

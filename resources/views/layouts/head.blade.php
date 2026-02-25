@@ -53,7 +53,7 @@
 <style>
 .floating-alert {
     position: fixed;
-    top: 70px;
+    bottom: 50px;
     right: 20px;
     z-index: 9999;
     min-width: 300px;
