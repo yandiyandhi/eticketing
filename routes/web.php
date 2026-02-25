@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index')->name('category.index');
+        Route::POST('/category', 'store')->name('category.store');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

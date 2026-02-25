@@ -7,27 +7,57 @@
     <!-- Navbar -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <!-- Column Search -->
+            @include('partials.alert')
+            <!-- Column Search -->
             <div class="card">
-                <h5 class="card-header">List Request</h5>
-                <div class="card-datatable text-nowrap">
-                    <table class="dt-column-search table">
-                        <thead>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">List Category</h5>
+                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCategory"><i
+                            class="ti ti-plus me-1"></i> Tambah Kategori</a>
+                </div>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead class="text-center">
                             <tr>
                                 <th>No</th>
-                                <th>Request Name</th>
-                                <th>Category</th>
-                                <th>Request By</th>
-                                <th>Description</th>
-                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            {{-- @forelse ($status as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ $item->updated_at }}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
+                                            data-bs-toggle="modal" data-bs-target="#modalEditStatus"
+                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Edit"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteStatus"
+                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
+                                            id="confirm-text">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Data tidak ditemukan.</td>
+                                </tr>
+                            @endforelse --}}
+                        </tbody>
                     </table>
                 </div>
             </div>
-        <!--/ Column Search -->
-    </div>
+            <!--/ Column Search -->
+        </div>                                  
+
+        @include('dataRef.category.addCategory');
 
      @include('layouts.footercontent')
 </div>
