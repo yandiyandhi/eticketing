@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\KpiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index')->name('category.index');
         Route::POST('/category', 'store')->name('category.store');
+    });
+
+    Route::controller(KpiController::class)->group(function () {
+        Route::get('/kpi', 'index')->name('kpi.index');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

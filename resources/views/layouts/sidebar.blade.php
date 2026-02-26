@@ -31,7 +31,7 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Route::is('department.index', 'statuses.index', 'category.index') ? 'open' : '' }}">
+        <li class="menu-item {{ Route::is('department.index', 'statuses.index', 'category.index', 'kpi.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -51,6 +51,11 @@
                 <li class="menu-item {{ Route::is('statuses.index') ? 'active' : '' }}">
                     <a href="{{ route('statuses.index') }}" class="menu-link">
                         <div data-i18n="Status">Status</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Route::is('kpi.index') ? 'active' : '' }}">
+                    <a href="{{ route('kpi.index') }}" class="menu-link">
+                        <div data-i18n="KPI">KPI</div>
                     </a>
                 </li>
             </ul>

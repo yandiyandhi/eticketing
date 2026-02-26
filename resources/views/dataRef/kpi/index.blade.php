@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Category')
+@section('title', 'KPI')
 @section('content')
 <div class="layout-page">
     <!-- Navbar -->
@@ -11,9 +11,9 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Category</h5>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCategory"><i
-                            class="ti ti-plus me-1"></i> Tambah Kategori</a>
+                    <h5 class="mb-0">List KPI</h5>
+                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddKpi"><i
+                            class="ti ti-plus me-1"></i> Tambah KPI</a>
                 </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($category as $item)
+                            {{-- @forelse ($category as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->task_name }}</td>
@@ -49,7 +49,7 @@
                                 <tr>
                                     <td colspan="5" class="text-center">Data tidak ditemukan.</td>
                                 </tr>
-                            @endforelse
+                            @endforelse --}}
                         </tbody>
                     </table>
                 </div>
@@ -57,7 +57,7 @@
             <!--/ Column Search -->
         </div>                                  
 
-        @include('dataRef.category.addCategory');
+        @include('dataRef.kpi.addKpi');
 
      @include('layouts.footercontent')
 </div>
