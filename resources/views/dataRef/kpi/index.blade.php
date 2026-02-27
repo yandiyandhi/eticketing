@@ -27,13 +27,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @forelse ($category as $item)
+                            @forelse ($kpi as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->task_name }}</td>
+                                    <td>{{ $item->name }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
                                             data-bs-toggle="modal" data-bs-target="#modalEditStatus"
                                             data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Edit"><i
@@ -49,7 +49,7 @@
                                 <tr>
                                     <td colspan="5" class="text-center">Data tidak ditemukan.</td>
                                 </tr>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
