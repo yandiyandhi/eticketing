@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/category', 'index')->name('category.index');
         Route::POST('/category', 'store')->name('category.store');
         Route::PUT('/category/{category}', 'update')->name('category.update');
-        Route::delete('/category/{category}', 'destroy')->name('category.destroy');
+    Route::delete('/category/{category}', 'destroy')->name('category.destroy');
     });
 
     Route::controller(KpiController::class)->group(function () {
