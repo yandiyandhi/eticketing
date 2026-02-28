@@ -11,7 +11,7 @@ class CreateTicketingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,11 @@ class CreateTicketingRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => 'required|numeric',
+            'department_id' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'kpi_id' => 'required|numeric',
             'request_name' => 'required|string|max:255',
-            'request_by' => 'required|numeric|max:1',
-            'category_task' => 'required|numeric|max:1',
-            'kpi' => 'required|numeric|max:1',
             'keterangan' => 'required|string|max:255',
         ];
     }

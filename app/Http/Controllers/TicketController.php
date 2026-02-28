@@ -11,6 +11,8 @@ use App\Models\Ticket;
 use App\Models\User;
 use App\Services\Ticket\TicketService;
 use Illuminate\Support\Facades\Auth;
+use RequestParseBodyException;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -27,8 +29,8 @@ class TicketController extends Controller
         return view('dataMaster.requestTicketing.indexRequest', compact('data', 'user', 'categories', 'kpis'));
     }
 
-    public function store(CreateTicketingRequest $createTicketingRequest, TicketService $ticketService)
-    {
+    public function store(CreateTicketingRequest $createTicketingRequest, TicketService $ticketService)        
+    {                
         $ticketService->store($createTicketingRequest->validated());
 
         return redirect()->back()->with('success', 'Request berhasil dibuat.');

@@ -9,7 +9,7 @@ class TicketService
 {
     public function store(array $data): Ticket
     {
-        return DB::transactions(function () use ($data) {
+        return DB::transaction(function () use ($data) {
             return Ticket::create($data);
         });
     }

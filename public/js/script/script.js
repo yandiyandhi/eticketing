@@ -52,7 +52,7 @@ $(document).on("click", ".deleteStatus", function () {
 
     Swal.fire({
         title: "Yakin ingin menghapus?",
-        text: `Kategori "${name}" akan dihapus`,
+        text: `Status "${name}" akan dihapus`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ya, hapus",
