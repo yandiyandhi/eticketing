@@ -99,6 +99,39 @@ $(document).on("click", ".deleteKpi", function () {
     });
 });
 
+$(document).ready(function () {
+    $("#modalEditCategory").on("show.bs.modal", function (event) {
+        const button = $(event.relatedTarget);
+
+        const id = button.data("id");
+        const name = button.data("name");
+
+        $("#task_name").val(name);    
+        
+        $("#formEditCategory").attr("action", `/category/${id}`);
+    });
+});
+
+$(document).on("click"  , ".deleteCategory", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");    
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `KPI "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteCategory").attr("action", `/category/${id}`);
+            $("#formDeleteCategory").submit();
+        }
+    });
+});
+
 // Close Alert
 document.addEventListener("DOMContentLoaded", function () {
     const alerts = document.querySelectorAll(".alert-dismissible");

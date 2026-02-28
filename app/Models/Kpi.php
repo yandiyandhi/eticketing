@@ -18,7 +18,7 @@ class Kpi extends Model
         return $this->hasMany(Ticket::class);
     }
 
-    public function getRouteKey()
+    public function getRouteKeyName()
     {
         return 'uuid';
     }

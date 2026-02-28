@@ -11,7 +11,7 @@ class CreateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class CreateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'task_name' => 'required|string|max:255',
         ];
     }
 }

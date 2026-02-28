@@ -25,20 +25,20 @@ class KpiService
     }
 
     public function udpateKpi(Kpi $kpi, array $data): bool
-    {
+    {        
         return DB::transaction(function () use ($kpi, $data) {
             $kpi->update($data);
             return $kpi->save();
         });
     }
 
-    public function delete(Kpi $kpi): bool
+    public function delete(Kpi $kpi): void
     {
-        return DB::transaction(function () use ($kpi) {
+        DB::transaction(function () use ($kpi) {
 
             if ($kpi->ticketing()->exists()) {
                 throw new DomainException(
-                    'KPI tidak bisa dihapus karena masih digunakan oleh User.'
+                    'KPI tidak bisa dihapus karena masih digunakan.'
                 );
             }
 

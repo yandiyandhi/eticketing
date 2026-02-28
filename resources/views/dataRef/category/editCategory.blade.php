@@ -1,19 +1,20 @@
-<div class="modal fade" id="modalAddCategory" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalEditCategory" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Kategori</h5>
+                <h5 class="modal-title">Edit Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method="POST" action="{{ route('category.store') }}">
+            <form id="formEditCategory" method="POST" action="#">
                 @csrf
+                @method('PUT')
                 <div class="modal-body">
 
                     <div class="mb-2">
                         <label class="form-label">Category Name</label>
-                        <input type="text" name="task_name" class="form-control" required>
+                        <input type="text" name="task_name" id="task_name" class="form-control" required>
                     </div>
 
                 </div>

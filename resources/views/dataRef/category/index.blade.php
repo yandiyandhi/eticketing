@@ -35,11 +35,11 @@
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditStatus"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Edit"><i
+                                            data-bs-toggle="modal" data-bs-target="#modalEditCategory"
+                                            data-id="{{ $item->uuid }}" data-name="{{ $item->task_name }}" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteStatus"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteCategory"
+                                            data-id="{{ $item->uuid }}" data-name="{{ $item->task_name }}" title="Hapus"
                                             id="confirm-text">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
@@ -55,10 +55,20 @@
                 </div>
             </div>
             <!--/ Column Search -->
-        </div>                                  
+        </div>                     
+        
+        <form id="formDeleteCategory" method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
 
         @include('dataRef.category.addCategory');
+        @include('dataRef.category.editCategory');
 
      @include('layouts.footercontent')
 </div>
 @endsection
+
+@push('myscript')
+    <script src="{{ asset('js/script/script.js') }}"></script>
+@endpush

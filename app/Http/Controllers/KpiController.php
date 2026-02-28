@@ -25,20 +25,20 @@ class KpiController extends Controller
     }
 
     public function update(EditKpiRequest $editKpiRequest, Kpi $kpi, KpiService $kpiService)
-    {        
+    {                
         $kpiService->udpateKpi($kpi, $editKpiRequest->validated());
 
         return redirect()->back()->with('success', 'Data berhasil disimpan.');
     }
 
-    public function delete(Kpi $kpi, KpiService $kpiservice)
+    public function destroy(Kpi $kpi, KpiService $kpiservice)
     {
         try {
             $kpiservice->delete($kpi);
 
             return redirect()
                 ->back()
-                ->with('success', 'Kategori berhasil dihapus');
+                ->with('success', 'KPI berhasil dihapus');
         } catch (DomainException $e) {
             return redirect()
                 ->back()

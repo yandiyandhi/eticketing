@@ -11,6 +11,13 @@ class Category extends Model
     protected $table = 'category_task';
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['task_name', 'uuid'];
+
+    public function ticketing()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'uuid';
@@ -18,8 +25,8 @@ class Category extends Model
 
     protected static function booted()
     {
-        static::creating(function ($department) {
-            $department->uuid = Str::uuid();
+        static::creating(function ($category) {
+            $category->uuid = Str::uuid();
         });
     }
 }

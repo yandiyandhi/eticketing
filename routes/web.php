@@ -40,13 +40,15 @@ Route::middleware('auth')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index')->name('category.index');
         Route::POST('/category', 'store')->name('category.store');
+        Route::PUT('/category/{category}', 'update')->name('category.update');
+        Route::delete('/category/{category}', 'destroy')->name('category.destroy');
     });
 
     Route::controller(KpiController::class)->group(function () {
         Route::get('/kpi', 'index')->name('kpi.index');
         Route::post('/kpi', 'store')->name('kpi.store');
         Route::put('/kpi/{kpi}', 'update')->name('kpi.update');
-        Route::delete('/kpi/{kpi}', 'delete')->name('kpi.delete');
+        Route::delete('/kpi/{kpi}', 'destroy')->name('kpi.delete');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

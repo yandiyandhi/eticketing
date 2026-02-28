@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('category_id');
             $table->foreignId('department_id');
-            $table->foreignId('kpis_id');
+            $table->foreignId('kpi_id');
             $table->string('request_name');
             $table->text('description');
             $table->enum('status', ['Open', 'On Progress', 'Not Started', 'Success'])->default('Open');
