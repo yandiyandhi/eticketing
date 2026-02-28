@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(KpiController::class)->group(function () {
         Route::get('/kpi', 'index')->name('kpi.index');
         Route::post('/kpi', 'store')->name('kpi.store');
+        Route::put('/kpi/{kpi}', 'update')->name('kpi.update');
+        Route::delete('/kpi/{kpi}', 'delete')->name('kpi.delete');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

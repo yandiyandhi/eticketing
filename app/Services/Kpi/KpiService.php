@@ -4,6 +4,7 @@ namespace App\Services\Kpi;
 
 use App\Models\Kpi;
 use Illuminate\Support\Facades\DB;
+use DomainException;
 
 class KpiService
 {
@@ -20,6 +21,28 @@ class KpiService
 
             // Jika tidak ada buat baru
             return Kpi::create($data);
+        });
+    }
+
+    public function udpateKpi(Kpi $kpi, array $data): bool
+    {
+        return DB::transaction(function () use ($kpi, $data) {
+            $kpi->update($data);
+            return $kpi->save();
+        });
+    }
+
+    public function delete(Kpi $kpi): bool
+    {
+        return DB::transaction(function () use ($kpi) {
+
+            if ($kpi->ticketing()->exists()) {
+                throw new DomainException(
+                    'KPI tidak bisa dihapus karena masih digunakan oleh User.'
+                );
+            }
+
+            $kpi->delete();
         });
     }
 }

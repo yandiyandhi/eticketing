@@ -35,10 +35,10 @@
                                     <td>{{ $item->updated_at }}</td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditStatus"
+                                            data-bs-toggle="modal" data-bs-target="#modalEditKpi"
                                             data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteStatus"
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteKpi"
                                             data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
                                             id="confirm-text">
                                             <i class="fa-solid fa-trash"></i>
@@ -55,10 +55,20 @@
                 </div>
             </div>
             <!--/ Column Search -->
-        </div>                                  
+        </div>              
+        
+         <form id="formDeleteKpi" method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
 
         @include('dataRef.kpi.addKpi');
+        @include('dataRef.kpi.editKpi');
 
      @include('layouts.footercontent')
 </div>
 @endsection
+
+@push('myscript')
+    <script src="{{ asset('js/script/script.js') }}"></script>
+@endpush

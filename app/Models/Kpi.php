@@ -13,6 +13,11 @@ class Kpi extends Model
 
     protected $guarded = ['id'];
 
+    public function ticketing()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
     public function getRouteKey()
     {
         return 'uuid';
