@@ -4,7 +4,7 @@
     data-style="light">
 
 <head>
-    @include('layouts.head')    
+    @include('layouts.head')
 </head>
 
 <body>
@@ -22,9 +22,9 @@
         <div class="drag-target"></div>
     </div>
 
+    @stack('myscript')
     @include('layouts.footer')
 
-    @stack('myscript')
 </body>
 
 </html>

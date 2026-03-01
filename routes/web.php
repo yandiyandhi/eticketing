@@ -1,20 +1,47 @@
 <?php
 
+use App\Events\TicketCreated;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\KpiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/simulateticket', function () {
+
+    // ambil ticket pertama (tanpa insert baru)
+    $ticket = Ticket::with(['category', 'user', 'status'])->first();
+
+    if (!$ticket) {
+        return response()->json(['message' => 'Tidak ada ticket untuk test'], 404);
+    }
+
+    // dispatch event
+    event(new TicketCreated($ticket));
+
+    return response()->json([
+        'message' => 'Event terkirim',
+        'ticket' => $ticket
+    ]);
+});
+
+Route::get('/test-event', function () {
+    $ticket = \App\Models\Ticket::first();
+    event(new \App\Events\TicketCreated($ticket));
+    return 'ok';
+});
+
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
 
@@ -41,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/category', 'index')->name('category.index');
         Route::POST('/category', 'store')->name('category.store');
         Route::PUT('/category/{category}', 'update')->name('category.update');
-    Route::delete('/category/{category}', 'destroy')->name('category.destroy');
+        Route::delete('/category/{category}', 'destroy')->name('category.destroy');
     });
 
     Route::controller(KpiController::class)->group(function () {

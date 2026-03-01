@@ -51,13 +51,13 @@
 <script src="{{ asset('assets/js/config.js') }}"></script>
 
 <style>
-.floating-alert {
-    position: fixed;
-    bottom: 50px;
-    right: 20px;
-    z-index: 9999;
-    min-width: 300px;
-}
+    .floating-alert {
+        position: fixed;
+        bottom: 50px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+    }
 </style>
 
 <title>@yield('title')</title>

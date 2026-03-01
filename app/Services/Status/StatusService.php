@@ -20,6 +20,7 @@ class StatusService
             }
 
             // Jika tidak ada buat baru
+            $data['status'] = 0;
             return Status::create($data);
         });
     }
@@ -27,8 +28,9 @@ class StatusService
     public function updateStatus(Status $status, array $data): bool
     {
         // Mulai transaksi
-        return DB::transaction(function () use ($status, $data) {            
+        return DB::transaction(function () use ($status, $data) {
             $status->update($data);
+            $data['status'] = 0;
             return $status->save();
         });
     }

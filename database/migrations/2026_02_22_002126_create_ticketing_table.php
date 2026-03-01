@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('kpi_id');
             $table->string('request_name');
             $table->text('description');
-            $table->enum('status', ['Open', 'On Progress', 'Not Started', 'Success'])->default('Open');
+            $table->char('status_id', 1)->default('0');
             $table->timestamps();
         });
     }

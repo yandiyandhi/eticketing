@@ -33,15 +33,16 @@
                         <tbody>
                             @forelse ($data as $item)
                                 <tr>
-                                    <th>{{ $loop->iteration }}</th>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->category }}</td>
-                                    <td>{{ $item->request_by }}</td>
-                                    <td>{{ $item->description }}</td>
-                                    <td>{{ $item->status }}</td>
+                                    <th>{{ $loop->iteration ?? ' ' }}</th>
+                                    <td>{{ $item->request_name ?? ' ' }}</td>
+                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                    <td>{{ $item->user->name ?? ' ' }}</td>
+                                    <td>{{ $item->description ?? ' ' }}</td>
+                                    <td>{{ $item->status->name ?? ' ' }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
+                                            data-bs-toggle="modal" data-bs-target="#modalEditRequest" data-id="#"
+                                            data-name="#" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </td>
                                 </tr>
                             @empty

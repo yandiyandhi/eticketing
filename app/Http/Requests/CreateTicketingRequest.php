@@ -27,7 +27,7 @@ class CreateTicketingRequest extends FormRequest
             'category_id' => 'required|numeric',
             'kpi_id' => 'required|numeric',
             'request_name' => 'required|string|max:255',
-            'keterangan' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
         ];
     }
 }

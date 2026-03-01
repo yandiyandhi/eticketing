@@ -85,12 +85,19 @@
             </div>
 
             <hr class="my-4" />
-            <!-- Column Search -->
+
             <div class="card">
-                <h5 class="card-header">List Request</h5>
-                <div class="card-datatable text-nowrap">
-                    <table class="dt-column-search table">
-                        <thead>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">List Request</h5>
+                    <form class="d-flex ms-auto" method="GET" role="search">
+                        <input class="form-control form-control-sm me-2" type="search" name="q"
+                            placeholder="Search request..." value="{{ request('q') }}">
+                        <button class="btn btn-sm btn-primary" type="submit"><i class="ti ti-search"></i></button>
+                    </form>
+                </div>
+                <div class="table">
+                    <table class="table">
+                        <thead class="text-center">
                             <tr>
                                 <th>No</th>
                                 <th>Request Name</th>
@@ -101,30 +108,83 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody id="ticket-tbody">
+                            @forelse ($data as $item)
+                                <tr>
+                                    <th>{{ $loop->iteration ?? ' ' }}</th>
+                                    <td>{{ $item->request_name ?? ' ' }}</td>
+                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                    <td>{{ $item->user->name ?? ' ' }}</td>
+                                    <td>{{ $item->description ?? ' ' }}</td>
+                                    <td>{{ $item->status->name ?? ' ' }}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
+                                            data-bs-toggle="modal" data-bs-target="#modalEditRequest" data-id="#"
+                                            data-name="#" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">Data tidak ditemukan.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <!--/ Column Search -->
         </div>
 
         @include('layouts.footercontent')
     </div>
 @endsection
 
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+@push('myscript')
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.3/dist/echo.iife.js"></script>
 
-<script>
-    var pusher = new Pusher("{{ env('REVERB_APP_KEY') }}", {
-        wsHost: window.location.hostname,
-        wsPort: 8080,
-        forceTLS: false,
-        enabledTransports: ['ws']
-    });
+    <script>
+        window.Pusher = Pusher;
 
-    var channel = pusher.subscribe('tickets');
+        window.Echo = new Echo({
+            broadcaster: 'reverb',
+            key: "{{ config('broadcasting.connections.reverb.key') }}",
+            wsHost: "{{ config('broadcasting.connections.reverb.options.host') }}",
+            wsPort: "{{ config('broadcasting.connections.reverb.options.port') }}",
+            wssPort: "{{ config('broadcasting.connections.reverb.options.port') }}",
+            forceTLS: false,
+            enabledTransports: ['ws', 'wss'],
+        });
 
-    channel.bind('TicketCreated', function(data) {
-        console.log("Tiket baru:", data);
-        alert("Tiket baru masuk!");
-    });
-</script>
+        // listen after connected
+        // if (window.Echo && window.Echo.connector && window.Echo.connector.pusher) {
+        //     window.Echo.connector.pusher.connection.bind('connected', function() {
+        //         console.log('Echo connected, socketId:', window.Echo.socketId());
+
+        //         // subscribe to channel
+        //         window.Echo.channel('tickets')
+        //             .listen('ticket.created', (event) => {
+        //                 console.log('event received:', event);
+
+        //                 // contoh update table realtime
+        //                 const tbody = document.getElementById('ticket-tbody');
+        //                 if (tbody) {
+        //                     tbody.innerHTML += `
+    //                 <tr>
+    //                     <td>${event.ticket.id}</td>
+    //                     <td>${event.ticket.request_name}</td>
+    //                     <td>${event.ticket.status?.name ?? ''}</td>
+    //                 </tr>
+    //             `;
+        //                 }
+        //             });
+        //     });
+        // }
+
+        window.Echo.channel('tickets')
+            .listen('ticket.created', (event) => {
+                console.log('event received:', event);
+
+                alert('Ticket baru: ' + event.ticket.request_name);
+            });
+    </script>
+@endpush
