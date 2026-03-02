@@ -22,8 +22,8 @@
         <div class="drag-target"></div>
     </div>
 
-    @stack('myscript')
     @include('layouts.footer')
+    @stack('myscript')
 
 </body>
 
