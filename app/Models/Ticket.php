@@ -50,6 +50,7 @@ class Ticket extends Model
     {
         static::creating(function ($status) {
             $status->uuid = Str::uuid();
+            $status->status_id = '1';
         });
     }
 }
