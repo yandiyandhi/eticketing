@@ -13,6 +13,7 @@ use App\Observers\CategoryObserver;
 use App\Observers\KpiObserver;
 use App\Observers\TicketingObserver;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,8 @@ class AppServiceProvider extends ServiceProvider
         Ticket::observe(TicketingObserver::class);
         Category::observe(CategoryObserver::class);
         Kpi::observe(KpiObserver::class);
+        if (request()->header(key: 'x-forwarded-proto') === 'https') {
+            URL::forceScheme('https');
+        }
     }
 }

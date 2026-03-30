@@ -81,6 +81,32 @@
                 </li>
             </ul>
         </li>
+
+                <!-- Main Menu -->
+        <li class="menu-header small">
+            <span class="menu-header-text" data-i18n="Pengaturan">Pengaturan</span>
+        </li>
+
+        <!-- Layouts -->
+        <li class="menu-item {{ Route::is('ticketing.index') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div data-i18n="Role & Permission">Role & Permission</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
+                    <a href="{{ route('ticketing.index') }}" class="menu-link">
+                        <div data-i18n="Role">Role</div>
+                    </a>
+                </li>
+                                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
+                    <a href="{{ route('ticketing.index') }}" class="menu-link">
+                        <div data-i18n="Permission">Permission</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </aside>
 <!-- / Menu -->
