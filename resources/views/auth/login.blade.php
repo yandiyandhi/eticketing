@@ -25,7 +25,7 @@
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control @error('username') is-invalid @enderror"
                                     id="username" name="username" placeholder="Enter your username" autofocus
-                                    autocomplete="off" />
+                                    autocomplete="off" required />
                                 <x-error field="username" />
                             </div>
                             <div class="mb-6 form-password-toggle">
