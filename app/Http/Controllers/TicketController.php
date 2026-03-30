@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTicketingRequest;
 use App\Models\Category;
+use App\Models\Department;
 use App\Models\Kpi;
 use App\Models\Ticket;
 use App\Models\User;
@@ -30,5 +31,21 @@ class TicketController extends Controller
         $ticketService->store($createTicketingRequest->validated());
 
         return redirect()->back()->with('success', 'Request berhasil dibuat.');
+    }
+
+    public function edit($tiket)
+    {
+        
+        $data = Ticket::where('uuid', $tiket)->with('department', 'status', 'kpi', 'category', 'user')->firstOrFail();
+
+        $user = User::with('department')->first();
+
+        $categories = Category::orderBy('task_name', 'asc')->get();
+
+        $kpis = Kpi::orderBy('name', 'asc')->get();
+
+        $departments  = Department::orderBy('name', 'asc')->get();
+    
+        return view('dataMaster.requestTicketing.editRequest', compact('data', 'user', 'categories', 'kpis', 'departments'));
     }
 }

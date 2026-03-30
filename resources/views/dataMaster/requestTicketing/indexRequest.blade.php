@@ -40,9 +40,9 @@
                                     <td>{{ $item->description ?? ' ' }}</td>
                                     <td>{{ $item->status->name ?? ' ' }}</td>
                                     <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditRequest" data-id="#"
-                                            data-name="#" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
+                                            class="btn btn-sm btn-icon btn-warning" title="Edit"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
                                     </td>
                                 </tr>
                             @empty

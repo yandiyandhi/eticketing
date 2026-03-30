@@ -31,7 +31,8 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Route::is('department.index', 'statuses.index', 'category.index', 'kpi.index') ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::is('department.index', 'statuses.index', 'category.index', 'kpi.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -67,14 +68,14 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Route::is('ticketing.index') ? 'open' : '' }}">
+        <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Master Data">Master Data</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'active' : '' }}">
                     <a href="{{ route('ticketing.index') }}" class="menu-link">
                         <div data-i18n="Request Ticketing">Request Ticketing</div>
                     </a>
@@ -82,7 +83,7 @@
             </ul>
         </li>
 
-                <!-- Main Menu -->
+        <!-- Main Menu -->
         <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Pengaturan">Pengaturan</span>
         </li>
@@ -100,7 +101,7 @@
                         <div data-i18n="Role">Role</div>
                     </a>
                 </li>
-                                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
                     <a href="{{ route('ticketing.index') }}" class="menu-link">
                         <div data-i18n="Permission">Permission</div>
                     </a>

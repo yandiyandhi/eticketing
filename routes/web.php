@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(TicketController::class)->group(function () {
         Route::get('/ticketing', 'index')->name('ticketing.index');
         Route::POST('/ticketing', 'store')->name('ticketing.store');
+        Route::get('/ticketing/{tiket}', 'edit')->name('ticketing.edit');
     });
 
     Route::controller(DepartmentController::class)->group(function () {
