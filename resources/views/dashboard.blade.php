@@ -125,9 +125,9 @@
                                     </td>
                                     <td>{{ $item->status->name ?? ' ' }}</td>
                                     <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditRequest" data-id="#"
-                                            data-name="#" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
                                     </td>
                                 </tr>
                             @empty
@@ -147,27 +147,4 @@
 
 @push('myscript')
     <script src="{{ asset('js/script/script.js') }}"></script>
-    {{-- <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.3/dist/echo.iife.js"></script>
-
-    <script>
-        window.Pusher = Pusher;
-
-        window.Echo = new Echo({
-            broadcaster: 'reverb',
-            key: "{{ config('broadcasting.connections.reverb.key') }}",
-            wsHost: "{{ config('broadcasting.connections.reverb.options.host') }}",
-            wsPort: "{{ config('broadcasting.connections.reverb.options.port') }}",
-            wssPort: "{{ config('broadcasting.connections.reverb.options.port') }}",
-            forceTLS: false,
-            enabledTransports: ['ws', 'wss'],
-        });        
-
-        window.Echo.channel('tickets')
-            .listen('ticket.created', (event) => {
-                console.log('event received:', event);
-
-                alert('Ticket baru: ' + event.ticket.request_name);
-            });
-    </script> --}}
 @endpush

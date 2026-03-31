@@ -49,6 +49,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/ticketing', 'index')->name('ticketing.index');
         Route::POST('/ticketing', 'store')->name('ticketing.store');
         Route::get('/ticketing/{tiket}', 'edit')->name('ticketing.edit');
+        Route::put('/ticketing/{tiket}', 'update')->name('ticketing.update');
+        Route::get('/ticketing/status/{status}', 'status')->name('ticketing.status');
+        Route::put('/status/update/{id}', 'updateStatus')->name('ticketing.updateStatus');
     });
 
     Route::controller(DepartmentController::class)->group(function () {

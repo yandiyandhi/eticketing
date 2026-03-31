@@ -12,7 +12,7 @@ class StatusService
     {
         return DB::transaction(function () use ($data) {
             $status = Status::withTrashed()->where('name', $data['name'])->first();
-
+    
             // Jika ada dan soft delete maka restore
             if ($status && $status->trashed()) {
                 $status->restore();

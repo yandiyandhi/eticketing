@@ -83,12 +83,11 @@
             </ul>
         </li>
 
-        <!-- Main Menu -->
+        {{-- 
         <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Pengaturan">Pengaturan</span>
         </li>
-
-        <!-- Layouts -->
+        
         <li class="menu-item {{ Route::is('ticketing.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
@@ -107,7 +106,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
     </ul>
 </aside>
 <!-- / Menu -->

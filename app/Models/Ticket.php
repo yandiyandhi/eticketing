@@ -33,7 +33,7 @@ class Ticket extends Model
 
     public function status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
     public function userRequest()
@@ -48,9 +48,10 @@ class Ticket extends Model
 
     protected static function booted()
     {
-        static::creating(function ($status) {
-            $status->uuid = Str::uuid();
-            $status->status_id = '1';
+        static::creating(function ($ticket) {       
+            if (!$ticket->uuid) {
+                $ticket->uuid = Str::uuid();
+            }        
         });
     }
 }

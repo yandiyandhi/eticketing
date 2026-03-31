@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\Status;
 
 class DashboardController extends Controller
 {
@@ -33,7 +34,6 @@ class DashboardController extends Controller
                 ];
             });
 
-        // dd($statusCount['Queue']['count']);
         return view('dashboard', compact('data', 'statusCount'));
     }
 }

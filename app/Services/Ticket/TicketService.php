@@ -21,4 +21,28 @@ class TicketService
             // return $ticket;
         });
     }
+
+    public function update($tiket, array $data): Ticket
+    {
+        return DB::transaction(function () use ($tiket, $data) {
+
+            $ticket = Ticket::where('uuid', $tiket)->firstOrFail();
+
+            $ticket->update($data);
+
+            return $ticket;
+        });
+    }
+
+    public function updateStatus($id, array $data): Ticket
+    {
+        return DB::transaction(function () use ($id, $data) {
+
+            $ticket = Ticket::findOrFail($id);
+
+            $ticket->update($data);
+
+            return $ticket;
+        });
+    }
 }
