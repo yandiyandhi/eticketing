@@ -83,30 +83,30 @@
             </ul>
         </li>
 
-        {{-- 
+
         <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Pengaturan">Pengaturan</span>
+            <span class="menu-header-text" data-i18n="Report">Report</span>
         </li>
-        
-        <li class="menu-item {{ Route::is('ticketing.index') ? 'open' : '' }}">
+
+        <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Role & Permission">Role & Permission</div>
+                <div data-i18n="Report">Laporan</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
-                    <a href="{{ route('ticketing.index') }}" class="menu-link">
-                        <div data-i18n="Role">Role</div>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Tiketing">Tiketing</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Route::is('ticketing.index') ? 'active' : '' }}">
-                    <a href="{{ route('ticketing.index') }}" class="menu-link">
-                        <div data-i18n="Permission">Permission</div>
+                {{-- <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Aset">Aset</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
-        </li> --}}
+        </li>
     </ul>
 </aside>
 <!-- / Menu -->

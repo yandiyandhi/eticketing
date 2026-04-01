@@ -14,8 +14,6 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-<script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 
 <!-- Main JS -->
@@ -23,6 +21,5 @@
 
 <!-- Page JS -->
 <script src="{{ asset('assets/js/app-logistics-dashboard.js') }}"></script>
-<script src="{{ asset('assets/js/tables-datatables-advanced.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
