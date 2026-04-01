@@ -9,18 +9,25 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $data = Ticket::with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc')->paginate(10);
-        $statusCount = $data->getCollection()
-            ->groupBy(function ($item) {
-                return $item->status->id ?? 'Unknown';
-            })
-            ->map->count();
+        $status = Status::where('name', 'success')->first();
+        // Ambil data ticket dengan relasi
+        $data = Ticket::with('department', 'status', 'kpi', 'category', 'user')
+            ->where('status_id', '!=', $status->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
+        // Ambil collection dari page ini
         $collection = $data->getCollection();
 
-        $totalData = $collection->count(); // total data di page ini
+        // Hitung total ticket di page ini
+        $totalData = $collection->count();
 
+        // Hitung status count **selain "Success"**
         $statusCount = $collection
+            ->filter(function ($item) {
+                // Pastikan ada status
+                return isset($item->status->name) && strtolower($item->status->name) !== 'success';
+            })
             ->groupBy(function ($item) {
                 return $item->status->name ?? 'Unknown';
             })
@@ -33,7 +40,8 @@ class DashboardController extends Controller
                     'percentage' => $percentage
                 ];
             });
-
-        return view('dashboard', compact('data', 'statusCount'));
+        $countSuccess = Ticket::where('status_id', $status->id)->count();
+        
+        return view('dashboard', compact('data', 'statusCount', 'countSuccess'));
     }
 }

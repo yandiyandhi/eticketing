@@ -74,9 +74,9 @@
                                     <span class="avatar-initial rounded bg-label-success"><i
                                             class="ti ti-circle-check ti-28px text-success"></i></span>
                                 </div>
-                                <h4 class="mb-0">{{ $statusCount['Resolved']['count'] ?? 0 }}</h4>
+                                <h4 class="mb-0">{{ $countSuccess ?? 0 }}</h4>
                             </div>
-                            <p class="mb-1">Resolved</p>
+                            <p class="mb-1">Succeed</p>
                             <p class="mb-0">
                                 <span
                                     class="text-heading fw-medium me-2">{{ $statusCount['Resolved']['percentage'] ?? 0 }}%</span>
