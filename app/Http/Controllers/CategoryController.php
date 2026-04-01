@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Models\Category;
 use App\Services\Category\CategoryServices;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -16,7 +15,7 @@ class CategoryController extends Controller
     }
 
     public function store(CreateCategoryRequest $request, CategoryServices $categoryServices)
-    {                  
+    {
         $categoryServices->create($request->validated());
 
         return redirect()->back()->with('success', 'Kategori berhasil disimpan.');
