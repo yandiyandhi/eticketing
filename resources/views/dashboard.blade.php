@@ -94,8 +94,8 @@
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h6 class="mb-0">List Request</h6>
                     <form class="d-flex ms-auto" method="GET" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" name="q"
-                            placeholder="Search request..." value="{{ request('q') }}">
+                        <input class="form-control form-control-sm me-2" type="search" name="request"
+                            placeholder="Search request..." value="{{ request('request') }}">
                         <button class="btn btn-sm btn-primary" type="submit"><i class="ti ti-search"></i></button>
                     </form>
                 </div>
@@ -116,7 +116,7 @@
                         <tbody id="ticket-tbody">
                             @forelse ($data as $item)
                                 <tr>
-                                    <th>{{ $loop->iteration ?? ' ' }}</th>
+                                    <th>{{ $data->firstItem() + $loop->index }}</th>
                                     <td>{{ $item->request_name ?? ' ' }}</td>
                                     <td>{{ $item->category->task_name ?? ' ' }}</td>
                                     <td>{{ $item->user->name ?? ' ' }}</td>
@@ -137,6 +137,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end mt-3">
+                        {{ $data->links() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -77,7 +77,12 @@
             <ul class="menu-sub">
                 <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'active' : '' }}">
                     <a href="{{ route('ticketing.index') }}" class="menu-link">
-                        <div data-i18n="Request Ticketing">Request Ticketing</div>
+                        <div data-i18n="Request Ticketing IT">Request Ticketing IT</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Request Ticketing HR">Request Ticketing HR</div>
                     </a>
                 </li>
             </ul>
@@ -88,15 +93,15 @@
             <span class="menu-header-text" data-i18n="Report">Report</span>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('ticketing.reports') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Report">Laporan</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('ticketing.reports') ? 'active' : '' }}">
+                    <a href="{{ route('ticketing.reports') }}" class="menu-link">
                         <div data-i18n="Tiketing">Tiketing</div>
                     </a>
                 </li>

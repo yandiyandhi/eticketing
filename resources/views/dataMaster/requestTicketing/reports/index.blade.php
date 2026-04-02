@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Request Ticketing')
+@section('title', 'List Request Ticketing')
 @section('content')
     <div class="layout-page">
         <!-- Navbar -->
@@ -11,61 +11,54 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Request</h5>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddRequest"><i
-                            class="ti ti-plus me-1"></i> Request</a>
+                    <h6 class="mb-0">List Request</h6>
+                    <form class="d-flex ms-auto" method="GET" role="search">
+                        <input class="form-control form-control-sm me-2" type="search" name="request"
+                            placeholder="Search request..." value="{{ request('request') }}">
+                        <button class="btn btn-sm btn-primary" type="submit"><i class="ti ti-search"></i></button>
+                    </form>
                 </div>
-
-
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="text-center">
                             <tr>
                                 <th>No</th>
+                                <th>User</th>
+                                <th>Dept</th>
                                 <th>Request Name</th>
-                                <th>Category</th>
-                                <th>Request By</th>
-                                <th>Description</th>
+                                <th>Desc</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Date Req</th>
+                                <th>Date End</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $item)
+                            @forelse ($tickets as $item)
                                 <tr>
-                                    <th>{{ $data->firstItem() + $loop->index }}</th>
-                                    <td>{{ $item->request_name ?? ' ' }}</td>
-                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                    <th>{{ $tickets->firstItem() + $loop->index }}</th>
                                     <td>{{ $item->user->name ?? ' ' }}</td>
+                                    <td>{{ $item->department->name ?? ' ' }}</td>
+                                    <td>{{ $item->request_name ?? ' ' }}</td>
                                     <td>{{ $item->description ?? ' ' }}</td>
                                     <td>{{ $item->status->name ?? ' ' }}</td>
-                                    <td>
-                                        <a href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
-                                            class="btn btn-sm btn-icon btn-warning" title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
-                                    </td>
+                                    <td>{{ $item->created_at->format('d-m-Y') ?? ' ' }}</td>
+                                    <td>{{ $item->updated_at->format('d-m-Y') ?? ' ' }}</td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Data tidak ditemukan.</td>
+                                    <td colspan="8" class="text-center">Data tidak ditemukan.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end mt-3">
-                        {{ $data->links() }}
+                        {{ $tickets->links() }}
                     </div>
                 </div>
             </div>
             <!--/ Column Search -->
         </div>
 
-        @include('dataMaster.requestTicketing.createRequest')
-
         @include('layouts.footercontent')
     </div>
 @endsection
-
-@push('myscript')
-    <script src="{{ asset('js/script/script.js') }}"></script>
-@endpush

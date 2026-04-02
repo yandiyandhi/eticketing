@@ -77,4 +77,35 @@ class TicketController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Status berhasil diperbarui.');
     }
+
+
+
+    // Laporan
+
+    public function indexReports()
+    {
+        $request = request('request');
+        
+        $tickets = Ticket::where('status_id', '=', 4)->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
+
+        if ($request) {
+            $tickets->where(function ($query) use ($request) {
+                $query->where('request_name', 'like', "%{$request}%")
+                    ->orWhere('description', 'like', "%{$request}%")
+                    ->orWhereHas('user', function ($q) use ($request) {
+                        $q->where('name', 'like', "%{$request}%");
+                    })
+                    ->orWhereHas('category', function ($q) use ($request) {
+                        $q->where('task_name', 'like', "%{$request}%");
+                    })
+                    ->orWhereHas('department', function ($q) use ($request) {
+                        $q->where('name', 'like', "%{$request}%");
+                    });
+            });
+        }
+
+        $tickets = $tickets->paginate(10)->withQueryString();
+
+        return view('dataMaster.requestTicketing.reports.index', compact('tickets'));
+    }
 }

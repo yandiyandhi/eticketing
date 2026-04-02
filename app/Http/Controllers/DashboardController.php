@@ -9,12 +9,30 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $search = request('request');
+
         $status = Status::where('name', 'success')->first();
         // Ambil data ticket dengan relasi
-        $data = Ticket::with('department', 'status', 'kpi', 'category', 'user')
+        $datas = Ticket::with('department', 'status', 'kpi', 'category', 'user')
             ->where('status_id', '!=', $status->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->orderBy('created_at', 'desc');
+
+        if ($search) {
+            $datas->where(function ($query) use ($search) {
+                $query->where('request_name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('category', function ($q) use ($search) {
+                        $q->where('task_name', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('department', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    }); 
+            });
+        }
+        $data = $datas->paginate(10)->withQueryString();
 
         // Ambil collection dari page ini
         $collection = $data->getCollection();

@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/ticketing/{tiket}', 'update')->name('ticketing.update');
         Route::get('/ticketing/status/{status}', 'status')->name('ticketing.status');
         Route::put('/status/update/{id}', 'updateStatus')->name('ticketing.updateStatus');
+
+        Route::get('/reports/ticketing', 'indexReports')->name('ticketing.reports');
     });
 
     Route::controller(DepartmentController::class)->group(function () {
