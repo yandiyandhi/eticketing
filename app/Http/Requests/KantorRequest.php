@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTicketingRequest extends FormRequest
+class KantorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,8 @@ class CreateTicketingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|numeric',
-            'department_id' => 'required|numeric',
-            'category_id' => 'required|numeric',                        
-            'description' => 'required|string|max:255',
-            'request_to' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
         ];
     }
 }

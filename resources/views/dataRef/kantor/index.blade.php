@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Department')
+@section('title', 'Kantor')
 @section('content')
     <div class="layout-page">
         <!-- Navbar -->
@@ -11,9 +11,9 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Departemen</h5>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalAddDepartment"><i class="ti ti-plus me-1"></i> Tambah Departemen</a>
+                    <h5 class="mb-0">List Kantor</h5>
+                    <a href="{{ route('kantor.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
+                        Tambah Kantor</a>
                 </div>
 
                 <div class="table-responsive text-nowrap">
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $item)
+                            @forelse ($kantor as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->uuid }}</td>
@@ -37,11 +37,10 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditDepartment"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Edit"><i
+                                        <a href="{{ route('kantor.edit', $item->uuid) }}"
+                                            class="btn btn-sm btn-icon btn-warning" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteDepartment"
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteKantor"
                                             data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
                                             id="confirm-text">
                                             <i class="fa-solid fa-trash"></i>
@@ -55,17 +54,12 @@
                             @endforelse
                         </tbody>
                     </table>
-                    @if ($data->count())
-                        <div class="d-flex justify-content-end mt-3">
-                            {{ $data->links() }}
-                        </div>
-                    @endif
                 </div>
             </div>
             <!--/ Column Search -->
         </div>
 
-        <form id="formDeleteDepartment" method="POST">
+        <form id="formDeleteKantor" method="POST">
             @csrf
             @method('DELETE')
         </form>

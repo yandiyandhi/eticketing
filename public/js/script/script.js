@@ -32,6 +32,27 @@ $(document).on("click", ".deleteDepartment", function () {
     });
 });
 
+// Delete Kantor
+$(document).on("click", ".deleteKantor", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `Kantor "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteKantor").attr("action", `/kantor/${id}`);
+            $("#formDeleteKantor").submit();
+        }
+    });
+});
+
 $(document).ready(function () {
     $("#modalEditStatus").on("show.bs.modal", function (event) {
         const button = $(event.relatedTarget);
@@ -141,5 +162,48 @@ document.addEventListener("DOMContentLoaded", function () {
             const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
             bsAlert.close();
         }, 2000);
+    });
+});
+
+
+// Request Ticketing Success
+$(document).on("click", ".StatusRequestSuccess", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin update?",
+        text: `Status "${name}" akan diupdate`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, update",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        // if (result.isConfirmed) {
+        //     $("#formUpdateStatus").attr("action", `/statuses/${id}`);
+        //     $("#formUpdateStatus").submit();
+        // }
+    });
+});
+
+// Request Ticketing Cancel
+$(document).on("click", ".StatusRequestCancel", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin update?",
+        text: `Status "${name}" akan diupdate`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, update",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        // if (result.isConfirmed) {
+        //     $("#formUpdateStatus").attr("action", `/statuses/${id}`);
+        //     $("#formUpdateStatus").submit();
+        // }
     });
 });

@@ -17,11 +17,6 @@
                     <form method="POST" action="">
                         @csrf
                         @method('PUT') <div class="modal-body">
-                            <div class="mb-2">
-                                <label class="form-label">Request Name</label>
-                                <input type="text" name="request_name" class="form-control"
-                                    value="{{ old('request_name', $data->request_name) }}" required>
-                            </div>
 
                             <div class="mb-2">
                                 <label class="form-label">Request By</label>
@@ -37,24 +32,20 @@
                             </div>
 
                             <div class="mb-2">
+                                <label class="form-label">Request To</label>
+                                <select name="request_to" class="form-control" required>
+                                    <option value="it" {{ $data->request_to == 'it' ? 'selected' : '' }}>IT</option>
+                                    <option value="hr" {{ $data->request_to == 'hr' ? 'selected' : '' }}>HR</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-2">
                                 <label class="form-label">Category Task</label>
                                 <select name="category_id" class="form-control" required>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
                                             {{ $data->category_id == $category->id ? 'selected' : '' }}>
                                             {{ $category->task_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-2">
-                                <label class="form-label">KPI</label>
-                                <select name="kpi_id" class="form-control" required>
-                                    @foreach ($kpis as $kpi)
-                                        <option value="{{ $kpi->id }}"
-                                            {{ $data->kpi_id == $kpi->id ? 'selected' : '' }}>
-                                            {{ $kpi->name }}
                                         </option>
                                     @endforeach
                                 </select>

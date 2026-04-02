@@ -12,13 +12,7 @@ class TicketService
     {
         return DB::transaction(function () use ($data) {
 
-            return $ticket = Ticket::create($data);
-
-            // event(new TicketCreated(
-            //     $ticket->load(['category', 'user', 'status'])
-            // ));
-
-            // return $ticket;
+            return $ticket = Ticket::create($data);          
         });
     }
 

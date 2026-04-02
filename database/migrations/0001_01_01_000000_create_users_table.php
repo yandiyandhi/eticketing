@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('department_id')->nullable();
+            $table->foreignId('department_id');
+            $table->foreignId('kantor_id');
             $table->string('username')->unique();
             $table->string('name');            
             $table->string('email')->unique();

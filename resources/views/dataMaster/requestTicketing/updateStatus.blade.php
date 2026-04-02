@@ -29,7 +29,21 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="mb-2">
+                                <label class="form-label">KPI</label>
+                                <select name="kpi_id" class="form-control" required>
+                                    <option value="" selected>-- Pilih KPI --</option>
+                                    @foreach ($kpi as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Keterangan</label>
+                                <input type="text" name="keterangan" class="form-control" required>
+                            </div>
                             <button type="submit" class="btn btn-primary mt-4">Update Status</button>
                     </form>
                 </div>

@@ -21,11 +21,9 @@ class TicketController extends Controller
 
         $user = User::with('department')->first();
 
-        $categories = Category::orderBy('task_name', 'asc')->get();
+        $categories = Category::orderBy('task_name', 'asc')->get();        
 
-        $kpis = Kpi::orderBy('name', 'asc')->get();
-
-        return view('dataMaster.requestTicketing.indexRequest', compact('data', 'user', 'categories', 'kpis'));
+        return view('dataMaster.requestTicketing.indexRequest', compact('data', 'user', 'categories'));
     }
 
     public function store(CreateTicketingRequest $createTicketingRequest, TicketService $ticketService)
@@ -47,7 +45,7 @@ class TicketController extends Controller
         $kpis = Kpi::orderBy('name', 'asc')->get();
 
         $departments  = Department::orderBy('name', 'asc')->get();
-    
+        
         return view('dataMaster.requestTicketing.editRequest', compact('data', 'user', 'categories', 'kpis', 'departments'));
     }
 
@@ -64,7 +62,9 @@ class TicketController extends Controller
         
         $status = Status::orderBy('name', 'asc')->get();
 
-        return view('dataMaster.requestTicketing.updateStatus', compact('ticket', 'status'));
+        $kpi = Kpi::orderBy('name', 'asc')->get();
+
+        return view('dataMaster.requestTicketing.updateStatus', compact('ticket', 'status', 'kpi'));
     }
 
     public function updateStatus($id, TicketService $ticketService)

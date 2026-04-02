@@ -11,7 +11,7 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Request</h5>
+                    <h6 class="mb-0">List Request</h6>
                     <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddRequest"><i
                             class="ti ti-plus me-1"></i> Request</a>
                 </div>
@@ -19,12 +19,12 @@
 
                 <div class="table-responsive text-nowrap">
                     <table class="table">
-                        <thead class="text-center">
+                        <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Request Name</th>
                                 <th>Category</th>
                                 <th>Request By</th>
+                                <th>Request To</th>
                                 <th>Description</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -34,15 +34,37 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <th>{{ $data->firstItem() + $loop->index }}</th>
-                                    <td>{{ $item->request_name ?? ' ' }}</td>
                                     <td>{{ $item->category->task_name ?? ' ' }}</td>
                                     <td>{{ $item->user->name ?? ' ' }}</td>
+                                    <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
                                     <td>{{ $item->description ?? ' ' }}</td>
                                     <td>{{ $item->status->name ?? ' ' }}</td>
                                     <td>
-                                        <a href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
-                                            class="btn btn-sm btn-icon btn-warning" title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        {{--  --}}
+
+                                        <button type="button"
+                                            class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="icon-base ti ti-dots-vertical"></i></button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
+                                                    class="btn btn-sm btn-icon btn-warning">Edit</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                    class="btn btn-sm btn-icon btn-warning" data-bs-toggle="modal"
+                                                    data-bs-target="#StatusRequestSuccess" data-id="{{ $item->uuid }}"
+                                                    data-name="Success">Success</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                    class="btn btn-sm btn-icon btn-warning" data-bs-toggle="modal"
+                                                    data-bs-target="#StatusRequestCancel" data-id="{{ $item->uuid }}"
+                                                    data-name="Cancel">Cancel</a>
+                                            </li>
+                                        </ul>
                                     </td>
                                 </tr>
                             @empty
@@ -61,6 +83,11 @@
         </div>
 
         @include('dataMaster.requestTicketing.createRequest')
+
+        <form id="formUpdateStatus" method="POST">
+            @csrf
+            @method('PUT')
+        </form>
 
         @include('layouts.footercontent')
     </div>

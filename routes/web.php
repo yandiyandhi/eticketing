@@ -8,6 +8,7 @@ use App\Http\Controllers\KpiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\KantorController;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,15 @@ Route::middleware('auth')->group(function () {
         Route::put('/status/update/{id}', 'updateStatus')->name('ticketing.updateStatus');
 
         Route::get('/reports/ticketing', 'indexReports')->name('ticketing.reports');
+    });
+
+    Route::controller(KantorController::class)->group(function () {
+        Route::get('/kantor', 'index')->name('kantor.index');       
+        Route::get('/kantor/create', 'create')->name('kantor.create');
+        Route::post('/kantor', 'store')->name('kantor.store');
+        Route::get('/kantor/edit/{id}', 'edit')->name('kantor.edit');
+        Route::put('/kantor/{id}', 'update')->name('kantor.update');
+        Route::delete('/kantor/{id}', 'destroy')->name('kantor.destroy');
     });
 
     Route::controller(DepartmentController::class)->group(function () {

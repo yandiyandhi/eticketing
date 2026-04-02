@@ -6,8 +6,6 @@ use App\Http\Requests\EditStatusRequest;
 use App\Http\Requests\CreateStatusRequest;
 use App\Models\Status;
 use App\Services\Status\StatusService;
-use GuzzleHttp\Promise\Create;
-use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
@@ -30,7 +28,7 @@ class StatusController extends Controller
         return redirect()->route('statuses.index')->with('success', 'Status updated successfully.');
     }
 
-    public function destroy(\App\Models\Status $status)
+    public function destroy(Status $status)
     {
         $status->delete();
 

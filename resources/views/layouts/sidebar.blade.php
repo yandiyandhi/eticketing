@@ -32,13 +32,18 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('department.index', 'statuses.index', 'category.index', 'kpi.index') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <i class="menu-icon ti ti-package"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
             </a>
 
             <ul class="menu-sub">
+                <li class="menu-item {{ Route::is('kantor.index', 'kantor.create', 'kantor.edit') ? 'active' : '' }}">
+                    <a href="{{ route('kantor.index') }}" class="menu-link">
+                        <div data-i18n="Kantor">Kantor</div>
+                    </a>
+                </li>
                 <li class="menu-item {{ Route::is('department.index') ? 'active' : '' }}">
                     <a href="{{ route('department.index') }}" class="menu-link">
                         <div data-i18n="Departemen">Departemen</div>
@@ -70,7 +75,7 @@
         <!-- Layouts -->
         <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <i class="menu-icon ti ti-server"></i>
                 <div data-i18n="Master Data">Master Data</div>
             </a>
 
@@ -95,8 +100,8 @@
 
         <li class="menu-item {{ Route::is('ticketing.reports') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Report">Laporan</div>
+                <i class="menu-icon ti ti-files"></i>
+                <div data-i18n="Laporan">Laporan</div>
             </a>
 
             <ul class="menu-sub">

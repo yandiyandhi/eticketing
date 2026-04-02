@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Department;
+use App\Models\Kantor;
 use App\Models\Kpi;
 use App\Models\Status;
 use App\Models\User;
@@ -23,9 +24,30 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        Kantor::insert([
+            [
+                'uuid' => Str::uuid(),
+                'name' => 'Kantor Toha',
+                'address' => 'Jl. M. Toha No. 266, Bandung 40243',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        Kantor::insert([
+            [
+                'uuid' => Str::uuid(),
+                'name' => 'Kantor Karapitan',
+                'address' => 'Jl. Karapitan No.16 B, Bandung 40261',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
         User::create([
             'uuid' => Str::uuid(),
             'department_id' => '1',
+            'kantor_id' => '1',
             'username' => 'admin',
             'name' => 'Administrator',
             'email' => 'admin@example.com',
@@ -35,9 +57,10 @@ class DatabaseSeeder extends Seeder
         User::create([
             'uuid' => Str::uuid(),
             'department_id' => '2',
-            'username' => 'guest',
-            'name' => 'Guest User',
-            'email' => 'guest@example.com',
+            'kantor_id' => '1',
+            'username' => 'yandi',
+            'name' => 'YandiYandhi',
+            'email' => 'yandi@example.com',
             'password' => Hash::make('admin123*'),
         ]);
 
@@ -92,7 +115,13 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'uuid' => Str::uuid(),
-                'name' => 'Not Started',
+                'name' => 'Cancel',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'name' => 'Done',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

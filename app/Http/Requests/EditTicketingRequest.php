@@ -25,8 +25,7 @@ class EditTicketingRequest extends FormRequest
             'user_id' => 'required|numeric',
             'department_id' => 'required|numeric',
             'category_id' => 'required|numeric',
-            'kpi_id' => 'required|numeric',
-            'request_name' => 'required|string|max:255',
+            'request_to' => 'required|string|max:255',
             'description' => 'required|string|max:255',
         ];
     }

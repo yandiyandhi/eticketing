@@ -17,7 +17,7 @@ class TicketingObserver
             'model'       => 'Ticket',
             'model_id'    => $ticket->id,
             'new_data'    => $ticket->toArray(),
-            'description' => "Request baru dibuat: {$ticket->request_name}",
+            'description' => "Request baru dibuat: {$ticket->description}",
         ]);        
     }
 
@@ -30,14 +30,7 @@ class TicketingObserver
             'model_id'  => $ticket->id,
             'old_data'  => $ticket->getOriginal(),
             'new_data'  => $ticket->getChanges(),
-            'description' => "Request diubah: {$ticket->request_name}"
+            'description' => "Request diubah: {$ticket->description}"
         ]);
-    }
-
-    public function saving(Ticket $ticket): void
-    {
-        $ticket->request_name = Str::title(
-            strtolower($ticket->request_name)
-        );
     }
 }

@@ -11,7 +11,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $data = Department::orderBy('name', 'asc')->get();
+        $data = Department::orderBy('name', 'asc')->paginate(10);
         return view('dataRef.dept.index', compact('data'));
     }
 

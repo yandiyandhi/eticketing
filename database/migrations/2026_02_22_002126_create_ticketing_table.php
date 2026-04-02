@@ -17,9 +17,12 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('category_id');
             $table->foreignId('department_id');
-            $table->foreignId('kpi_id');
-            $table->string('request_name');
-            $table->text('description');
+            $table->foreignId('kpi_id')->nullable();
+            $table->string('request_to')->nullable();
+            $table->dateTime('time_start')->nullable();
+            $table->dateTime('time_end')->nullable();
+            $table->text('description')->nullable();
+            $table->text('keterangan')->nullable();
             $table->char('status_id', 1)->default('1');
             $table->timestamps();
         });

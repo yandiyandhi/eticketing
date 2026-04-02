@@ -11,10 +11,6 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-2">
-                        <label class="form-label">Request Name</label>
-                        <input type="text" name="request_name" class="form-control" required>
-                    </div>
-                    <div class="mb-2">
                         <label class="form-label">Request By</label>
                         <input type="text" name="user_id" value="{{ Auth::user()->id ?? ' ' }}" class="form-control"
                             hidden>
@@ -29,6 +25,14 @@
                             class="form-control" readonly required>
                     </div>
                     <div class="mb-2">
+                        <label class="form-label">Request To</label>
+                        <select name="request_to" class="form-control" required>
+                            <option value="" disabled selected> -- Select -- </option>
+                            <option value="it">IT</option>
+                            <option value="hr">HR</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
                         <label class="form-label">Category Task</label>
                         <select name="category_id" class="form-control" required>
                             <option value="" disabled selected> -- Pilih Kategori -- </option>
@@ -36,17 +40,6 @@
                                 <option value="{{ $category->id }}"
                                     {{ old('category_id') == $category->task_name ? 'selected' : '' }}>
                                     {{ $category->task_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">KPI</label>
-                        <select name="kpi_id" class="form-control" required>
-                            <option value="" disabled selected> -- Pilih KPI -- </option>
-                            @foreach ($kpis as $kpi)
-                                <option value="{{ $kpi->id }}" {{ old('kpi_id') == $kpi->name ? 'selected' : '' }}>
-                                    {{ $kpi->name }}
                                 </option>
                             @endforeach
                         </select>
