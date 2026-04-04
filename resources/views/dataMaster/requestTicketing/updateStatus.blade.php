@@ -34,7 +34,8 @@
                                 <select name="kpi_id" class="form-control" required>
                                     <option value="" selected>-- Pilih KPI --</option>
                                     @foreach ($kpi as $item)
-                                        <option value="{{ $item->id }}">
+                                        <option value="{{ $item->id }}"
+                                            {{ $ticket->kpi_id == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
@@ -42,7 +43,8 @@
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Keterangan</label>
-                                <input type="text" name="keterangan" class="form-control" required>
+                                <input type="text" name="keterangan" class="form-control"
+                                    value="{{ $ticket->keterangan ?? '' }}" required>
                             </div>
                             <button type="submit" class="btn btn-primary mt-4">Update Status</button>
                     </form>
@@ -51,6 +53,6 @@
             <!--/ Column Search -->
         </div>
 
-        @include('layouts.footercontent')
     </div>
+    @include('layouts.footercontent')
 @endsection

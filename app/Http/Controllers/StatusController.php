@@ -25,7 +25,7 @@ class StatusController extends Controller
     {
         $statusService->updateStatus($status, $request->validated());
 
-        return redirect()->route('statuses.index')->with('success', 'Status updated successfully.');
+        return redirect()->back()->with('success', 'Status updated successfully.');
     }
 
     public function destroy(Status $status)

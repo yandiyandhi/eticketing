@@ -40,8 +40,6 @@
                                     <td>{{ $item->description ?? ' ' }}</td>
                                     <td>{{ $item->status->name ?? ' ' }}</td>
                                     <td>
-                                        {{--  --}}
-
                                         <button type="button"
                                             class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,16 +51,14 @@
                                                     class="btn btn-sm btn-icon btn-warning">Edit</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    class="btn btn-sm btn-icon btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#StatusRequestSuccess" data-id="{{ $item->uuid }}"
-                                                    data-name="Success">Success</a>
+                                                <a class="dropdown-item StatusRequestSuccess" href="javascript:void(0)"
+                                                    class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                    data-name="Success">{{ $success->name ?? ' ' }}</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    class="btn btn-sm btn-icon btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#StatusRequestCancel" data-id="{{ $item->uuid }}"
-                                                    data-name="Cancel">Cancel</a>
+                                                <a class="dropdown-item StatusRequestCancel" href="javascript:void(0)"
+                                                    class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                    data-name="{{ $cancel->name ?? ' ' }}">{{ $cancel->name ?? ' ' }}</a>
                                             </li>
                                         </ul>
                                     </td>

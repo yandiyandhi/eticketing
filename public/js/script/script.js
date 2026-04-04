@@ -170,20 +170,20 @@ document.addEventListener("DOMContentLoaded", function () {
 $(document).on("click", ".StatusRequestSuccess", function () {
     const id = $(this).data("id");
     const name = $(this).data("name");
-
+    console.log(id, name);
     Swal.fire({
         title: "Yakin ingin update?",
-        text: `Status "${name}" akan diupdate`,
+        text: `Status akan diupdate menjadi "${name}"`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ya, update",
         cancelButtonText: "Batal",
         confirmButtonColor: "#d33",
     }).then((result) => {
-        // if (result.isConfirmed) {
-        //     $("#formUpdateStatus").attr("action", `/statuses/${id}`);
-        //     $("#formUpdateStatus").submit();
-        // }
+        if (result.isConfirmed) {
+            $("#formUpdateStatus").attr("action", `/user/update/status/success/${id}`);
+            $("#formUpdateStatus").submit();
+        }
     });
 });
 
@@ -194,7 +194,7 @@ $(document).on("click", ".StatusRequestCancel", function () {
 
     Swal.fire({
         title: "Yakin ingin update?",
-        text: `Status "${name}" akan diupdate`,
+        text: `Status akan diupdate menjadi "${name}"`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ya, update",
@@ -202,7 +202,7 @@ $(document).on("click", ".StatusRequestCancel", function () {
         confirmButtonColor: "#d33",
     }).then((result) => {
         // if (result.isConfirmed) {
-        //     $("#formUpdateStatus").attr("action", `/statuses/${id}`);
+        //     $("#formUpdateStatus").attr("action", `/user/update/status/${id}`);
         //     $("#formUpdateStatus").submit();
         // }
     });

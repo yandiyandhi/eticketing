@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Status;
 use App\Services\Ticket\TicketService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -22,8 +23,12 @@ class TicketController extends Controller
         $user = User::with('department')->first();
 
         $categories = Category::orderBy('task_name', 'asc')->get();        
+        
+        $cancel = Status::where('name', 'Cancel')->first();
 
-        return view('dataMaster.requestTicketing.indexRequest', compact('data', 'user', 'categories'));
+        $success = Status::where('name', 'Success')->first();   
+        
+        return view('dataMaster.requestTicketing.indexRequest', compact('data', 'user', 'categories', 'cancel', 'success'));
     }
 
     public function store(CreateTicketingRequest $createTicketingRequest, TicketService $ticketService)
@@ -71,11 +76,25 @@ class TicketController extends Controller
     {
         $request = request()->validate([
             'status_id' => 'required|exists:statuses,id',
+            'kpi_id' => 'required|exists:kpis,id',
+            'keterangan' => 'nullable|string|max:255',
         ]);
 
         $ticketService->updateStatus($id, $request);
 
         return redirect()->route('dashboard')->with('success', 'Status berhasil diperbarui.');
+    }
+
+    public function UserUpdateStatusSuccess($id)
+    {
+        $request = request()->validate([
+            'status_id' => 'required|exists:statuses,id',            
+        ]);
+
+        $ticket = Ticket::findOrFail($id);
+        dd($ticket);
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui.');   
     }
 
 
