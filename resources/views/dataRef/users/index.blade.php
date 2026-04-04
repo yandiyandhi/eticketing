@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Kantor')
+@section('title', 'User')
 @section('content')
     <div class="layout-page">
         <!-- Navbar -->
@@ -11,39 +11,48 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Kantor</h5>
-                    <a href="{{ route('kantor.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
-                        Tambah Kantor</a>
+                    <h5 class="mb-0">List User</h5>
+                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
+                        Tambah User</a>
                 </div>
 
                 <div class="table-responsive text-nowrap">
                     <table class="table">
-                        <thead class="text-center">
+                        <thead>
                             <tr>
                                 <th>No</th>
-                                <th>UUID</th>
                                 <th>Name</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>kantor</th>
+                                <th>Departemen</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($kantor as $item)
+                            @forelse ($user as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->uuid }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->created_at }}</td>
-                                    <td>{{ $item->updated_at }}</td>
+                                    <td>{{ $item->username }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->kantor->name ?? 'N/A' }}</td>
+                                    <td>{{ $item->department->name ?? 'N/A' }}</td>
                                     <td>
-                                        <a href="{{ route('kantor.edit', $item->uuid) }}"
+                                        @if ($item->active == 1)
+                                            <span class="badge bg-label-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-label-danger">Tidak Aktif</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('user.edit', $item->uuid) }}"
                                             class="btn btn-sm btn-icon btn-warning" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteKantor"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
-                                            id="confirm-text">
-                                            <i class="fa-solid fa-trash"></i>
+                                        <a href="{{ Route('user.password', $item->uuid) }}"
+                                            class="btn btn-sm btn-icon btn-danger" title="Edit Password">
+                                            <i class="fa-solid fa-lock"></i>
                                         </a>
                                     </td>
                                 </tr>

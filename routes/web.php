@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\KantorController;
+use App\Http\Controllers\UserController;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 
@@ -92,6 +93,18 @@ Route::middleware('auth')->group(function () {
         Route::post('/kpi', 'store')->name('kpi.store');
         Route::put('/kpi/{kpi}', 'update')->name('kpi.update');
         Route::delete('/kpi/{kpi}', 'destroy')->name('kpi.delete');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'index')->name('user.index');
+        Route::get('/user/create', 'create')->name('user.create');
+        Route::post('/user', 'store')->name('user.store');
+        Route::get('/user/edit/{id}', 'edit')->name('user.edit');
+        Route::put('/user/{id}', 'update')->name('user.update');
+        Route::delete('/user/{id}', 'destroy')->name('user.destroy');
+
+        Route::get('/user/password/{id}', 'password')->name('user.password');
+        Route::put('/user/passwords/{id}', 'updatePassword')->name('user.updatePassword');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -119,12 +119,12 @@
                             </div>
                             <div class="table-responsive table">
                                 <table class="table" style="font-size: 12pt;">
-                                    <thead class="text-center">
+                                    <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Request Name</th>
-                                            <th>Category</th>
                                             <th>Request By</th>
+                                            <th>Request To</th>
+                                            <th>Category</th>
                                             <th>Description</th>
                                             <th>Tanggal Report</th>
                                             <th>Status</th>
@@ -135,9 +135,9 @@
                                         @forelse ($data as $item)
                                             <tr>
                                                 <th>{{ $data->firstItem() + $loop->index }}</th>
-                                                <td>{{ $item->request_name ?? ' ' }}</td>
-                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
                                                 <td>{{ $item->user->name ?? ' ' }}</td>
+                                                <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
+                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
                                                 <td>{{ $item->description ?? ' ' }}</td>
                                                 <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
                                                 </td>
@@ -171,12 +171,12 @@
                             </div>
                             <div class="table-responsive table">
                                 <table class="table" style="font-size: 12pt;">
-                                    <thead class="text-center">
+                                    <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Request Name</th>
-                                            <th>Category</th>
                                             <th>Request By</th>
+                                            <th>Request To</th>
+                                            <th>Category</th>
                                             <th>Description</th>
                                             <th>Tanggal Report</th>
                                             <th>Status</th>
@@ -187,9 +187,9 @@
                                         @forelse ($data as $item)
                                             <tr>
                                                 <th>{{ $data->firstItem() + $loop->index }}</th>
-                                                <td>{{ $item->request_name ?? ' ' }}</td>
-                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
                                                 <td>{{ $item->user->name ?? ' ' }}</td>
+                                                <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
+                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
                                                 <td>{{ $item->description ?? ' ' }}</td>
                                                 <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
                                                 </td>
