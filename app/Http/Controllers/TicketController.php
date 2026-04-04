@@ -11,6 +11,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Status;
 use App\Services\Ticket\TicketService;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -86,15 +87,49 @@ class TicketController extends Controller
     }
 
     public function UserUpdateStatusSuccess($id)
-    {
-        $request = request()->validate([
-            'status_id' => 'required|exists:statuses,id',            
-        ]);
+    {        
+        try {
+            $ticket = Ticket::where('uuid', $id)->first();
+        
+            if(empty($ticket)) {
+                return redirect()->back()->with('error', 'Ticket tidak ditemukan.');
+            }
 
-        $ticket = Ticket::findOrFail($id);
-        dd($ticket);
+            $status = Status::where('name', 'Success')->first();
+        
+            $data = [            
+                'status_id' => $status->id,
+            ];
 
-        return redirect()->back()->with('success', 'Status berhasil diperbarui.');   
+            $ticket->update($data);
+
+            return redirect()->back()->with('success', 'Status berhasil diperbarui.');  
+        } catch (Exception $th) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat update status : ' . $th->getMessage());
+        } 
+    }
+
+    public function UserUpdateStatusCancel($id)
+    {        
+        try {
+            $ticket = Ticket::where('uuid', $id)->first();
+        
+            if(empty($ticket)) {
+                return redirect()->back()->with('error', 'Ticket tidak ditemukan.');
+            }
+
+            $status = Status::where('name', 'Cancel')->first();
+        
+            $data = [            
+                'status_id' => $status->id,
+            ];
+
+            $ticket->update($data);
+
+            return redirect()->back()->with('success', 'Status berhasil diperbarui.');  
+        } catch (Exception $th) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat update status : ' . $th->getMessage());
+        } 
     }
 
 

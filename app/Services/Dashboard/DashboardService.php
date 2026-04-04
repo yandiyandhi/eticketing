@@ -11,57 +11,59 @@ class DashboardService
     {
         $search = request('request');
 
-        $status = Status::where('name', 'success')->first();
-        
-        $datas = Ticket::with('department', 'status', 'kpi', 'category', 'user')
-            ->where('status_id', '!=', $status->id)
-            ->orderBy('created_at', 'desc');
+        // Ambil ID status sekali saja
+        $statusIds = Status::whereIn('name', ['success', 'cancel'])
+            ->pluck('id', 'name');
 
-        if ($search) {
-            $datas->where(function ($query) use ($search) {
-                $query->where('request_name', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%")
-                    ->orWhereHas('user', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
-                    })
-                    ->orWhereHas('category', function ($q) use ($search) {
-                        $q->where('task_name', 'like', "%{$search}%");
-                    })
-                    ->orWhereHas('department', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
-                    }); 
+        $successId = $statusIds['Success'] ?? null;
+        $cancelId = $statusIds['Cancel'] ?? null;
+
+        // Base query (dipakai ulang)
+        $query = Ticket::with(['department', 'status', 'kpi', 'category', 'user'])
+            ->when($successId && $cancelId, function ($q) use ($successId, $cancelId) {
+                $q->whereNotIn('status_id', [$successId, $cancelId]);
+            })
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($query) use ($search) {
+                    $query->where('request_name', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhereHas('user', fn($q) => $q->where('name', 'like', "%{$search}%"))
+                        ->orWhereHas('category', fn($q) => $q->where('task_name', 'like', "%{$search}%"))
+                        ->orWhereHas('department', fn($q) => $q->where('name', 'like', "%{$search}%"));
+                });
             });
-        }
-        $data = $datas->paginate(10)->withQueryString();
 
-        // Ambil collection dari page ini
-        $collection = $data->getCollection();
+        // Pagination
+        $data = (clone $query)
+            ->orderByDesc('created_at')
+            ->paginate(10)
+            ->withQueryString();
 
-        // Hitung total ticket di page ini
-        $totalData = $collection->count();
 
-        // Hitung status count **selain "Success"**
-        $statusCount = $collection
-            ->filter(function ($item) {
-                // Pastikan ada status
-                return isset($item->status->name) && strtolower($item->status->name) !== 'success';
-            })
-            ->groupBy(function ($item) {
-                return $item->status->name ?? 'Unknown';
-            })
-            ->map(function ($items) use ($totalData) {
-                $count = $items->count();
-                $percentage = $totalData > 0 ? round(($count / $totalData) * 100, 2) : 0;
+        // Hitung status langsung dari database (lebih efisien)
+        $statusCount = (clone $query)
+            ->selectRaw('status_id, COUNT(*) as count')
+            ->groupBy('status_id')
+            ->with('status')
+            ->get()
+            ->mapWithKeys(function ($item) use ($query) {
+                $total = (clone $query)->count(); // total semua data (bukan per page)
 
                 return [
-                    'count' => $count,
-                    'percentage' => $percentage
+                    $item->status->name ?? 'Unknown' => [
+                        'count' => $item->count,
+                        'percentage' => $total > 0
+                            ? round(($item->count / $total) * 100, 2)
+                            : 0
+                    ]
                 ];
             });
+    
         return [
             'data' => $data,
             'statusCount' => $statusCount,
-            'countSuccess' => Ticket::where('status_id', $status->id)->count()
+            'countSuccess' => Ticket::where('status_id', $successId)->count(),
+            'countCancelled' => Ticket::where('status_id', $cancelId)->count(),
         ];
     }
 }

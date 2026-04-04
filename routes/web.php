@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/reports/ticketing', 'indexReports')->name('ticketing.reports');
         Route::put('/user/update/status/success/{id}', 'UserUpdateStatusSuccess')->name('ticketing.UserUpdateStatusSuccess');
+        Route::put('/user/update/status/cancel/{id}', 'UserUpdateStatusCancel')->name('ticketing.UserUpdateStatusCancel');
     });
 
     Route::controller(KantorController::class)->group(function () {

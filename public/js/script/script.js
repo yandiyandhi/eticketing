@@ -201,9 +201,9 @@ $(document).on("click", ".StatusRequestCancel", function () {
         cancelButtonText: "Batal",
         confirmButtonColor: "#d33",
     }).then((result) => {
-        // if (result.isConfirmed) {
-        //     $("#formUpdateStatus").attr("action", `/user/update/status/${id}`);
-        //     $("#formUpdateStatus").submit();
-        // }
+        if (result.isConfirmed) {
+            $("#formUpdateStatus").attr("action", `/user/update/status/cancel/${id}`);
+            $("#formUpdateStatus").submit();
+        }
     });
 });
