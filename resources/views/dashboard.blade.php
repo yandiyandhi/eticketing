@@ -134,21 +134,23 @@
                                     </thead>
                                     <tbody id="ticket-tbody">
                                         @forelse ($data as $item)
-                                            <tr>
-                                                <th>{{ $data->firstItem() + $loop->index }}</th>
-                                                <td>{{ $item->user->name ?? ' ' }}</td>
-                                                <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
-                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
-                                                <td>{{ $item->description ?? ' ' }}</td>
-                                                <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
-                                                </td>
-                                                <td>{{ $item->status->name ?? ' ' }}</td>
-                                                <td>
-                                                    <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                                        class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
-                                                </td>
-                                            </tr>
+                                            @if ($item->request_to == 'it')
+                                                <tr>
+                                                    <th>{{ $data->firstItem() + $loop->index }}</th>
+                                                    <td>{{ $item->user->name ?? ' ' }}</td>
+                                                    <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
+                                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                                    <td>{{ $item->description ?? ' ' }}</td>
+                                                    <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
+                                                    </td>
+                                                    <td>{{ $item->status->name ?? ' ' }}</td>
+                                                    <td>
+                                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                                class="fa-solid fa-pen-to-square"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @empty
                                             <tr>
                                                 <td colspan="8" class="text-center">Data tidak ditemukan.</td>
@@ -186,21 +188,23 @@
                                     </thead>
                                     <tbody id="ticket-tbody">
                                         @forelse ($data as $item)
-                                            <tr>
-                                                <th>{{ $data->firstItem() + $loop->index }}</th>
-                                                <td>{{ $item->user->name ?? ' ' }}</td>
-                                                <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
-                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
-                                                <td>{{ $item->description ?? ' ' }}</td>
-                                                <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
-                                                </td>
-                                                <td>{{ $item->status->name ?? ' ' }}</td>
-                                                <td>
-                                                    <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                                        class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
-                                                </td>
-                                            </tr>
+                                            @if ($item->request_to == 'hr')
+                                                <tr>
+                                                    <th>{{ $data->firstItem() + $loop->index }}</th>
+                                                    <td>{{ $item->user->name ?? ' ' }}</td>
+                                                    <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
+                                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                                    <td>{{ $item->description ?? ' ' }}</td>
+                                                    <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
+                                                    </td>
+                                                    <td>{{ $item->status->name ?? ' ' }}</td>
+                                                    <td>
+                                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                                class="fa-solid fa-pen-to-square"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @empty
                                             <tr>
                                                 <td colspan="7" class="text-center">Data tidak ditemukan.</td>

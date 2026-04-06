@@ -88,14 +88,14 @@
             <ul class="menu-sub">
                 <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'active' : '' }}">
                     <a href="{{ route('ticketing.index') }}" class="menu-link">
-                        <div data-i18n="Request Ticketing IT">Request Ticketing IT</div>
+                        <div data-i18n="Request Ticketing">Request Ticketing</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="#" class="menu-link">
                         <div data-i18n="Request Ticketing HR">Request Ticketing HR</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
 
