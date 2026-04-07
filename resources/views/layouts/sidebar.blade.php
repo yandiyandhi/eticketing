@@ -32,7 +32,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-package"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li
-                    class="menu-item {{ Route::is('user.index', 'user.create', 'user.edit', 'user.password') ? 'active' : '' }}">
+                    class="menu-item {{ Route::is('user.index', 'user.create', 'user.edit', 'user.password', 'user.role') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}" class="menu-link">
                         <div data-i18n="User">User</div>
                     </a>
@@ -91,11 +91,6 @@
                         <div data-i18n="Request Ticketing">Request Ticketing</div>
                     </a>
                 </li>
-                {{-- <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Request Ticketing HR">Request Ticketing HR</div>
-                    </a>
-                </li> --}}
             </ul>
         </li>
 
@@ -121,6 +116,31 @@
                         <div data-i18n="Aset">Aset</div>
                     </a>
                 </li> --}}
+            </ul>
+        </li>
+
+        <li class="menu-header small">
+            <span class="menu-header-text" data-i18n="Setting">Setting</span>
+        </li>
+
+        <li
+            class="menu-item {{ Route::is('ticketing.reports', 'role.index', 'role.edit', 'permission.index', 'permission.edit') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon ti ti-files"></i>
+                <div data-i18n="Role & Permissions">Role & Permissions</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Route::is('role.index', 'role.edit') ? 'active' : '' }}">
+                    <a href="{{ route('role.index') }}" class="menu-link">
+                        <div data-i18n="Role">Role</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Route::is('permission.index', 'permission.edit') ? 'active' : '' }}">
+                    <a href="{{ route('permission.index') }}" class="menu-link">
+                        <div data-i18n="Permissions">Permissions</div>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

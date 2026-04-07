@@ -20,15 +20,16 @@
                 </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
-                        <thead class="text-center">
+                        <thead>
                             <tr>
                                 <th>No</th>
                                 <th>User</th>
                                 <th>Dept</th>
-                                <th>Request Name</th>
                                 <th>Desc</th>
                                 <th>Status</th>
                                 <th>Date Req</th>
+                                <th>Time Start</th>
+                                <th>Time End</th>
                                 <th>Date End</th>
                             </tr>
                         </thead>
@@ -38,11 +39,15 @@
                                     <th>{{ $tickets->firstItem() + $loop->index }}</th>
                                     <td>{{ $item->user->name ?? ' ' }}</td>
                                     <td>{{ $item->department->name ?? ' ' }}</td>
-                                    <td>{{ $item->request_name ?? ' ' }}</td>
                                     <td>{{ $item->description ?? ' ' }}</td>
                                     <td>{{ $item->status->name ?? ' ' }}</td>
-                                    <td>{{ $item->created_at->format('d-m-Y') ?? ' ' }}</td>
-                                    <td>{{ $item->updated_at->format('d-m-Y') ?? ' ' }}</td>
+                                    <td>{{ $item->created_at ?? ' ' }}
+                                    </td>
+                                    <td>{{ $item->time_start ? $item->time_start : ' ' }}
+                                    </td>
+                                    <td>{{ $item->time_end ? $item->time_end : ' ' }}
+                                    </td>
+                                    <td>{{ $item->updated_at ?? ' ' }}</td>
                                 </tr>
                             @empty
                                 <tr>

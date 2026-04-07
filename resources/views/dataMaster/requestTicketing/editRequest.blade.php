@@ -35,7 +35,7 @@
                                 <label class="form-label">Request To</label>
                                 <select name="request_to" class="form-control" required>
                                     <option value="it" {{ $data->request_to == 'it' ? 'selected' : '' }}>IT</option>
-                                    <option value="hr" {{ $data->request_to == 'hr' ? 'selected' : '' }}>HR</option>
+                                    <option value="hr" {{ $data->request_to == 'hr' ? 'selected' : '' }}>HR/GA</option>
                                 </select>
                             </div>
 

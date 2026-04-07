@@ -140,7 +140,7 @@ class TicketController extends Controller
     {
         $request = request('request');
         
-        $tickets = Ticket::where('status_id', '=', 4)->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
+        $tickets = Ticket::where('status_id', '=', 5)->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
 
         if ($request) {
             $tickets->where(function ($query) use ($request) {

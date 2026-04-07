@@ -26,6 +26,7 @@
                                 <th>Email</th>
                                 <th>kantor</th>
                                 <th>Departemen</th>
+                                <th>Role</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -40,6 +41,13 @@
                                     <td>{{ $item->kantor->name ?? 'N/A' }}</td>
                                     <td>{{ $item->department->name ?? 'N/A' }}</td>
                                     <td>
+                                        @forelse ($item->roles as $role)
+                                            <li>{{ $role->name }}</li>
+                                        @empty
+                                            Tidak ada Role
+                                        @endforelse
+                                    </td>
+                                    <td>
                                         @if ($item->active == 1)
                                             <span class="badge bg-label-success">Aktif</span>
                                         @else
@@ -50,7 +58,10 @@
                                         <a href="{{ route('user.edit', $item->uuid) }}"
                                             class="btn btn-sm btn-icon btn-warning" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="{{ Route('user.password', $item->uuid) }}"
+                                        <a href="{{ route('user.role', $item->uuid) }}"
+                                            class="btn btn-sm btn-icon btn-success" title="Add Role"><i
+                                                class="fa-solid fa-users"></i></a>
+                                        <a href="{{ route('user.password', $item->uuid) }}"
                                             class="btn btn-sm btn-icon btn-danger" title="Edit Password">
                                             <i class="fa-solid fa-lock"></i>
                                         </a>
@@ -63,6 +74,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end mt-3">
+                        {{ $user->links() }}
+                    </div>
                 </div>
             </div>
             <!--/ Column Search -->

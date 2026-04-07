@@ -9,9 +9,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\KantorController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
+use Monolog\Handler\RotatingFileHandler;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -107,6 +110,25 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/user/password/{id}', 'password')->name('user.password');
         Route::put('/user/passwords/{id}', 'updatePassword')->name('user.updatePassword');
+
+        Route::get('/user/role/{id}', 'role')->name('user.role');
+        Route::put('/user/role/{id}', 'assignRole')->name('user.assignRole');
+    });
+
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/role', 'index')->name('role.index');
+        Route::post('/role', 'store')->name('role.store');
+        Route::get('/role/edit/{id}', 'edit')->name('role.edit');
+        Route::put('/role/{id}', 'update')->name('role.update');
+        Route::delete('/role/{id}', 'destroy')->name('role.destroy');
+    });
+
+    Route::controller(PermissionController::class)->group(function () {
+        Route::get('/permission', 'index')->name('permission.index');
+        Route::post('/permission', 'store')->name('permission.store');
+        Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
+        Route::put('/permission/{id}', 'update')->name('permission.update');
+        Route::delete('/permission/{id}', 'destroy')->name('permission.destroy');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

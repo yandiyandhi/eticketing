@@ -126,6 +126,8 @@
                                             <th>Request By</th>
                                             <th>Request To</th>
                                             <th>Category</th>
+                                            <th>Time Start</th>
+                                            <th>Time End</th>
                                             <th>Description</th>
                                             <th>Tanggal Report</th>
                                             <th>Status</th>
@@ -140,6 +142,10 @@
                                                     <td>{{ $item->user->name ?? ' ' }}</td>
                                                     <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
                                                     <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                                    <td>{{ $item->time_start ? $item->time_start : ' ' }}
+                                                    </td>
+                                                    <td>{{ $item->time_end ? $item->time_end : ' ' }}
+                                                    </td>
                                                     <td>{{ $item->description ?? ' ' }}</td>
                                                     <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
                                                     </td>
@@ -180,6 +186,8 @@
                                             <th>Request By</th>
                                             <th>Request To</th>
                                             <th>Category</th>
+                                            <th>Time Start</th>
+                                            <th>Time End</th>
                                             <th>Description</th>
                                             <th>Tanggal Report</th>
                                             <th>Status</th>
@@ -194,6 +202,10 @@
                                                     <td>{{ $item->user->name ?? ' ' }}</td>
                                                     <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
                                                     <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                                    <td>{{ $item->time_start ? $item->time_start : ' ' }}
+                                                    </td>
+                                                    <td>{{ $item->time_end ? $item->time_end : ' ' }}
+                                                    </td>
                                                     <td>{{ $item->description ?? ' ' }}</td>
                                                     <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
                                                     </td>

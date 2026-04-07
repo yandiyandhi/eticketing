@@ -4,6 +4,7 @@ namespace App\Services\Ticket;
 
 // use App\Events\TicketCreated;
 use App\Models\Ticket;
+use App\Models\Status;
 use Illuminate\Support\Facades\DB;
 
 class TicketService
@@ -31,7 +32,14 @@ class TicketService
     public function updateStatus($id, array $data): Ticket
     {
         return DB::transaction(function () use ($id, $data) {
+            $status = Status::where('id', $data['status_id'])->firstOrFail();
 
+            if($status->name == 'On Progress'){                
+                $data['time_start'] = now();
+            }elseif ($status->name == 'Done') {
+                $data['time_end'] = now();
+            }
+            
             $ticket = Ticket::findOrFail($id);
 
             $ticket->update($data);

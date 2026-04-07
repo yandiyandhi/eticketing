@@ -29,7 +29,7 @@
                         <select name="request_to" class="form-control" required>
                             <option value="" disabled selected> -- Select -- </option>
                             <option value="it">IT</option>
-                            <option value="hr">HR</option>
+                            <option value="hr">HR/GA</option>
                         </select>
                     </div>
                     <div class="mb-2">

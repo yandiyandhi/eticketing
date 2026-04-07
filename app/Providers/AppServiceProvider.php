@@ -14,6 +14,8 @@ use App\Observers\KpiObserver;
 use App\Observers\TicketingObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Spatie\Permission\Models\Role;
+use App\Observers\RoleObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
         Ticket::observe(TicketingObserver::class);
         Category::observe(CategoryObserver::class);
         Kpi::observe(KpiObserver::class);
+        Role::observe(RoleObserver::class);
+
         if (request()->header(key: 'x-forwarded-proto') === 'https') {
             URL::forceScheme('https');
         }

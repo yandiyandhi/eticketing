@@ -207,3 +207,24 @@ $(document).on("click", ".StatusRequestCancel", function () {
         }
     });
 });
+
+// Delete Role
+$(document).on("click", ".deleteRole", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `Role "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteRole").attr("action", `/role/${id}`);
+            $("#formDeleteRole").submit();
+        }
+    });
+});

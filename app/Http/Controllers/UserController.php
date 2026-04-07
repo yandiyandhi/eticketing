@@ -11,14 +11,15 @@ use App\Models\Kantor;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function index()
-    {
+    {        
+        $user = User::with(['kantor', 'department', 'roles'])->orderBy('name', 'asc')->paginate(10);     
+        return view('dataRef.users.index', compact('user'));
         try {        
-            $user = User::with(['kantor', 'department'])->orderBy('name', 'asc')->paginate(10);               
-            return view('dataRef.users.index', compact('user'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
@@ -81,6 +82,29 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Password berhasil diperbarui.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    public function role($id)
+    {
+        $user = User::where('uuid', $id)->first();
+        $roles = DB::table('roles')->orderBy('name')->get();
+        
+        return view('dataRef.users.addRole', compact('user', 'roles'));
+    }
+
+    public function assignRole(Request $request, $id)
+    {        
+        try {
+            $request->validate([
+                'role_name' => 'required|exists:roles,name',
+            ]);
+            $user = User::find($id);
+            $user->syncRoles([$request->role_name]);
+    
+            return redirect()->back()->with('success', 'Role assigned successfully.');
+        } catch (Exception $th) {
+            return redirect()->back()->with('error', 'Failed to assign role: ' . $th->getMessage());
         }
     }
 }
