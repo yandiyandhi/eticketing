@@ -232,59 +232,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="card">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0">List Request</h6>
-                    <form class="d-flex ms-auto" method="GET" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" name="request"
-                            placeholder="Search request..." value="{{ request('request') }}">
-                        <button class="btn btn-sm btn-primary" type="submit"><i class="ti ti-search"></i></button>
-                    </form>
-                </div>
-                <div class="table-responsive table">
-                    <table class="table">
-                        <thead class="text-center">
-                            <tr>
-                                <th>No</th>
-                                <th>Request Name</th>
-                                <th>Category</th>
-                                <th>Request By</th>
-                                <th>Description</th>
-                                <th>Tanggal Report</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ticket-tbody">
-                            @forelse ($data as $item)
-                                <tr>
-                                    <th>{{ $data->firstItem() + $loop->index }}</th>
-                                    <td>{{ $item->request_name ?? ' ' }}</td>
-                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
-                                    <td>{{ $item->user->name ?? ' ' }}</td>
-                                    <td>{{ $item->description ?? ' ' }}</td>
-                                    <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
-                                    </td>
-                                    <td>{{ $item->status->name ?? ' ' }}</td>
-                                    <td>
-                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center">Data tidak ditemukan.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end mt-3">
-                        {{ $data->links() }}
-                    </div>
-                </div>
-            </div> --}}
         </div>
 
         @include('layouts.footercontent')

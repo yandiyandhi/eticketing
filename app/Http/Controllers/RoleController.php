@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoleRequest;
 use App\Services\Role\RoleService;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -43,6 +44,13 @@ class RoleController extends Controller
         } catch (Exception $th) {
             return redirect()->back()->with('error', 'Role gagal diperbarui. Error: ' . $th->getMessage());
         }
+    }
+
+    public function permission(Role $role)
+    {          
+        $permissions = DB::table('permissions')->orderBy('name')->get();
+            // dd($permissions);
+        return view('role.roleHasPermission', compact('permissions', 'role'));
     }
 
     public function destroy($id, RoleService $roleService)

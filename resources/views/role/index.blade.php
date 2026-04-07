@@ -39,6 +39,10 @@
                                             class="btn btn-sm btn-icon btn-warning"title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
+                                        <a href="{{ route('role.permission', ['id' => $item->id]) }}"
+                                            class="btn btn-sm btn-icon btn-success"title="Permission"><i
+                                                class="fa-solid fa-lock"></i></a>
+
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteRole"
                                             data-id="{{ $item->id }}" data-name="{{ $item->name }}" title="Hapus"
                                             id="confirm-text">
