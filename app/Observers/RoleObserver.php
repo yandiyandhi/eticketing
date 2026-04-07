@@ -47,15 +47,15 @@ class RoleObserver
 
     public function saving(Role $role): void
     {
-       $role->name = collect(explode(' ', $role->name))
-        ->map(function ($word) {
-            
-            if (strlen($word) <= 3) {
-                return strtoupper($word);
-            }
-            
-            return Str::title(strtolower($word));
-        })
-        ->implode(' ');
+        $role->name = collect(explode(' ', $role->name))
+            ->map(function ($word) {
+
+                if (strlen($word) <= 3) {
+                    return strtoupper($word);
+                }
+
+                return Str::title(strtolower($word));
+            })
+            ->implode(' ');
     }
 }

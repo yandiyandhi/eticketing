@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,12 +46,12 @@ class User extends Authenticatable
 
     public function kantor()
     {
-        return $this->belongsTo(Kantor::class);        
+        return $this->belongsTo(Kantor::class);
     }
 
     public function department()
     {
-        return $this->belongsTo(Department::class);        
+        return $this->belongsTo(Department::class);
     }
 
     public function getRouteKeyName()

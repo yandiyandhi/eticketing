@@ -5,17 +5,18 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Department;
 use App\Models\Kpi;
-use App\Observers\DepartmentObserver;
-use App\Observers\StatusObserver;
 use App\Models\Status;
 use App\Models\Ticket;
 use App\Observers\CategoryObserver;
+use App\Observers\DepartmentObserver;
 use App\Observers\KpiObserver;
-use App\Observers\TicketingObserver;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL;
-use Spatie\Permission\Models\Role;
 use App\Observers\RoleObserver;
+use App\Observers\StatusObserver;
+use App\Observers\TicketingObserver;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,12 @@ class AppServiceProvider extends ServiceProvider
         Category::observe(CategoryObserver::class);
         Kpi::observe(KpiObserver::class);
         Role::observe(RoleObserver::class);
+
+        Gate::before(function ($user, $ability) {
+            if ($user->hasRole('admin')) {
+                return true;
+            }
+        });
 
         if (request()->header(key: 'x-forwarded-proto') === 'https') {
             URL::forceScheme('https');

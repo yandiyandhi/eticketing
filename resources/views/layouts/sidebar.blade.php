@@ -124,14 +124,14 @@
         </li>
 
         <li
-            class="menu-item {{ Route::is('ticketing.reports', 'role.index', 'role.edit', 'permission.index', 'permission.edit') ? 'open' : '' }}">
+            class="menu-item mb-6 {{ Route::is('ticketing.reports', 'role.index', 'role.edit', 'permission.index', 'permission.edit', 'role.permission') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-files"></i>
                 <div data-i18n="Role & Permissions">Role & Permissions</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('role.index', 'role.edit') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('role.index', 'role.edit', 'role.permission') ? 'active' : '' }}">
                     <a href="{{ route('role.index') }}" class="menu-link">
                         <div data-i18n="Role">Role</div>
                     </a>
