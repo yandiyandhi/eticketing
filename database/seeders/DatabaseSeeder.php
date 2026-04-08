@@ -12,6 +12,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Role::firstOrCreate(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'Admin']);
 
         Kantor::insert([
             [
@@ -162,5 +163,69 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        $permissions = [
+            'dashboardit.edit',
+            'dashboardhr.edit',
+
+            'kantor.view',
+            'kantor.edit',
+            'kantor.update',
+            'kantor.delete',
+
+            'departemen.view',
+            'departemen.edit',
+            'departemen.update',
+            'departemen.delete',
+
+            'kategori.view',
+            'kategori.edit',
+            'kategori.update',
+            'kategori.delete',
+
+            'status.view',
+            'status.edit',
+            'status.update',
+            'status.delete',
+
+            'kpi.view',
+            'kpi.edit',
+            'kpi.update',
+            'kpi.delete',
+
+            'user.view',
+            'user.edit',
+            'user.update',
+            'user.password',
+            'user.role',
+
+            'requesttiket.view',
+            'requesttiket.add',
+            'requesttiket.edit',
+            'requesttiket.success',
+            'requesttiket.cancel',
+
+            'laporan.view',
+            'laporan.export',
+
+            'role.view',
+            'role.edit',
+            'role.permission',
+            'role.delete',
+
+            'permission.view',
+            'permission.edit',
+            'permission.update',
+            'permission.delete',
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web'
+            ]);
+        }
+
+        // $admin->syncPermissions(Permission::all());
     }
 }
