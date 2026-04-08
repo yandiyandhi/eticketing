@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TicketExport;
 use App\Http\Requests\CreateTicketingRequest;
 use App\Http\Requests\EditTicketingRequest;
 use App\Models\Category;
 use App\Models\Department;
 use App\Models\Kpi;
+use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\User;
-use App\Models\Status;
 use App\Services\Ticket\TicketService;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TicketController extends Controller
 {
@@ -23,12 +25,12 @@ class TicketController extends Controller
 
         $user = User::with('department')->first();
 
-        $categories = Category::orderBy('task_name', 'asc')->get();        
-        
+        $categories = Category::orderBy('task_name', 'asc')->get();
+
         $cancel = Status::where('name', 'Cancel')->first();
 
-        $success = Status::where('name', 'Success')->first();   
-        
+        $success = Status::where('name', 'Success')->first();
+
         return view('dataMaster.requestTicketing.indexRequest', compact('data', 'user', 'categories', 'cancel', 'success'));
     }
 
@@ -41,7 +43,7 @@ class TicketController extends Controller
 
     public function edit($tiket)
     {
-        
+
         $data = Ticket::where('uuid', $tiket)->with('department', 'status', 'kpi', 'category', 'user')->firstOrFail();
 
         $user = User::with('department')->first();
@@ -51,7 +53,7 @@ class TicketController extends Controller
         $kpis = Kpi::orderBy('name', 'asc')->get();
 
         $departments  = Department::orderBy('name', 'asc')->get();
-        
+
         return view('dataMaster.requestTicketing.editRequest', compact('data', 'user', 'categories', 'kpis', 'departments'));
     }
 
@@ -64,8 +66,8 @@ class TicketController extends Controller
 
     public function status($status)
     {
-        $ticket = Ticket::with('status')->firstWhere('uuid', $status);   
-        
+        $ticket = Ticket::with('status')->firstWhere('uuid', $status);
+
         $status = Status::orderBy('name', 'asc')->get();
 
         $kpi = Kpi::orderBy('name', 'asc')->get();
@@ -87,59 +89,60 @@ class TicketController extends Controller
     }
 
     public function UserUpdateStatusSuccess($id)
-    {        
+    {
         try {
             $ticket = Ticket::where('uuid', $id)->first();
-        
-            if(empty($ticket)) {
+
+            if (empty($ticket)) {
                 return redirect()->back()->with('error', 'Ticket tidak ditemukan.');
             }
 
             $status = Status::where('name', 'Success')->first();
-        
-            $data = [            
+
+            $data = [
                 'status_id' => $status->id,
+                'time_approved' => now()
             ];
 
             $ticket->update($data);
 
-            return redirect()->back()->with('success', 'Status berhasil diperbarui.');  
+            return redirect()->back()->with('success', 'Status berhasil diperbarui.');
         } catch (Exception $th) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat update status : ' . $th->getMessage());
-        } 
+        }
     }
 
     public function UserUpdateStatusCancel($id)
-    {        
+    {
         try {
             $ticket = Ticket::where('uuid', $id)->first();
-        
-            if(empty($ticket)) {
+
+            if (empty($ticket)) {
                 return redirect()->back()->with('error', 'Ticket tidak ditemukan.');
             }
 
             $status = Status::where('name', 'Cancel')->first();
-        
-            $data = [            
+
+            $data = [
                 'status_id' => $status->id,
             ];
 
             $ticket->update($data);
 
-            return redirect()->back()->with('success', 'Status berhasil diperbarui.');  
+            return redirect()->back()->with('success', 'Status berhasil diperbarui.');
         } catch (Exception $th) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat update status : ' . $th->getMessage());
-        } 
+        }
     }
 
 
 
     // Laporan
 
-    public function indexReports()
+    public function indexReportsIt()
     {
         $request = request('request');
-        
+
         $tickets = Ticket::where('status_id', '=', 5)->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
 
         if ($request) {
@@ -161,5 +164,15 @@ class TicketController extends Controller
         $tickets = $tickets->paginate(10)->withQueryString();
 
         return view('dataMaster.requestTicketing.reports.index', compact('tickets'));
+    }
+
+
+    // Export
+
+    public function exportRequest(Request $request)
+    {
+        $start = $request->tanggal_awal;
+        $end   = $request->tanggal_akhir;
+        return Excel::download(new TicketExport($start, $end), 'Request_Ticketing_IT.xlsx');
     }
 }

@@ -108,7 +108,12 @@
             <ul class="menu-sub">
                 <li class="menu-item {{ Route::is('ticketing.reports') ? 'active' : '' }}">
                     <a href="{{ route('ticketing.reports') }}" class="menu-link">
-                        <div data-i18n="Tiketing">Tiketing</div>
+                        <div data-i18n="Tiketing IT">Tiketing IT</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Tiketing HR">Tiketing HR</div>
                     </a>
                 </li>
                 {{-- <li class="menu-item">

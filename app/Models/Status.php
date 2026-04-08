@@ -18,6 +18,11 @@ class Status extends Model
         return 'uuid';
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'status_id');
+    }
+
     protected static function booted()
     {
         static::creating(function ($status) {

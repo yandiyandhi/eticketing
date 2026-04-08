@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\TicketCreated;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
@@ -12,36 +11,10 @@ use App\Http\Controllers\KantorController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
-use Monolog\Handler\RotatingFileHandler;
 
 Route::get('/', function () {
     return redirect()->route('login');
-});
-
-Route::get('/simulateticket', function () {
-
-    // ambil ticket pertama (tanpa insert baru)
-    $ticket = Ticket::with(['category', 'user', 'status'])->first();
-
-    if (!$ticket) {
-        return response()->json(['message' => 'Tidak ada ticket untuk test'], 404);
-    }
-
-    // dispatch event
-    event(new TicketCreated($ticket));
-
-    return response()->json([
-        'message' => 'Event terkirim',
-        'ticket' => $ticket
-    ]);
-});
-
-Route::get('/test-event', function () {
-    $ticket = \App\Models\Ticket::first();
-    event(new \App\Events\TicketCreated($ticket));
-    return 'ok';
 });
 
 Route::controller(DashboardController::class)->group(function () {
@@ -58,13 +31,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/ticketing/status/{status}', 'status')->name('ticketing.status');
         Route::put('/status/update/{id}', 'updateStatus')->name('ticketing.updateStatus');
 
-        Route::get('/reports/ticketing', 'indexReports')->name('ticketing.reports');
+        Route::get('/reports/ticketing', 'indexReportsIt')->name('ticketing.reports');
         Route::put('/user/update/status/success/{id}', 'UserUpdateStatusSuccess')->name('ticketing.UserUpdateStatusSuccess');
         Route::put('/user/update/status/cancel/{id}', 'UserUpdateStatusCancel')->name('ticketing.UserUpdateStatusCancel');
+
+        Route::get('/request/export', 'exportRequest')->name('ticketing.exportRequest');
     });
 
     Route::controller(KantorController::class)->group(function () {
-        Route::get('/kantor', 'index')->name('kantor.index');       
+        Route::get('/kantor', 'index')->name('kantor.index');
         Route::get('/kantor/create', 'create')->name('kantor.create');
         Route::post('/kantor', 'store')->name('kantor.store');
         Route::get('/kantor/edit/{id}', 'edit')->name('kantor.edit');

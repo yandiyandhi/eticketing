@@ -8,83 +8,54 @@
 
         <div class="container-xxl flex-grow-1 container-p-y fs-6">
 
-            <div class="row g-6">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card card-border-shadow-primary h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="avatar me-4">
-                                    <span class="avatar-initial rounded bg-label-primary"><i
-                                            class="ti ti-clock ti-28px text-primary"></i></span>
+            <div class="row g-4">
+                @forelse ($status as $item)
+                    <div class="col-md">
+                        <div
+                            class="card card-border-shadow-{{ match ($item->name) {
+                                'Queue' => 'primary',
+                                'On Progress' => 'warning',
+                                'Cancel' => 'danger',
+                                'Done' => 'info',
+                                'Success' => 'success',
+                                default => 'secondary',
+                            } }} h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="avatar me-4">
+                                        <span
+                                            class="avatar-initial rounded bg-label-{{ match ($item->name) {
+                                                'Queue' => 'primary',
+                                                'On Progress' => 'warning',
+                                                'Cancel' => 'danger',
+                                                'Done' => 'info',
+                                                'Success' => 'success',
+                                                default => 'secondary',
+                                            } }}"><i
+                                                class="fa-solid fa-{{ match ($item->name) {
+                                                    'Queue' => 'clock',
+                                                    'On Progress' => 'rotate',
+                                                    'Cancel' => 'ban',
+                                                    'Done' => 'check',
+                                                    'Success' => 'calendar-check',
+                                                    default => 'secondary',
+                                                } }} ti-28px text-{{ match ($item->name) {
+                                                    'Queue' => 'primary',
+                                                    'On Progress' => 'warning',
+                                                    'Cancel' => 'danger',
+                                                    'Done' => 'info',
+                                                    'Success' => 'success',
+                                                    default => 'secondary',
+                                                } }}"></i></span>
+                                    </div>
+                                    <h4 class="mb-0">{{ $item->count ?? 0 }}</h4>
                                 </div>
-                                <h4 class="mb-0">{{ $statusCount['Queue']['count'] ?? 0 }}</h4>
+                                <p class="mb-1">{{ $item->name }}</p>
                             </div>
-                            <p class="mb-1">In Queue</p>
-                            <p class="mb-0">
-                                <span
-                                    class="text-heading fw-medium me-2">{{ $statusCount['Queue']['percentage'] ?? 0 }}%</span>
-                                <small class="text-muted">than last week</small>
-                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card card-border-shadow-warning h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="avatar me-4">
-                                    <span class="avatar-initial rounded bg-label-warning"><i
-                                            class="ti ti-hourglass-low ti-28px text-warning"></i></span>
-                                </div>
-                                <h4 class="mb-0">{{ $statusCount['On Progress']['count'] ?? 0 }}</h4>
-                            </div>
-                            <p class="mb-1">On Progress</p>
-                            <p class="mb-0">
-                                <span
-                                    class="text-heading fw-medium me-2">{{ $statusCount['On Progress']['percentage'] ?? 0 }}%</span>
-                                <small class="text-muted">than last week</small>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card card-border-shadow-danger h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="avatar me-4">
-                                    <span class="avatar-initial rounded bg-label-danger">
-                                        <i class="fa-solid fa-ban ti-28px text-danger"></i></span>
-                                </div>
-                                <h4 class="mb-0">{{ $countCancelled ?? 0 }}</h4>
-                            </div>
-                            <p class="mb-1">Canceled</p>
-                            <p class="mb-0">
-                                <span
-                                    class="text-heading fw-medium me-2">{{ $statusCount['Not Started']['percentage'] ?? 0 }}%</span>
-                                <small class="text-muted">than last week</small>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card card-border-shadow-success h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="avatar me-4">
-                                    <span class="avatar-initial rounded bg-label-success"><i
-                                            class="ti ti-circle-check ti-28px text-success"></i></span>
-                                </div>
-                                <h4 class="mb-0">{{ $countSuccess ?? 0 }}</h4>
-                            </div>
-                            <p class="mb-1">Succeed</p>
-                            <p class="mb-0">
-                                <span
-                                    class="text-heading fw-medium me-2">{{ $statusCount['Resolved']['percentage'] ?? 0 }}%</span>
-                                <small class="text-muted">than last week</small>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                @endforelse
             </div>
 
             <hr class="my-4" />
@@ -94,7 +65,7 @@
                 <div class="nav-align-top nav-tabs-shadow">
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">
-                            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
+                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-justified-it" aria-controls="navs-justified-it" aria-selected="true">
                                 <span class="d-sm-inline-flex align-items-center">
                                     IT
@@ -109,16 +80,16 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="navs-justified-it" role="tabpanel">
+                        <div class="tab-pane fade show" id="navs-justified-it" role="tabpanel">
                             <div class="card-header d-flex align-items-center justify-content-between mb-4">
                                 <form class="d-flex ms-auto" method="GET" role="search">
-                                    <input class="form-control form-control-sm me-2" type="search" name="request"
-                                        placeholder="Search request..." value="{{ request('request') }}">
+                                    <input class="form-control form-control-sm me-2" type="search" name="requestit"
+                                        placeholder="Search request..." value="{{ request('requestit') }}">
                                     <button class="btn btn-sm btn-primary" type="submit"><i
                                             class="ti ti-search"></i></button>
                                 </form>
                             </div>
-                            <div class="table-responsive table">
+                            <div class="table-responsive text-nowrap">
                                 <table class="table" style="font-size: 12pt;">
                                     <thead>
                                         <tr>
@@ -129,58 +100,56 @@
                                             <th>Time Start</th>
                                             <th>Time End</th>
                                             <th>Description</th>
-                                            <th>Tanggal Report</th>
+                                            <th>Date Report</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="ticket-tbody">
-                                        @forelse ($data as $item)
-                                            @if ($item->request_to == 'it')
-                                                <tr>
-                                                    <th>{{ $data->firstItem() + $loop->index }}</th>
-                                                    <td>{{ $item->user->name ?? ' ' }}</td>
-                                                    <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
-                                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
-                                                    <td>{{ $item->time_start ? $item->time_start : ' ' }}
-                                                    </td>
-                                                    <td>{{ $item->time_end ? $item->time_end : ' ' }}
-                                                    </td>
-                                                    <td>{{ $item->description ?? ' ' }}</td>
-                                                    <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
-                                                    </td>
-                                                    <td>{{ $item->status->name ?? ' ' }}</td>
-                                                    <td>
-                                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                                class="fa-solid fa-pen-to-square"></i></a>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                        @forelse ($datait as $item)
+                                            <tr>
+                                                <th>{{ $datait->firstItem() + $loop->index }}</th>
+                                                <td>{{ $item->user->name ?? ' ' }}</td>
+                                                <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
+                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                                <td>{{ $item->time_start ? $item->time_start : ' ' }}
+                                                </td>
+                                                <td>{{ $item->time_end ? $item->time_end : ' ' }}
+                                                </td>
+                                                <td>{{ $item->description ?? ' ' }}</td>
+                                                <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
+                                                </td>
+                                                <td>{{ $item->status->name ?? ' ' }}</td>
+                                                <td>
+                                                    <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                                        class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                </td>
+                                            </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="8" class="text-center">Data tidak ditemukan.</td>
+                                                <td colspan="15" class="text-center">Data tidak ditemukan.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-end mt-3">
-                                    {{ $data->links() }}
+                                    {{ $datait->links() }}
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="navs-justified-hr" role="tabpanel">
                             <div class="card-header d-flex align-items-center justify-content-between mb-2">
                                 <form class="d-flex ms-auto" method="GET" role="search">
-                                    <input class="form-control form-control-sm me-2" type="search" name="request"
-                                        placeholder="Search request..." value="{{ request('request') }}">
+                                    <input class="form-control form-control-sm me-2" type="search" name="requesthr"
+                                        placeholder="Search request..." value="{{ request('requesthr') }}">
                                     <button class="btn btn-sm btn-primary" type="submit"><i
                                             class="ti ti-search"></i></button>
                                 </form>
                             </div>
-                            <div class="table-responsive table">
+                            <div class="table-responsive text-nowrap">
                                 <table class="table" style="font-size: 12pt;">
-                                    <thead>
+                                    <thead style="font-size: 10pt;">
                                         <tr>
                                             <th>No</th>
                                             <th>Request By</th>
@@ -189,43 +158,41 @@
                                             <th>Time Start</th>
                                             <th>Time End</th>
                                             <th>Description</th>
-                                            <th>Tanggal Report</th>
+                                            <th>Date Report</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="ticket-tbody">
-                                        @forelse ($data as $item)
-                                            @if ($item->request_to == 'hr')
-                                                <tr>
-                                                    <th>{{ $data->firstItem() + $loop->index }}</th>
-                                                    <td>{{ $item->user->name ?? ' ' }}</td>
-                                                    <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
-                                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
-                                                    <td>{{ $item->time_start ? $item->time_start : ' ' }}
-                                                    </td>
-                                                    <td>{{ $item->time_end ? $item->time_end : ' ' }}
-                                                    </td>
-                                                    <td>{{ $item->description ?? ' ' }}</td>
-                                                    <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
-                                                    </td>
-                                                    <td>{{ $item->status->name ?? ' ' }}</td>
-                                                    <td>
-                                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                                class="fa-solid fa-pen-to-square"></i></a>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                        @forelse ($datahr as $item)
+                                            <tr>
+                                                <th>{{ $datahr->firstItem() + $loop->index }}</th>
+                                                <td>{{ $item->user->name ?? ' ' }}</td>
+                                                <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
+                                                <td>{{ $item->category->task_name ?? ' ' }}</td>
+                                                <td>{{ $item->time_start ? $item->time_start : ' ' }}
+                                                </td>
+                                                <td>{{ $item->time_end ? $item->time_end : ' ' }}
+                                                </td>
+                                                <td>{{ $item->description ?? ' ' }}</td>
+                                                <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
+                                                </td>
+                                                <td>{{ $item->status->name ?? ' ' }}</td>
+                                                <td>
+                                                    <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                                        class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                </td>
+                                            </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="7" class="text-center">Data tidak ditemukan.</td>
+                                                <td colspan="15" class="text-center">Data tidak ditemukan.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-end mt-3">
-                                    {{ $data->links() }}
+                                    {{ $datahr->links() }}
                                 </div>
                             </div>
                         </div>
@@ -240,4 +207,26 @@
 
 @push('myscript')
     <script src="{{ asset('js/script/script.js') }}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+
+            let tab = '#navs-justified-it'; // default
+
+            if (params.has('requesthr')) {
+                tab = '#navs-justified-hr';
+            } else if (params.has('requestit')) {
+                tab = '#navs-justified-it';
+            } else if (params.get('tab')) {
+                tab = params.get('tab');
+            }
+
+            const trigger = document.querySelector(`[data-bs-target="${tab}"]`);
+            if (trigger) {
+                const tabInstance = new bootstrap.Tab(trigger);
+                tabInstance.show();
+            }
+        });
+    </script>
 @endpush

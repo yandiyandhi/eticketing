@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('request_to')->nullable();
             $table->dateTime('time_start')->nullable();
             $table->dateTime('time_end')->nullable();
+            $table->dateTime('time_approved')->nullable();
             $table->text('description')->nullable();
             $table->text('keterangan')->nullable();
             $table->char('status_id', 1)->default('1');

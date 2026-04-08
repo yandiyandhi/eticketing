@@ -42,7 +42,7 @@
                                     <td>{{ $item->department->name ?? 'N/A' }}</td>
                                     <td>
                                         @forelse ($item->roles as $role)
-                                            <li>{{ $role->name }}</li>
+                                            {{ $role->name }}
                                         @empty
                                             Tidak ada Role
                                         @endforelse
