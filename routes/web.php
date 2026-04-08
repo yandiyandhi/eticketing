@@ -98,7 +98,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/role/{id}', 'destroy')->name('role.destroy');
 
         Route::get('/role/permission/{id}', 'permission')->name('role.permission');
-        Route::put('/role/permission/{id}', 'assignPermission')->name('role.assignPermission');
+        Route::post('/role/permission/{id}', 'assignPermission')->name('role.assignPermission');
     });
 
     Route::controller(PermissionController::class)->group(function () {

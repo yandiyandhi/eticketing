@@ -34,7 +34,7 @@
                         <tbody>
                             @forelse ($user as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->firstItem() + $loop->index }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->username }}</td>
                                     <td>{{ $item->email }}</td>
@@ -74,8 +74,8 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-end mt-3">
-                        {{ $user->links() }}
+                    <div class="card-footer">
+                        {{ $user->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

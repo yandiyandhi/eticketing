@@ -31,7 +31,7 @@
                         <tbody>
                             @forelse ($data as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->firstItem() + $loop->index }}</td>
                                     <td>{{ $item->uuid }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->created_at }}</td>
@@ -55,11 +55,9 @@
                             @endforelse
                         </tbody>
                     </table>
-                    @if ($data->count())
-                        <div class="d-flex justify-content-end mt-3">
-                            {{ $data->links() }}
-                        </div>
-                    @endif
+                    <div class="card-footer">
+                        {{ $data->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
             <!--/ Column Search -->

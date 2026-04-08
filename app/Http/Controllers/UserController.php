@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function index()
-    {        
-        $user = User::with(['kantor', 'department', 'roles'])->orderBy('name', 'asc')->paginate(10);     
-        return view('dataRef.users.index', compact('user'));
-        try {        
+    {
+        try {
+            $user = User::with(['kantor', 'department', 'roles'])->orderBy('name', 'asc')->paginate(10)->withQueryString();
+            return view('dataRef.users.index', compact('user'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
@@ -34,7 +34,7 @@ class UserController extends Controller
     }
 
     public function store(UserRequest $request, UserService $userService)
-    {                
+    {
         try {
             $userService->create($request->validated());
             return redirect()->back()->with('success', 'User berhasil ditambahkan.');
@@ -48,15 +48,15 @@ class UserController extends Controller
         $user = User::where('uuid', $id)->first();
         $departments = Department::orderBy('name', 'asc')->get();
         $kantors = Kantor::orderBy('name', 'asc')->get();
-        
+
         return view('dataRef.users.editUser', compact('user', 'departments', 'kantors'));
     }
 
     public function update(EditUserRequest $request, $id, UserService $userService)
-    {        
+    {
         try {
-                $userService->update($id, $request->validated());
-                return redirect()->back()->with('success', 'User berhasil diperbarui.');
+            $userService->update($id, $request->validated());
+            return redirect()->back()->with('success', 'User berhasil diperbarui.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
@@ -64,7 +64,7 @@ class UserController extends Controller
 
     public function password($id)
     {
-        $user = User::where('uuid', $id)->first();        
+        $user = User::where('uuid', $id)->first();
         return view('dataRef.users.updatePassword', compact('user'));
     }
 
@@ -89,19 +89,19 @@ class UserController extends Controller
     {
         $user = User::where('uuid', $id)->first();
         $roles = DB::table('roles')->orderBy('name')->get();
-        
+
         return view('dataRef.users.addRole', compact('user', 'roles'));
     }
 
     public function assignRole(Request $request, $id)
-    {        
+    {
         try {
             $request->validate([
                 'role_name' => 'required|exists:roles,name',
             ]);
             $user = User::find($id);
             $user->syncRoles([$request->role_name]);
-    
+
             return redirect()->back()->with('success', 'Role assigned successfully.');
         } catch (Exception $th) {
             return redirect()->back()->with('error', 'Failed to assign role: ' . $th->getMessage());

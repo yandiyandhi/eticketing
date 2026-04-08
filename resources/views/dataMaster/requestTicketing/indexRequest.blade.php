@@ -70,8 +70,8 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-end mt-3">
-                        {{ $data->links() }}
+                    <div class="card-footer">
+                        {{ $data->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

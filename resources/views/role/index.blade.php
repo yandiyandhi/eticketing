@@ -30,7 +30,7 @@
                         <tbody>
                             @forelse ($role as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $role->firstItem() + $loop->index }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
@@ -56,8 +56,8 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-end mt-3">
-                        {{ $role->links() }}
+                    <div class="card-footer">
+                        {{ $role->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

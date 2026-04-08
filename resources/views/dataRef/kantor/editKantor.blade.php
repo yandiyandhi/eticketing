@@ -38,8 +38,8 @@
             <!--/ Column Search -->
         </div>
 
-        @include('layouts.footercontent')
     </div>
+    @include('layouts.footercontent')
 @endsection
 
 @push('myscript')

@@ -34,7 +34,3 @@
     </div>
     @include('layouts.footercontent')
 @endsection
-
-@push('myscript')
-    <script src="{{ asset('js/script/script.js') }}"></script>
-@endpush

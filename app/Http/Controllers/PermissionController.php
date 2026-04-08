@@ -11,7 +11,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $permissions = DB::table('permissions')->paginate(10);
+        $permissions = DB::table('permissions')->paginate(10)->withQueryString();
         return view('permissions.index', compact('permissions'));
     }
 
