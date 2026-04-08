@@ -12,10 +12,15 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">List Kantor</h5>
-                    <a href="{{ route('kantor.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
-                        Tambah Kantor</a>
+                    @can('kantor.create')
+                        <a href="{{ route('kantor.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
+                            Tambah Kantor</a>
+                    @else
+                        <a href="#" class="btn btn-sm btn-secondary" @disabled(true)><i
+                                class="ti ti-plus me-1"></i>
+                            Tambah Kantor</a>
+                    @endcan
                 </div>
-
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="text-center">
@@ -37,14 +42,24 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
-                                        <a href="{{ route('kantor.edit', $item->uuid) }}"
-                                            class="btn btn-sm btn-icon btn-warning" title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteKantor"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
-                                            id="confirm-text">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
+                                        @can('kantor.edit')
+                                            <a href="{{ route('kantor.edit', $item->uuid) }}"
+                                                class="btn btn-sm btn-icon btn-warning" title="Edit"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)><i class="fa-solid fa-pen-to-square"></i></a>
+                                        @endcan
+                                        @can('kantor.delete')
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteKantor"
+                                                data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
+                                                id="confirm-text">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)><i class="fa-solid fa-trash"></i></a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

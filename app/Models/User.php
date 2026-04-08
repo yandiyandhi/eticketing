@@ -63,6 +63,10 @@ class User extends Authenticatable
     {
         static::creating(function ($user) {
             $user->uuid = Str::uuid();
+
+            if (isset($user->username)) {
+                $user->username = strtolower($user->username);
+            }
         });
     }
 }

@@ -1,19 +1,24 @@
 @extends('layouts.app')
 @section('title', 'Category')
 @section('content')
-<div class="layout-page">
-    <!-- Navbar -->
+    <div class="layout-page">
+        <!-- Navbar -->
         @include('layouts.navbar')
-    <!-- Navbar -->
+        <!-- Navbar -->
 
-    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="container-xxl flex-grow-1 container-p-y">
             @include('partials.alert')
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">List Category</h5>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCategory"><i
-                            class="ti ti-plus me-1"></i> Tambah Kategori</a>
+                    @can('kategori.create')
+                        <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalAddCategory"><i class="ti ti-plus me-1"></i> Tambah Kategori</a>
+                    @else
+                        <a href="#" class="btn btn-sm btn-secondary" @disabled(true)><i
+                                class="ti ti-plus me-1"></i> Tambah Kategori</a>
+                    @endcan
                 </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
@@ -34,15 +39,29 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
-                                            data-bs-toggle="modal" data-bs-target="#modalEditCategory"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->task_name }}" title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteCategory"
-                                            data-id="{{ $item->uuid }}" data-name="{{ $item->task_name }}" title="Hapus"
-                                            id="confirm-text">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
+                                        @can('kategori.edit')
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning"
+                                                data-bs-toggle="modal" data-bs-target="#modalEditCategory"
+                                                data-id="{{ $item->uuid }}" data-name="{{ $item->task_name }}"
+                                                title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)>
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        @endcan
+                                        @can('kategori.delete')
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteCategory"
+                                                data-id="{{ $item->uuid }}" data-name="{{ $item->task_name }}" title="Hapus"
+                                                id="confirm-text">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)>
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
@@ -55,8 +74,8 @@
                 </div>
             </div>
             <!--/ Column Search -->
-        </div>                     
-        
+        </div>
+
         <form id="formDeleteCategory" method="POST">
             @csrf
             @method('DELETE')
@@ -65,8 +84,8 @@
         @include('dataRef.category.addCategory');
         @include('dataRef.category.editCategory');
 
-     @include('layouts.footercontent')
-</div>
+        @include('layouts.footercontent')
+    </div>
 @endsection
 
 @push('myscript')

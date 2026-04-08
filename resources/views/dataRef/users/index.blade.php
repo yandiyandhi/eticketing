@@ -12,8 +12,13 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">List User</h5>
-                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
-                        Tambah User</a>
+                    @can('user.create')
+                        <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
+                            Tambah User</a>
+                    @else
+                        <a href="#" class="btn btn-sm btn-secondary" @disabled(true)>
+                            <i class="ti ti-plus me-1"></i> Tambah User</a>
+                    @endcan
                 </div>
 
                 <div class="table-responsive text-nowrap">
@@ -55,16 +60,37 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('user.edit', $item->uuid) }}"
-                                            class="btn btn-sm btn-icon btn-warning" title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="{{ route('user.role', $item->uuid) }}"
-                                            class="btn btn-sm btn-icon btn-success" title="Add Role"><i
-                                                class="fa-solid fa-users"></i></a>
-                                        <a href="{{ route('user.password', $item->uuid) }}"
-                                            class="btn btn-sm btn-icon btn-danger" title="Edit Password">
-                                            <i class="fa-solid fa-lock"></i>
-                                        </a>
+                                        @can('user.edit')
+                                            <a href="{{ route('user.edit', $item->uuid) }}"
+                                                class="btn btn-sm btn-icon btn-warning" title="Edit"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)>
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        @endcan
+                                        @can('user.role')
+                                            <a href="{{ route('user.role', $item->uuid) }}"
+                                                class="btn btn-sm btn-icon btn-success" title="Add Role"><i
+                                                    class="fa-solid fa-users"></i></a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)>
+                                                <i class="fa-solid fa-users"></i>
+                                            </a>
+                                        @endcan
+                                        @can('user.password')
+                                            <a href="{{ route('user.password', $item->uuid) }}"
+                                                class="btn btn-sm btn-icon btn-danger" title="Edit Password">
+                                                <i class="fa-solid fa-lock"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                @disabled(true)>
+                                                <i class="fa-solid fa-lock"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

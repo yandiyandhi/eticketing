@@ -72,6 +72,7 @@ class RoleController extends Controller
     public function permission($id)
     {
         $roleId = $id;
+        $roleName = Role::find($id)->name;
         $permissions = DB::table('permissions')
             ->get()
             ->groupBy(function ($item) {
@@ -83,7 +84,7 @@ class RoleController extends Controller
             ->pluck('permission_id')
             ->toArray();
 
-        return view('role.roleHasPermission', compact('permissions', 'rolePermissions', 'roleId'));
+        return view('role.roleHasPermission', compact('permissions', 'rolePermissions', 'roleId', 'roleName'));
     }
 
     public function destroy($id, RoleService $roleService)

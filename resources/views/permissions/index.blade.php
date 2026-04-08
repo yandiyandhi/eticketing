@@ -12,8 +12,14 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">List Permission</h5>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalAddPermission"><i class="ti ti-plus me-1"></i>Tambah Permission</a>
+                    @can('permission.create')
+                        <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalAddPermission"><i class="ti ti-plus me-1"></i>Tambah Permission</a>
+                    @else
+                        <a href="#" class="btn btn-sm btn-secondary">
+                            <i class="ti ti-plus me-1"></i>Tambah Permission
+                        </a>
+                    @endcan
                 </div>
 
                 <div class="table-responsive text-nowrap">
@@ -35,14 +41,28 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
-                                        <a href="{{ route('permission.edit', ['id' => $item->id]) }}"
-                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        @can('permission.edit')
+                                            <a href="{{ route('permission.edit', ['id' => $item->id]) }}"
+                                                class="btn btn-sm btn-icon btn-warning" title="Edit"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary" title="Edit"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                        @endcan
 
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteRole"
-                                            data-id="{{ $item->id }}" data-name="{{ $item->name }}" title="Hapus"
-                                            id="confirm-text">
-                                            <i class="fa-solid fa-trash"></i>
+                                        @can('permission.delete')
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteRole"
+                                                data-id="{{ $item->id }}" data-name="{{ $item->name }}" title="Hapus"
+                                                id="confirm-text">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-icon btn-secondary"
+                                                data-id="{{ $item->id }}" data-name="{{ $item->name }}" title="Hapus"
+                                                id="confirm-text">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

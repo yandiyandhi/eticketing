@@ -27,7 +27,12 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4">Update</button>
+                            @can('user.role')
+                                <button type="submit" class="btn btn-primary mt-4">Update</button>
+                            @else
+                                <button type="submit" class="btn btn-secondary mt-4"
+                                    @disabled(true)>Update</button>
+                            @endcan
                     </form>
                 </div>
             </div>

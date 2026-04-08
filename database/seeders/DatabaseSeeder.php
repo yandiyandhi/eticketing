@@ -12,6 +12,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +25,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+        Role::firstOrCreate(['name' => 'admin']);
 
         Kantor::insert([
             [
@@ -44,7 +49,7 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        User::create([
+        $user = User::create([
             'uuid' => Str::uuid(),
             'department_id' => '1',
             'kantor_id' => '1',
@@ -53,6 +58,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('admin123*'),
         ]);
+
+        $user->syncRoles('admin');
+
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         User::create([
             'uuid' => Str::uuid(),

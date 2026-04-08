@@ -21,7 +21,11 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    @can('departemen.update')
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    @else
+                        <button type="submit" class="btn btn-secondary" @disabled(true)>Simpan</button>
+                    @endcan
                 </div>
             </form>
 

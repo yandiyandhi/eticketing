@@ -7,12 +7,14 @@ use App\Models\Department;
 use App\Models\Kpi;
 use App\Models\Status;
 use App\Models\Ticket;
+use App\Models\User;
 use App\Observers\CategoryObserver;
 use App\Observers\DepartmentObserver;
 use App\Observers\KpiObserver;
 use App\Observers\RoleObserver;
 use App\Observers\StatusObserver;
 use App\Observers\TicketingObserver;
+use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -39,9 +41,10 @@ class AppServiceProvider extends ServiceProvider
         Category::observe(CategoryObserver::class);
         Kpi::observe(KpiObserver::class);
         Role::observe(RoleObserver::class);
+        User::observe(UserObserver::class);
 
         Gate::before(function ($user, $ability) {
-            if ($user->hasRole('admin')) {
+            if ($user->hasRole('Admin')) {
                 return true;
             }
         });

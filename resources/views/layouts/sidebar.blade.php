@@ -106,11 +106,19 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('ticketing.reports') ? 'active' : '' }}">
-                    <a href="{{ route('ticketing.reports') }}" class="menu-link">
-                        <div data-i18n="Tiketing IT">Tiketing IT</div>
-                    </a>
-                </li>
+                @can('laporan.view')
+                    <li class="menu-item {{ Route::is('ticketing.reports') ? 'active' : '' }}">
+                        <a href="{{ route('ticketing.reports') }}" class="menu-link">
+                            <div data-i18n="Tiketing IT">Tiketing IT</div>
+                        </a>
+                    </li>
+                @else
+                    <li>
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="Tiketing IT">Tiketing IT</div>
+                        </a>
+                    </li>
+                @endcan
                 <li class="menu-item">
                     <a href="#" class="menu-link">
                         <div data-i18n="Tiketing HR">Tiketing HR</div>

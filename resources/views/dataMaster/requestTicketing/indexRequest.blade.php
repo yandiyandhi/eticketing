@@ -12,8 +12,13 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h6 class="mb-0">List Request</h6>
-                    <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddRequest"><i
-                            class="ti ti-plus me-1"></i> Request</a>
+                    @can('requesttiket.add')
+                        <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddRequest"><i
+                                class="ti ti-plus me-1"></i> Request</a>
+                    @else
+                        <a href="#" class="btn btn-sm btn-secondary" @disabled(true)>
+                            <i class="ti ti-plus me-1"></i> Request</a>
+                    @endcan
                 </div>
 
 
@@ -45,21 +50,47 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="icon-base ti ti-dots-vertical"></i></button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
-                                                    class="btn btn-sm btn-icon btn-warning">Edit</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item StatusRequestSuccess" href="javascript:void(0)"
-                                                    class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                    data-name="Success">{{ $success->name ?? ' ' }}</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item StatusRequestCancel" href="javascript:void(0)"
-                                                    class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                    data-name="{{ $cancel->name ?? ' ' }}">{{ $cancel->name ?? ' ' }}</a>
-                                            </li>
+                                            @can('requesttiket.edit')
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
+                                                        class="btn btn-sm btn-icon btn-warning">Edit</a>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                        data-name="Edit"><span class="text-danger">Edit</span></a>
+                                                </li>
+                                            @endcan
+                                            @can('requesttiket.success')
+                                                <li>
+                                                    <a class="dropdown-item StatusRequestSuccess" href="javascript:void(0)"
+                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                        data-name="Success">{{ $success->name ?? ' ' }}</a>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                        data-name="Success"><span
+                                                            class="text-danger">{{ $success->name ?? ' ' }}</span></a>
+                                                </li>
+                                            @endcan
+                                            @can('requesttiket.cancel')
+                                                <li>
+                                                    <a class="dropdown-item StatusRequestCancel" href="javascript:void(0)"
+                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                        data-name="{{ $cancel->name ?? ' ' }}">{{ $cancel->name ?? ' ' }}</a>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
+                                                        data-name="Cancel"><span
+                                                            class="text-danger">{{ $cancel->name ?? ' ' }}</span></a>
+                                                </li>
+                                            @endcan
                                         </ul>
                                     </td>
                                 </tr>

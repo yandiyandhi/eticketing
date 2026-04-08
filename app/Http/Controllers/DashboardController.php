@@ -11,7 +11,7 @@ class DashboardController extends Controller
         $datait = $dashboardService->getDataIt();
         $datahr = $dashboardService->getDataHr();
         $status = $dashboardService->getStatusCounts();
-        // dd($data);
+
         return view('dashboard', [
             'datait' => $datait,
             'datahr' => $datahr,

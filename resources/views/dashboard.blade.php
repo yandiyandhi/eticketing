@@ -102,7 +102,9 @@
                                             <th>Description</th>
                                             <th>Date Report</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            @can('dashboardit.edit')
+                                                <th>Action</th>
+                                            @endcan
                                         </tr>
                                     </thead>
                                     <tbody id="ticket-tbody">
@@ -120,11 +122,13 @@
                                                 <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
                                                 </td>
                                                 <td>{{ $item->status->name ?? ' ' }}</td>
-                                                <td>
-                                                    <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                                        class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
-                                                </td>
+                                                @can('dashboardit.edit')
+                                                    <td>
+                                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                                class="fa-solid fa-pen-to-square"></i></a>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                         @empty
                                             <tr>
@@ -160,7 +164,9 @@
                                             <th>Description</th>
                                             <th>Date Report</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            @can('dashboardhr.edit')
+                                                <th>Action</th>
+                                            @endcan
                                         </tr>
                                     </thead>
                                     <tbody id="ticket-tbody">
@@ -178,11 +184,13 @@
                                                 <td>{{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y') : ' ' }}
                                                 </td>
                                                 <td>{{ $item->status->name ?? ' ' }}</td>
-                                                <td>
-                                                    <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
-                                                        class="btn btn-sm btn-icon btn-warning"title="Edit"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
-                                                </td>
+                                                @can('dashboardhr.edit')
+                                                    <td>
+                                                        <a href="{{ route('ticketing.status', ['status' => $item->uuid]) }}"
+                                                            class="btn btn-sm btn-icon btn-warning"title="Edit"><i
+                                                                class="fa-solid fa-pen-to-square"></i></a>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                         @empty
                                             <tr>
