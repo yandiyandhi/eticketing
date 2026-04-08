@@ -99,7 +99,7 @@
             <span class="menu-header-text" data-i18n="Report">Report</span>
         </li>
 
-        <li class="menu-item {{ Route::is('ticketing.reports') ? 'open' : '' }}">
+        <li class="menu-item {{ Route::is('ticketing.reports', 'ticketing.reports') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-files"></i>
                 <div data-i18n="Laporan">Laporan</div>

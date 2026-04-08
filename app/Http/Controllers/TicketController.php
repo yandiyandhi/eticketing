@@ -147,8 +147,7 @@ class TicketController extends Controller
 
         if ($request) {
             $tickets->where(function ($query) use ($request) {
-                $query->where('request_name', 'like', "%{$request}%")
-                    ->orWhere('description', 'like', "%{$request}%")
+                $query->Where('description', 'like', "%{$request}%")
                     ->orWhereHas('user', function ($q) use ($request) {
                         $q->where('name', 'like', "%{$request}%");
                     })
