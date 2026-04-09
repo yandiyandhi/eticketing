@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin123*'),
         ]);
 
-        $user->syncRoles('admin');
+        $user->syncRoles('Admin');
 
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
