@@ -1,3 +1,5 @@
+// Edit Department
+
 $(document).ready(function () {
     $("#modalEditDepartment").on("show.bs.modal", function (event) {
         const button = $(event.relatedTarget);
@@ -29,6 +31,21 @@ $(document).on("click", ".deleteDepartment", function () {
             $("#formDeleteDepartment").attr("action", `/departments/${id}`);
             $("#formDeleteDepartment").submit();
         }
+    });
+});
+
+// Edit Divisi
+
+$(document).ready(function () {
+    $("#modalEditDivisi").on("show.bs.modal", function (event) {
+        const button = $(event.relatedTarget);
+
+        const id = button.data("id");
+        const name = button.data("name");
+
+        $("#name").val(name);
+
+        $("#formEditDivisi").attr("action", `/divisi/${id}`);
     });
 });
 
@@ -94,7 +111,7 @@ $(document).ready(function () {
         const id = button.data("id");
         const name = button.data("name");
 
-        $("#name").val(name);    
+        $("#name").val(name);
 
         $("#formEditKpi").attr("action", `/kpi/${id}`);
     });
@@ -102,7 +119,7 @@ $(document).ready(function () {
 
 $(document).on("click", ".deleteKpi", function () {
     const id = $(this).data("id");
-    const name = $(this).data("name");    
+    const name = $(this).data("name");
 
     Swal.fire({
         title: "Yakin ingin menghapus?",
@@ -127,15 +144,15 @@ $(document).ready(function () {
         const id = button.data("id");
         const name = button.data("name");
 
-        $("#task_name").val(name);    
-        
+        $("#task_name").val(name);
+
         $("#formEditCategory").attr("action", `/category/${id}`);
     });
 });
 
-$(document).on("click"  , ".deleteCategory", function () {
+$(document).on("click", ".deleteCategory", function () {
     const id = $(this).data("id");
-    const name = $(this).data("name");    
+    const name = $(this).data("name");
 
     Swal.fire({
         title: "Yakin ingin menghapus?",
