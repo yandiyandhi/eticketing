@@ -2,13 +2,13 @@
 
 namespace App\Exports;
 
-use App\Models\Ticket;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use App\Models\Ticket;
 use Carbon\Carbon;
 
-class TicketExport implements FromQuery, WithHeadings, WithMapping
+class TicketExportHr implements FromCollection, WithHeadings, WithMapping
 {
     protected $start;
     protected $end;
@@ -19,18 +19,18 @@ class TicketExport implements FromQuery, WithHeadings, WithMapping
         $this->end   = $end;
     }
 
-    public function query()
+    public function collection()
     {
-        $export = Ticket::with(['department', 'status', 'category', 'user'])
-            ->where('request_to', 'it')
+        return Ticket::with(['department', 'status', 'category', 'user'])
+            ->where('request_to', 'hr')
             ->when($this->start && $this->end, function ($q) {
                 $q->whereBetween('created_at', [
                     $this->start . ' 00:00:00',
                     $this->end . ' 23:59:59'
                 ]);
             })
-            ->orderByDesc('created_at')->get();        
-        return $export;
+            ->orderByDesc('created_at')
+            ->get();
     }
 
     public function headings(): array
@@ -53,6 +53,7 @@ class TicketExport implements FromQuery, WithHeadings, WithMapping
 
     public function map($ticket): array
     {
+        // Hitung durasi
         if ($ticket->time_start && $ticket->time_end) {
             $start = Carbon::parse($ticket->time_start);
             $end = Carbon::parse($ticket->time_end);

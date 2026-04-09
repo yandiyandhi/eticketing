@@ -19,6 +19,11 @@
                         @method('PUT')
                         <div class="modal-body">
                             <div class="mb-2">
+                                <label class="form-label">Keterangan User</label>
+                                <input type="text" class="form-control" value="{{ $ticket->description ?? '' }}"
+                                    readonly>
+                            </div>
+                            <div class="mb-2">
                                 <label class="form-label">Status</label>
                                 <select name="status_id" class="form-control" required>
                                     @foreach ($status as $item)

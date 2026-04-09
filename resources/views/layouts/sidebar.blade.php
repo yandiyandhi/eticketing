@@ -40,34 +40,71 @@
 
             <ul class="menu-sub">
                 <li class="menu-item {{ Route::is('kantor.index', 'kantor.create', 'kantor.edit') ? 'active' : '' }}">
-                    <a href="{{ route('kantor.index') }}" class="menu-link">
-                        <div data-i18n="Kantor">Kantor</div>
-                    </a>
+                    @can('kantor.view')
+                        <a href="{{ route('kantor.index') }}" class="menu-link">
+                            <div data-i18n="Kantor">Kantor</div>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="Kantor">Kantor</div>
+                        </a>
+                    @endcan
                 </li>
                 <li class="menu-item {{ Route::is('department.index') ? 'active' : '' }}">
-                    <a href="{{ route('department.index') }}" class="menu-link">
-                        <div data-i18n="Departemen">Departemen</div>
-                    </a>
+                    @can('department.view')
+                        <a href="{{ route('department.index') }}" class="menu-link">
+                            <div data-i18n="Departemen">Departemen</div>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="Departemen">Departemen</div>
+                        </a>
+                    @endcan
                 </li>
                 <li class="menu-item {{ Route::is('category.index') ? 'active' : '' }}">
-                    <a href="{{ route('category.index') }}" class="menu-link">
-                        <div data-i18n="Kategori">Kategori</div>
-                    </a>
+                    @can('category.view')
+                        <a href="{{ route('category.index') }}" class="menu-link">
+                            <div data-i18n="Kategori">Kategori</div>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="Kategori">Kategori</div>
+                        </a>
+                    @endcan
                 </li>
                 <li class="menu-item {{ Route::is('statuses.index') ? 'active' : '' }}">
-                    <a href="{{ route('statuses.index') }}" class="menu-link">
-                        <div data-i18n="Status">Status</div>
-                    </a>
+                    @can('status.view')
+                        <a href="{{ route('statuses.index') }}" class="menu-link">
+                            <div data-i18n="Status">Status</div>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="Status">Status</div>
+                        </a>
+                    @endcan
                 </li>
                 <li class="menu-item {{ Route::is('kpi.index') ? 'active' : '' }}">
-                    <a href="{{ route('kpi.index') }}" class="menu-link">
-                        <div data-i18n="KPI">KPI</div>
-                    </a>
+                    @can('kpi.view')
+                        <a href="{{ route('kpi.index') }}" class="menu-link">
+                            <div data-i18n="KPI">KPI</div>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="KPI">KPI</div>
+                        </a>
+                    @endcan
                 </li>
                 <li
                     class="menu-item {{ Route::is('user.index', 'user.create', 'user.edit', 'user.password', 'user.role') ? 'active' : '' }}">
-                    <a href="{{ route('user.index') }}" class="menu-link">
-                        <div data-i18n="User">User</div>
+                    @can('user.view')
+                        <a href="{{ route('user.index') }}" class="menu-link">
+                            <div data-i18n="User">User</div>
+                        </a>
+                    @else
+                        <a href="javascript:void(0)" class="menu-link">
+                            <div data-i18n="User">User</div>
+                        </a>
+                    @endcan
                     </a>
                 </li>
             </ul>
@@ -99,7 +136,7 @@
             <span class="menu-header-text" data-i18n="Report">Report</span>
         </li>
 
-        <li class="menu-item {{ Route::is('ticketing.reports', 'ticketing.reports') ? 'open' : '' }}">
+        <li class="menu-item {{ Route::is('ticketingit.reports', 'ticketinghr.reports') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-files"></i>
                 <div data-i18n="Laporan">Laporan</div>
@@ -107,8 +144,8 @@
 
             <ul class="menu-sub">
                 @can('laporan.view')
-                    <li class="menu-item {{ Route::is('ticketing.reports') ? 'active' : '' }}">
-                        <a href="{{ route('ticketing.reports') }}" class="menu-link">
+                    <li class="menu-item {{ Route::is('ticketingit.reports') ? 'active' : '' }}">
+                        <a href="{{ route('ticketingit.reports') }}" class="menu-link">
                             <div data-i18n="Tiketing IT">Tiketing IT</div>
                         </a>
                     </li>
@@ -119,8 +156,8 @@
                         </a>
                     </li>
                 @endcan
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('ticketinghr.reports') ? 'active' : '' }}">
+                    <a href="{{ route('ticketinghr.reports') }}" class="menu-link">
                         <div data-i18n="Tiketing HR">Tiketing HR</div>
                     </a>
                 </li>

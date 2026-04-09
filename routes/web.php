@@ -31,11 +31,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/ticketing/status/{status}', 'status')->name('ticketing.status');
         Route::put('/status/update/{id}', 'updateStatus')->name('ticketing.updateStatus');
 
-        Route::get('/reports/ticketing', 'indexReportsIt')->name('ticketing.reports');
+        Route::get('/reports/ticketing/it', 'indexReportsIt')->name('ticketingit.reports');
+        Route::get('/reports/ticketing/hr', 'indexReportsHr')->name('ticketinghr.reports');
         Route::put('/user/update/status/success/{id}', 'UserUpdateStatusSuccess')->name('ticketing.UserUpdateStatusSuccess');
         Route::put('/user/update/status/cancel/{id}', 'UserUpdateStatusCancel')->name('ticketing.UserUpdateStatusCancel');
 
-        Route::get('/request/export', 'exportRequest')->name('ticketing.exportRequest');
+        Route::get('/request/export', 'exportRequest')->name('ticketing.exportRequest'); 
+        Route::get('/request/export/hr', 'exportRequestHr')->name('ticketing.exportRequestHr'); 
     });
 
     Route::controller(KantorController::class)->group(function () {

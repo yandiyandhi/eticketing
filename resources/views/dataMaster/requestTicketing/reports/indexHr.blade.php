@@ -11,10 +11,10 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h6 class="mb-0">List Request IT</h6>
+                    <h6 class="mb-0">List Request HR</h6>
                     @can('laporan.export')
                         <div class="col-8 justify-content-end d-flex">
-                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalExportIt">
+                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalExportHr">
                                 <i class="ti ti-download"></i> Export
                             </a>
                         </div>
@@ -83,7 +83,7 @@
             <!--/ Column Search -->
         </div>
 
-        @include('dataMaster.requestTicketing.reports.modalIt')
+        @include('dataMaster.requestTicketing.reports.modalHr')
         @include('layouts.footercontent')
     </div>
 @endsection

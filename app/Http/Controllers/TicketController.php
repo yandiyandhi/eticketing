@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TicketExport;
+use App\Exports\TicketExportHr;
 use App\Http\Requests\CreateTicketingRequest;
 use App\Http\Requests\EditTicketingRequest;
 use App\Models\Category;
@@ -143,7 +144,7 @@ class TicketController extends Controller
     {
         $request = request('request');
 
-        $tickets = Ticket::where('status_id', '=', 5)->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
+        $tickets = Ticket::where('status_id', '=', 5)->where('request_to', 'it')->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
 
         if ($request) {
             $tickets->where(function ($query) use ($request) {
@@ -165,6 +166,32 @@ class TicketController extends Controller
         return view('dataMaster.requestTicketing.reports.index', compact('tickets'));
     }
 
+    public function indexReportsHr()
+    {
+        $request = request('request');
+
+        $tickets = Ticket::where('status_id', '=', 5)->where('request_to', 'hr')->with('department', 'status', 'kpi', 'category', 'user')->orderBy('created_at', 'desc');
+    
+        if ($request) {
+            $tickets->where(function ($query) use ($request) {
+                $query->Where('description', 'like', "%{$request}%")
+                    ->orWhereHas('user', function ($q) use ($request) {
+                        $q->where('name', 'like', "%{$request}%");
+                    })
+                    ->orWhereHas('category', function ($q) use ($request) {
+                        $q->where('task_name', 'like', "%{$request}%");
+                    })
+                    ->orWhereHas('department', function ($q) use ($request) {
+                        $q->where('name', 'like', "%{$request}%");
+                    });
+            });
+        }
+
+        $tickets = $tickets->paginate(10)->withQueryString();
+
+        return view('dataMaster.requestTicketing.reports.indexHr', compact('tickets'));
+    }
+
 
     // Export
 
@@ -172,6 +199,23 @@ class TicketController extends Controller
     {
         $start = $request->tanggal_awal;
         $end   = $request->tanggal_akhir;
-        return Excel::download(new TicketExport($start, $end), 'Request_Ticketing_IT.xlsx');
+
+        if (!$start || !$end) {
+            return redirect()->back()->with('error', 'Tanggal awal dan tanggal akhir harus diisi.');
+        }
+
+        return Excel::download(new TicketExport($start, $end), 'Request Ticketing IT.xlsx');
+    }
+
+    public function exportRequestHr(Request $request)
+    {
+        $start = $request->tanggal_awal;
+        $end   = $request->tanggal_akhir;
+
+        if (!$start || !$end) {
+            return redirect()->back()->with('error', 'Tanggal awal dan tanggal akhir harus diisi.');
+        }
+        
+        return Excel::download(new TicketExportHr($start, $end), 'Request Ticketing HR.xlsx');
     }
 }
