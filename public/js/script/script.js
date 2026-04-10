@@ -49,6 +49,27 @@ $(document).ready(function () {
     });
 });
 
+// Delete Divisi
+$(document).on("click", ".deleteDivisi", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `Kategori "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteDivisi").attr("action", `/divisi/${id}`);
+            $("#formDeleteDivisi").submit();
+        }
+    });
+});
+
 // Delete Kantor
 $(document).on("click", ".deleteKantor", function () {
     const id = $(this).data("id");

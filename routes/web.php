@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/divisi/store', 'store')->name('divisi.store');
         Route::get('/divisi/edit/{id}', 'edit')->name('divisi.edit');
         Route::put('/divisi/{id}', 'update')->name('divisi.update');
+        Route::delete('/divisi/{divisi}', 'destroy')->name('divisi.session_destroy');
 
     });
 

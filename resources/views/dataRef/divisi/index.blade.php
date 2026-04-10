@@ -43,7 +43,7 @@
                                             class="btn btn-sm btn-icon btn-warning" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
-                                        @can('departemen.delete')
+                                        @can('divisi.delete')
                                             <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteDivisi"
                                                 data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
                                                 id="confirm-text">

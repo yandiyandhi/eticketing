@@ -4,6 +4,7 @@ namespace App\Services\Divisi;
 
 use App\Models\Divisi;
 use Illuminate\Support\Facades\DB;
+use DomainException;
 
 class DivisiService
 {
@@ -23,5 +24,19 @@ class DivisiService
             return Divisi::create($data);
         });
 
+    }
+
+        public function delete(Divisi $divisi): void
+    {
+        DB::transaction(function () use ($divisi) {
+
+            if ($divisi->users()->exists()) {
+                throw new DomainException(
+                    'Divisi tidak bisa dihapus karena masih digunakan oleh User.'
+                );
+            }
+
+            $divisi->delete();
+        });
     }
 }
