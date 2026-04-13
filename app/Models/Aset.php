@@ -41,7 +41,25 @@ class Aset extends Model
     protected static function booted()
     {
         static::creating(function ($aset) {
-            $aset->uuid = Str::uuid();
+            $aset->uuid = Str::uuid();            
+        });
+
+        static::saving(function ($aset) {
+            $fields = ['name', 'merk', 'spesifikasi'];
+
+            foreach ($fields as $field) {
+                if (!empty($aset->$field)) {
+                    $aset->$field = Str::title(trim($aset->$field));
+                    }
+            }
+
+            $upperFields = ['serial_number','model', 'no_polisi'];
+
+            foreach ($upperFields as $field) {
+                if (!empty($aset->$field)) {
+                    $aset->$field = strtoupper(trim($aset->$field));
+                }
+            }
         });
     }
 }

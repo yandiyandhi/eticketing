@@ -11,6 +11,8 @@ class KondisiAset extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'kondisi_asets';
+
     protected $guarded = ['id'];
 
     public function getRouteKeyName()

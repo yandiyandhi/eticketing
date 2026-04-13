@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('serial_number')->nullable();
             $table->text('spesifikasi')->nullable();            
             $table->text('no_polisi')->nullable();            
-            $table->text('pajak_stnk')->nullable();            
-            $table->text('pajak_bpkb')->nullable();            
-            $table->text('kir')->nullable();            
+            $table->date('pajak_stnk')->nullable();            
+            $table->date('pajak_bpkb')->nullable();            
+            $table->date('kir')->nullable();            
             $table->string('divisi')->nullable();
             $table->date('tanggal_beli')->nullable();            
             $table->text('keterangan')->nullable();

@@ -29,7 +29,7 @@ class CategoryObserver
             'model'       => 'Category',
             'model_id'    => $category->id,
             'new_data'    => $category->toArray(),
-            'description' => "Kategori baru dibuat: {$category->task_name}",
+            'description' => "Kategori telah diubah: {$category->task_name}",
         ]);
     }
 

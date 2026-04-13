@@ -127,6 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(AsetController::class)->group(function () {
         Route::get('/aset', 'index')->name('aset.index');
         Route::get('/aset/create', 'create')->name('aset.create');
+        Route::post('/aset/store', 'store')->name('aset.store');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

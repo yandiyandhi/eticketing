@@ -25,7 +25,7 @@ if (document.getElementById("layout-menu")) {
         Waves.init();
         Waves.attach(
             ".btn[class*='btn-']:not(.position-relative):not([class*='btn-outline-']):not([class*='btn-label-'])",
-            ["waves-light"]
+            ["waves-light"],
         );
         Waves.attach("[class*='btn-outline-']:not(.position-relative)");
         Waves.attach("[class*='btn-label-']:not(.position-relative)");
@@ -49,16 +49,17 @@ if (document.getElementById("layout-menu")) {
             closeChildren: isHorizontalLayout ? true : false,
             // ? This option only works with Horizontal menu
             showDropdownOnHover: localStorage.getItem(
-                "templateCustomizer-" + templateName + "--ShowDropdownOnHover"
+                "templateCustomizer-" + templateName + "--ShowDropdownOnHover",
             ) // If value(showDropdownOnHover) is set in local storage
                 ? localStorage.getItem(
                       "templateCustomizer-" +
                           templateName +
-                          "--ShowDropdownOnHover"
+                          "--ShowDropdownOnHover",
                   ) === "true" // Use the local storage value
                 : window.templateCustomizer !== undefined // If value is set in config.js
-                ? window.templateCustomizer.settings.defaultShowDropdownOnHover // Use the config.js value
-                : true, // Use this if you are not using the config.js and want to set value directly from here
+                  ? window.templateCustomizer.settings
+                        .defaultShowDropdownOnHover // Use the config.js value
+                  : true, // Use this if you are not using the config.js and want to set value directly from here
         });
         // Change parameter to true if you want scroll animation
         window.Helpers.scrollToActive((animate = false));
@@ -81,12 +82,12 @@ if (document.getElementById("layout-menu")) {
                         "templateCustomizer-" +
                             templateName +
                             "--LayoutCollapsed",
-                        String(window.Helpers.isCollapsed())
+                        String(window.Helpers.isCollapsed()),
                     );
                     // Update customizer checkbox state on click of menu toggler
                     let layoutCollapsedCustomizerOptions =
                         document.querySelector(
-                            ".template-customizer-layouts-options"
+                            ".template-customizer-layouts-options",
                         );
                     if (layoutCollapsedCustomizerOptions) {
                         let layoutCollapsedVal = window.Helpers.isCollapsed()
@@ -94,7 +95,7 @@ if (document.getElementById("layout-menu")) {
                             : "expanded";
                         layoutCollapsedCustomizerOptions
                             .querySelector(
-                                `input[value="${layoutCollapsedVal}"]`
+                                `input[value="${layoutCollapsedVal}"]`,
                             )
                             .click();
                     }
@@ -139,7 +140,7 @@ if (document.getElementById("layout-menu")) {
             }
         }
         const switchImagesList = [].slice.call(
-            document.querySelectorAll("[data-app-" + style + "-img]")
+            document.querySelectorAll("[data-app-" + style + "-img]"),
         );
         switchImagesList.map(function (imageEl) {
             const setImage = imageEl.getAttribute("data-app-" + style + "-img");
@@ -156,14 +157,14 @@ if (document.getElementById("layout-menu")) {
     // Get style from local storage or use 'system' as default
     let storedStyle =
         localStorage.getItem(
-            "templateCustomizer-" + "vertical-menu-template" + "--Style"
+            "templateCustomizer-" + "vertical-menu-template" + "--Style",
         ) || //if no template style then use Customizer style
         (window.templateCustomizer?.settings?.defaultStyle ?? "light"); //!if there is no Customizer then use default style as light
 
     // Set style on click of style switcher item if template customizer is enabled
     if (window.templateCustomizer && styleSwitcher) {
         let styleSwitcherItems = [].slice.call(
-            styleSwitcher.children[1].querySelectorAll(".dropdown-item")
+            styleSwitcher.children[1].querySelectorAll(".dropdown-item"),
         );
 
         styleSwitcherItems.forEach(function (item) {
@@ -229,7 +230,7 @@ if (document.getElementById("layout-menu")) {
                 debug: false,
                 fallbackLng: "en",
                 backend: {
-                    loadPath: "assets/json/locales/{{lng}}.json",
+                    loadPath: "/assets/json/locales/{{lng}}.json",
                 },
                 returnObjects: true,
             })
@@ -283,7 +284,7 @@ if (document.getElementById("layout-menu")) {
             if (textDirection === "rtl") {
                 if (
                     localStorage.getItem(
-                        "templateCustomizer-" + templateName + "--Rtl"
+                        "templateCustomizer-" + templateName + "--Rtl",
                     ) !== "true"
                 )
                     window.templateCustomizer
@@ -292,7 +293,7 @@ if (document.getElementById("layout-menu")) {
             } else {
                 if (
                     localStorage.getItem(
-                        "templateCustomizer-" + templateName + "--Rtl"
+                        "templateCustomizer-" + templateName + "--Rtl",
                     ) === "true"
                 )
                     window.templateCustomizer
@@ -306,7 +307,7 @@ if (document.getElementById("layout-menu")) {
         let i18nList = document.querySelectorAll("[data-i18n]");
         // Set the current language in dd
         let currentLanguageEle = document.querySelector(
-            '.dropdown-item[data-language="' + i18next.language + '"]'
+            '.dropdown-item[data-language="' + i18next.language + '"]',
         );
 
         if (currentLanguageEle) {
@@ -321,10 +322,10 @@ if (document.getElementById("layout-menu")) {
     // Notification
     // ------------
     const notificationMarkAsReadAll = document.querySelector(
-        ".dropdown-notifications-all"
+        ".dropdown-notifications-all",
     );
     const notificationMarkAsReadList = document.querySelectorAll(
-        ".dropdown-notifications-read"
+        ".dropdown-notifications-read",
     );
 
     // Notification: Mark as all as read
@@ -332,7 +333,7 @@ if (document.getElementById("layout-menu")) {
         notificationMarkAsReadAll.addEventListener("click", (event) => {
             notificationMarkAsReadList.forEach((item) => {
                 item.closest(".dropdown-notifications-item").classList.add(
-                    "marked-as-read"
+                    "marked-as-read",
                 );
             });
         });
@@ -342,7 +343,7 @@ if (document.getElementById("layout-menu")) {
         notificationMarkAsReadList.forEach((item) => {
             item.addEventListener("click", (event) => {
                 item.closest(".dropdown-notifications-item").classList.toggle(
-                    "marked-as-read"
+                    "marked-as-read",
                 );
             });
         });
@@ -350,7 +351,7 @@ if (document.getElementById("layout-menu")) {
 
     // Notification: Mark as read/unread onclick of dot
     const notificationArchiveMessageList = document.querySelectorAll(
-        ".dropdown-notifications-archive"
+        ".dropdown-notifications-archive",
     );
     notificationArchiveMessageList.forEach((item) => {
         item.addEventListener("click", (event) => {
@@ -363,7 +364,7 @@ if (document.getElementById("layout-menu")) {
 
     // Init BS Tooltip
     const tooltipTriggerList = [].slice.call(
-        document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        document.querySelectorAll('[data-bs-toggle="tooltip"]'),
     );
     tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -379,20 +380,20 @@ if (document.getElementById("layout-menu")) {
     };
 
     const accordionTriggerList = [].slice.call(
-        document.querySelectorAll(".accordion")
+        document.querySelectorAll(".accordion"),
     );
-    const accordionList = accordionTriggerList.map(function (
-        accordionTriggerEl
-    ) {
-        accordionTriggerEl.addEventListener(
-            "show.bs.collapse",
-            accordionActiveFunction
-        );
-        accordionTriggerEl.addEventListener(
-            "hide.bs.collapse",
-            accordionActiveFunction
-        );
-    });
+    const accordionList = accordionTriggerList.map(
+        function (accordionTriggerEl) {
+            accordionTriggerEl.addEventListener(
+                "show.bs.collapse",
+                accordionActiveFunction,
+            );
+            accordionTriggerEl.addEventListener(
+                "hide.bs.collapse",
+                accordionActiveFunction,
+            );
+        },
+    );
 
     // If layout is RTL add .dropdown-menu-end class to .dropdown-menu
     // if (isRtl) {
@@ -412,7 +413,7 @@ if (document.getElementById("layout-menu")) {
     window.Helpers.initNavbarDropdownScrollbar();
 
     let horizontalMenuTemplate = document.querySelector(
-        "[data-template^='horizontal-menu']"
+        "[data-template^='horizontal-menu']",
     );
     if (horizontalMenuTemplate) {
         // if screen size is small then set navbar fixed
@@ -470,7 +471,7 @@ if (document.getElementById("layout-menu")) {
                 }, 100);
             }
         },
-        true
+        true,
     );
 
     // Manage menu expanded/collapsed with templateCustomizer & local storage
@@ -500,16 +501,16 @@ if (document.getElementById("layout-menu")) {
                     localStorage.getItem(
                         "templateCustomizer-" +
                             templateName +
-                            "--LayoutCollapsed"
+                            "--LayoutCollapsed",
                     ) !== null
                 )
                     window.Helpers.setCollapsed(
                         localStorage.getItem(
                             "templateCustomizer-" +
                                 templateName +
-                                "--LayoutCollapsed"
+                                "--LayoutCollapsed",
                         ) === "true",
-                        false
+                        false,
                     );
             } catch (e) {}
         }
@@ -603,7 +604,7 @@ if (typeof $ !== "undefined") {
             }
             // Search API AJAX call
             var searchData = $.ajax({
-                url: "assets/json/" + searchJson, //? Use your own search api instead
+                url: "/assets/json/" + searchJson, //? Use your own search api instead
                 dataType: "json",
                 async: false,
             }).responseJSON;
@@ -734,7 +735,7 @@ if (typeof $ !== "undefined") {
                                     '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
                                     "</div>",
                             },
-                        }
+                        },
                     )
                     //On typeahead result render.
                     .bind("typeahead:render", function () {
