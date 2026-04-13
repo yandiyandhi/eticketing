@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Kantor;
 use App\Models\Kpi;
 use App\Models\Status;
+use App\Models\Divisi;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -159,6 +160,30 @@ class DatabaseSeeder extends Seeder
             [
                 'uuid' => Str::uuid(),
                 'name' => 'Finance',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        Divisi::Insert([
+            [
+                'uuid' => Str::uuid(),
+                'department_id' => 2,
+                'name' => 'Purchasing',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'department_id' => 3,
+                'name' => 'Accounting',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'department_id' => 1,
+                'name' => 'Sales',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

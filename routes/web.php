@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\KpiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
@@ -54,6 +55,17 @@ Route::middleware('auth')->group(function () {
         Route::post('/department', 'store')->name('department.store');
         Route::put('/departments/{department}', 'update')->name('department.update');
         Route::delete('/departments/{department}', 'destroy')->name('department.destroy');
+    });
+
+    Route::controller(DivisiController::class)->group(function ()
+    {
+        Route::get('/divisi', 'index')->name('divisi.index');
+        Route::get('/divisi/create', 'create')->name('divisi.create');
+        Route::post('/divisi/store', 'store')->name('divisi.store');
+        Route::get('/divisi/edit/{id}', 'edit')->name('divisi.edit');
+        Route::put('/divisi/{id}', 'update')->name('divisi.update');
+        Route::delete('/divisi/{divisi}', 'destroy')->name('divisi.session_destroy');
+
     });
 
     Route::controller(StatusController::class)->group(function () {
