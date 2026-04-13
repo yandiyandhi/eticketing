@@ -32,7 +32,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-package"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -61,7 +61,7 @@
                         </a>
                     @endcan
                 </li>
-                <li class="menu-item {{ Route::is('divisi.index', 'divisi.create') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('divisi.index', 'divisi.create', 'divisi.edit') ? 'active' : '' }}">
                     <a href="{{ route('divisi.index') }}" class="menu-link">
                         <div data-i18n="Divisi">Divisi</div>
                     </a>

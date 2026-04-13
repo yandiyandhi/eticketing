@@ -56,7 +56,7 @@ $(document).on("click", ".deleteDivisi", function () {
 
     Swal.fire({
         title: "Yakin ingin menghapus?",
-        text: `Kategori "${name}" akan dihapus`,
+        text: `Divisi "${name}" akan dihapus`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Ya, hapus",

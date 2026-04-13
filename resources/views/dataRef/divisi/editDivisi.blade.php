@@ -14,10 +14,10 @@
                     <h5 class="modal-title">Edit Divisi</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('divisi.update') }}">
+                    <form method="POST" action="{{ route('divisi.update', ['id' => $divisi->id]) }}">
                         @csrf
-                        @method('POST') <div class="modal-body">
-
+                        @method('PUT')
+                        <div class="modal-body">
                             <div class="mb-2">
                                 <label class="form-label">Departemen</label>
                                 <select name="department_id" class="form-control" required>
