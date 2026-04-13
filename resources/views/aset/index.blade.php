@@ -41,7 +41,7 @@
                                 <th>Nama Aset</th>
                                 <th>Jenis</th>
                                 <th>Kondisi</th>
-                                <th>Merek</th>
+                                <th>Merk</th>
                                 <th>Model</th>
                                 <th>Serial Number</th>
                                 <th>Spesifikasi</th>
