@@ -18,24 +18,45 @@
                         @csrf
                         @method('POST') <div class="modal-body">
 
-                            <div class="col-lg-4">
+                            <div class="row g-4">
 
-                                <div class="mb-2">
-                                    <label class="form-label">Nama Aset</label>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                                        required>
+                                <div class="col-lg-6">
+
+                                    <div>
+                                        <label class="form-label">Nama Aset</label>
+                                        <input type="text" name="name" class="form-control"
+                                            value="{{ old('name') }}" required>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <label class="form-label">Merk</label>
+                                        <input type="text" name="merk" class="form-control"
+                                            value="{{ old('merk') }}" required>
+                                    </div>
+
                                 </div>
+                                <div class="col-lg-6">
 
-                            </div>
-                            <div class="col-lg-4">
+                                    <div>
+                                        <label class="form-label">Departemen</label>
+                                        <select name="kondisi_id" class="form-control" required>
+                                            <option value="">-- Pilih Kondisi --</option>
+                                            @foreach ($kondisi as $konds)
+                                                <option value="{{ $konds->id }}">
+                                                    {{ ucwords($konds->name) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label class="form-label">Merk</label>
+                                        <input type="text" name="merk" class="form-control"
+                                            value="{{ old('merk') }}" required>
+                                    </div>
 
-                                <div class="mb-2">
-                                    <label class="form-label">Nama Aset</label>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                                        required>
                                 </div>
-
                             </div>
+
 
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                     </form>

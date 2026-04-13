@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aset;
+use App\Models\Kondisi;
+use App\Models\KondisiAset;
 
 class AsetController extends Controller
 {
@@ -49,6 +51,8 @@ class AsetController extends Controller
 
     public function create()
     {
-        return view('dataRef.aset.createAset');
+        $kondisi = KondisiAset::orderBy('name', 'asc')->get();
+
+        return view('dataRef.aset.createAset', compact('kondisi'));
     }
 }
