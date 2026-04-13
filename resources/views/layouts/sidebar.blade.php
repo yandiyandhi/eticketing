@@ -32,7 +32,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'aset.create') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-package"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -61,7 +61,7 @@
                         </a>
                     @endcan
                 </li>
-                <li class="menu-item {{ Route::is('divisi.index', 'divisi.create') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('divisi.index', 'divisi.create', 'divisi.edit') ? 'active' : '' }}">
                     <a href="{{ route('divisi.index') }}" class="menu-link">
                         <div data-i18n="Divisi">Divisi</div>
                     </a>
@@ -112,6 +112,11 @@
                     @endcan
                     </a>
                 </li>
+                <li class="menu-item {{ Route::is('aset.create') ? 'active' : '' }}">
+                    <a href="{{ route('aset.create') }}" class="menu-link">
+                        <div data-i18n="Aset">Aset</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -141,7 +146,8 @@
             <span class="menu-header-text" data-i18n="Report">Report</span>
         </li>
 
-        <li class="menu-item {{ Route::is('ticketingit.reports', 'ticketinghr.reports') ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::is('ticketingit.reports', 'ticketinghr.reports', 'aset.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-files"></i>
                 <div data-i18n="Laporan">Laporan</div>
@@ -166,11 +172,11 @@
                         <div data-i18n="Tiketing HR">Tiketing HR</div>
                     </a>
                 </li>
-                {{-- <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('aset.index') ? 'active' : '' }}">
+                    <a href="{{ route('aset.index') }}" class="menu-link">
                         <div data-i18n="Aset">Aset</div>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </li>
 

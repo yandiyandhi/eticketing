@@ -26,17 +26,25 @@ class DivisiService
 
     }
 
-        public function delete(Divisi $divisi): void
+    public function delete(Divisi $divisi): void
     {
         DB::transaction(function () use ($divisi) {
-
-            if ($divisi->users()->exists()) {
+            $divisi = Divisi::with(['department.users'])->where('id', $divisi->id)->first();            
+            if ($divisi->department->users()->exists()) {
                 throw new DomainException(
                     'Divisi tidak bisa dihapus karena masih digunakan oleh User.'
                 );
             }
 
             $divisi->delete();
+        });
+    }
+
+    public function update($id, array $data)
+    {
+        return DB::transaction(function () use ($id, $data) {
+            $divisi = Divisi::findOrFail($id);
+            return $divisi->update($data)            ;
         });
     }
 }

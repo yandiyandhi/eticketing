@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Divisi;
 use App\Services\Divisi\DivisiService;
 use DomainException;
+use Exception;
 use Illuminate\Http\Request;
 
 class DivisiController extends Controller
@@ -38,18 +39,24 @@ class DivisiController extends Controller
         return view('dataRef.divisi.editDivisi', compact('divisi', 'departments'));
     }
 
+    public function update(DivisiRequest $divisiRequest, $id, DivisiService $divisiservice)
+    {
+        $divisiservice->update($id, $divisiRequest->validated());
+
+        return redirect()->back()->with('success', 'Divisi berhasil diupdate.');
+    }
+
     public function destroy(Divisi $divisi, DivisiService $divisiService)
     {
         try {
             $divisiService->delete($divisi);
-
             return redirect()
                 ->back()
-                ->with('success', 'Kategori berhasil dihapus');
-        } catch (DomainException $e) {
+                ->with('success', 'Divisi berhasil dihapus');
+        } catch (Exception $e) {
             return redirect()
                 ->back()
-                ->with('erro', $e->getMessage());
+                ->with('error', $e->getMessage());
         }
     }
 }

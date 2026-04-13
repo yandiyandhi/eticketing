@@ -77,6 +77,8 @@
 
         @include('layouts.footercontent')
     </div>
+
+    @include('partials.alert')
 @endsection
 
 @push('myscript')

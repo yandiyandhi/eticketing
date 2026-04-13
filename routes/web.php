@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsetController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
@@ -121,6 +122,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
         Route::put('/permission/{id}', 'update')->name('permission.update');
         Route::delete('/permission/{id}', 'destroy')->name('permission.destroy');
+    });
+
+    Route::controller(AsetController::class)->group(function () {
+        Route::get('/aset', 'index')->name('aset.index');
+        Route::get('/aset/create', 'create')->name('aset.create');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
