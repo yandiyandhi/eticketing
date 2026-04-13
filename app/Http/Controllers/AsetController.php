@@ -46,4 +46,9 @@ class AsetController extends Controller
         
         return view('aset.index', compact('aset'));
     }
+
+    public function create()
+    {
+        return view('dataRef.aset.createAset');
+    }
 }
