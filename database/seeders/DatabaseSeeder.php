@@ -8,6 +8,10 @@ use App\Models\Kantor;
 use App\Models\Kpi;
 use App\Models\Status;
 use App\Models\Divisi;
+use App\Models\JenisAset;
+use App\Models\JensiAset;
+use App\Models\Kondisi;
+use App\Models\KondisiAset;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -248,6 +252,42 @@ class DatabaseSeeder extends Seeder
             Permission::firstOrCreate([
                 'name' => $permission,
                 'guard_name' => 'web'
+            ]);
+        }
+
+        $jenis_aset = [
+            'komputer',
+            'monitor',
+            'keyboard',
+            'mouse',
+            'motor',
+            'mobil',
+            'printer',
+            'hp',
+            'tablet',
+            'laptop',
+            'Telpon/Voip',
+        ];
+
+        foreach ($jenis_aset as $jenisaset) {
+            JenisAset::firstOrCreate([
+                'uuid' => Str::uuid(),
+                'name' => $jenisaset,   
+                'created_at' => now(),             
+            ]);
+        }
+
+        $konsidi = [
+            'baik',
+            'rusak',
+            'perbaikan',
+        ];
+
+        foreach ($konsidi as $kon) {
+            KondisiAset::firstOrCreate([
+                'uuid' => Str::uuid(),
+                'name' => $kon,   
+                'created_at' => now(),             
             ]);
         }
 

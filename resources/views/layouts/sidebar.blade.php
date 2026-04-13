@@ -141,7 +141,8 @@
             <span class="menu-header-text" data-i18n="Report">Report</span>
         </li>
 
-        <li class="menu-item {{ Route::is('ticketingit.reports', 'ticketinghr.reports') ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::is('ticketingit.reports', 'ticketinghr.reports', 'aset.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-files"></i>
                 <div data-i18n="Laporan">Laporan</div>
@@ -166,11 +167,11 @@
                         <div data-i18n="Tiketing HR">Tiketing HR</div>
                     </a>
                 </li>
-                {{-- <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('aset.index') ? 'active' : '' }}">
+                    <a href="{{ route('aset.index') }}" class="menu-link">
                         <div data-i18n="Aset">Aset</div>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </li>
 
