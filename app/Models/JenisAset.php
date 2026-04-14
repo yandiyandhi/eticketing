@@ -22,6 +22,7 @@ class JenisAset extends Model
     {
         static::creating(function ($jenisaset) {
             $jenisaset->uuid = Str::uuid();
+            $jenisaset->name = Str::title($jenisaset->name);
         });
     }
 }

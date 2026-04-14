@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="mt-2">
                                         <label class="form-label">User</label>
-                                        <select name="user_id" class="form-control userselect2" required>
+                                        <select name="user_id" class="form-control userselect2">
                                             <option value="">-- Pilih User --</option>
                                             @foreach ($users as $user)
                                                 <option value="{{ $user->id }}" {{ old('user_id') }}>

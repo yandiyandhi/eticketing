@@ -32,7 +32,7 @@
 
                             <div class="mb-2">
                                 <label class="form-label">Departemen</label>
-                                <select name="department_id" class="form-control" required>
+                                <select name="department_id" class="form-control deptselect2" required>
                                     <option value="">-- Pilih Departemen --</option>
                                     @foreach ($departments as $department)
                                         <option value="{{ $department->id }}">
@@ -44,7 +44,7 @@
 
                             <div class="mb-2">
                                 <label class="form-label">Kantor</label>
-                                <select name="kantor_id" class="form-control" required>
+                                <select name="kantor_id" class="form-control kantor" required>
                                     <option value="">-- Pilih Kantor --</option>
                                     @foreach ($kantors as $kantor)
                                         <option value="{{ $kantor->id }}">
@@ -89,4 +89,7 @@
 
 @push('myscript')
     <script src="{{ asset('js/script/script.js') }}"></script>
+    <script>
+        $('.deptselect2, .kantor').select2();
+    </script>
 @endpush

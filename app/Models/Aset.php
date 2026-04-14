@@ -28,6 +28,11 @@ class Aset extends Model
         return $this->belongsTo(Kantor::class, 'kantor_id');
     }
 
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisi_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

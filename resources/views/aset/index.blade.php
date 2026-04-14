@@ -12,24 +12,13 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h6 class="mb-0">List Aset</h6>
-                    {{-- @can('laporan.export')
-                        <div class="col-8 justify-content-end d-flex">
-                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalExportIt">
-                                <i class="ti ti-download"></i> Export
-                            </a>
-                        </div>
-                    @else
-                        <div class="col-8 justify-content-end d-flex">
-                            <a href="#" class="btn btn-sm btn-secondary">
-                                <i class="ti ti-download"></i> Export
-                            </a>
-                        </div>
-                    @endcan --}}
-                    <form class="d-flex ms-auto" method="GET" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" name="request"
-                            placeholder="Search request..." value="{{ request('request') }}">
-                        <button class="btn btn-sm btn-primary" type="submit"><i class="ti ti-search"></i></button>
-                    </form>
+                    <div class="col-4 justify-content-end d-flex">
+                        <form class="d-flex ms-auto" method="GET" role="search">
+                            <input class="form-control form-control-sm me-2" type="search" name="request"
+                                placeholder="Search request..." value="{{ request('request') }}">
+                            <button class="btn btn-sm btn-primary" type="submit"><i class="ti ti-search"></i></button>
+                        </form>
+                    </div>
 
                 </div>
                 <div class="table-responsive text-nowrap">

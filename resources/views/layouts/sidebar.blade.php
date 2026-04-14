@@ -32,7 +32,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'aset.create') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'aset.create', 'jenisAset.index', 'aset.create') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-package"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -112,6 +112,10 @@
                     @endcan
                     </a>
                 </li>
+                <li class="menu-item {{ Route::is('jenisAset.index') ? 'active' : '' }}">
+                    <a href="{{ route('jenisAset.index') }}" class="menu-link">
+                        <div data-i18n="Jenis Aset">Jenis Aset</div>
+                    </a>
                 <li class="menu-item {{ Route::is('aset.create') ? 'active' : '' }}">
                     <a href="{{ route('aset.create') }}" class="menu-link">
                         <div data-i18n="Aset">Aset</div>
@@ -136,6 +140,13 @@
                 <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'active' : '' }}">
                     <a href="{{ route('ticketing.index') }}" class="menu-link">
                         <div data-i18n="Request Ticketing">Request Ticketing</div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Service Kendaraan">Service Kendaraan</div>
                     </a>
                 </li>
             </ul>

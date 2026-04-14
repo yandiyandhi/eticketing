@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('asets', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->string('kode_aset');
+            $table->uuid('uuid')->unique();
+            $table->string('kode_aset')->unique();
             $table->foreignId('jenis_aset_id');
             $table->foreignId('kondisi_id');
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('kantor_id')->nullable();            
+            $table->foreignId('divisi_id')->nullable();
             $table->string('nama_aset')->nullable();
             $table->string('merk')->nullable();
             $table->string('model')->nullable();
@@ -28,7 +29,6 @@ return new class extends Migration
             $table->date('pajak_stnk')->nullable();            
             $table->date('pajak_bpkb')->nullable();            
             $table->date('kir')->nullable();            
-            $table->string('divisi')->nullable();
             $table->date('tanggal_beli')->nullable();            
             $table->text('keterangan')->nullable();
             $table->timestamps();

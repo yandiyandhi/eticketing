@@ -18,7 +18,7 @@ class AsetController extends Controller
     {
         $request = request('request');
 
-        $aset = Aset::with(['jenis_aset', 'kondisi', 'user', 'kantor'])->orderBy('nama_aset', 'asc');
+        $aset = Aset::with(['jenis_aset', 'kondisi', 'user', 'kantor', 'divisi'])->orderBy('nama_aset', 'asc');
 
         if($request){
             $aset->where(function ($query) use ($request) {
@@ -30,14 +30,16 @@ class AsetController extends Controller
                     ->orWhere('no_polisi', 'like', "%{$request}%")
                     ->orWhere('pajak_stnk', 'like', "%{$request}%")
                     ->orWhere('pajak_bpkb', 'like', "%{$request}%")
-                    ->orWhere('kir', 'like', "%{$request}%")
-                    ->orWhere('divisi', 'like', "%{$request}%")                    
+                    ->orWhere('kir', 'like', "%{$request}%")                                       
                     ->orWhere('tanggal_beli', 'like', "%{$request}%")
                     ->orWhere('keterangan', 'like', "%{$request}%")                    
                     ->orWhereHas('jenis_aset', function ($q) use ($request) {
                         $q->where('name', 'like', "%{$request}%");
                     })
                     ->orWhereHas('kantor', function ($q) use ($request) {
+                        $q->where('name', 'like', "%{$request}%");
+                    })
+                    ->orWhereHas('divisi', function ($q) use ($request) {
                         $q->where('name', 'like', "%{$request}%");
                     })
                     ->orWhereHas('kondisi', function ($q) use ($request) {

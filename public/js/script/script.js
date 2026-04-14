@@ -203,6 +203,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Jenis Aset
+$(document).ready(function () {
+    $("#modalEditJenisAset").on("show.bs.modal", function (event) {
+        const button = $(event.relatedTarget);
+
+        const id = button.data("id");
+        let name = button.data("name");
+
+        name = name.toLowerCase().replace(/\b\w/g, function(char) {
+            return char.toUpperCase();
+        });
+
+        $("#name").val(name);
+
+        $("#formEditJenisAset").attr("action", `/jenis-aset/${id}`);
+    });
+});
+
+$(document).on("click", ".deleteJenisAset", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `Data "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteJenisAset").attr("action", `/jenis-aset/${id}`);
+            $("#formDeleteJenisAset").submit();
+        }
+    });
+});
+
 
 // Request Ticketing Success
 $(document).on("click", ".StatusRequestSuccess", function () {

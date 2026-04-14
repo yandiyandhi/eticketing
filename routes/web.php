@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\JenisAsetController;
 use App\Http\Controllers\KpiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
@@ -105,6 +106,19 @@ Route::middleware('auth')->group(function () {
         Route::put('/user/role/{id}', 'assignRole')->name('user.assignRole');
     });
 
+    Route::controller(JenisAsetController::class)->group(function () {
+        Route::get('/jenis-aset', 'index')->name('jenisAset.index');
+        Route::post('/jenis-aset/store', 'store')->name('jenisAset.store');
+        Route::put('/jenis-aset/{id}', 'update')->name('jenisAset.update');
+        Route::delete('/jenis-aset/{id}', 'destroy')->name('jenisAset.destroy');
+    });
+
+    Route::controller(AsetController::class)->group(function () {
+        Route::get('/aset', 'index')->name('aset.index');
+        Route::get('/aset/create', 'create')->name('aset.create');
+        Route::post('/aset/store', 'store')->name('aset.store');
+    });
+
     Route::controller(RoleController::class)->group(function () {
         Route::get('/role', 'index')->name('role.index');
         Route::post('/role', 'store')->name('role.store');
@@ -122,13 +136,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
         Route::put('/permission/{id}', 'update')->name('permission.update');
         Route::delete('/permission/{id}', 'destroy')->name('permission.destroy');
-    });
-
-    Route::controller(AsetController::class)->group(function () {
-        Route::get('/aset', 'index')->name('aset.index');
-        Route::get('/aset/create', 'create')->name('aset.create');
-        Route::post('/aset/store', 'store')->name('aset.store');
-    });
+    });    
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

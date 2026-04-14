@@ -27,7 +27,7 @@ class AsetRequest extends FormRequest
         'merk' => 'nullable|string|max:255',
         'model' => 'nullable|string|max:255',
 
-        'user_id' => 'required|exists:users,id',
+        'user_id' => 'nullable|exists:users,id',
         'kondisi_id' => 'required|exists:kondisi_asets,id',
         'divisi_id' => 'required|exists:divisis,id',
         'kantor_id' => 'required|exists:kantors,id',
