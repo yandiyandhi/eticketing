@@ -29,6 +29,7 @@ return new class extends Migration
             $table->date('pajak_stnk')->nullable();            
             $table->date('pajak_bpkb')->nullable();            
             $table->date('kir')->nullable();            
+            $table->string('qrcode')->nullable();            
             $table->date('tanggal_beli')->nullable();            
             $table->text('keterangan')->nullable();
             $table->timestamps();
