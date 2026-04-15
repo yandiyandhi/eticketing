@@ -4,6 +4,8 @@ namespace App\Services\Aset;
 
 use App\Models\Aset;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AsetService
 {
@@ -116,5 +118,120 @@ class AsetService
         }
 
         return $aset->paginate(10)->withQueryString();
+    }
+
+    public function generateQrcode($aset)
+    {        
+        $filename = $aset->uuid . '.png';
+
+        // generate QR
+        $qr = QrCode::format('png')
+            ->size(400)
+            ->margin(1)
+            ->errorCorrection('H')
+            ->generate($aset->uuid);
+
+        $qrImage = imagecreatefromstring($qr);
+
+        $width  = imagesx($qrImage);
+        $height = imagesy($qrImage);
+
+        // tambah ruang atas untuk nama PT
+        $topPadding = 60;
+        $canvas = imagecreatetruecolor($width, $height + $topPadding);
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        $black = imagecolorallocate($canvas, 0, 0, 0);
+
+        imagefill($canvas, 0, 0, $white);
+
+        // copy QR ke bawah
+        imagecopy($canvas, $qrImage, 0, $topPadding, 0, 0, $width, $height);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Text atas
+        |--------------------------------------------------------------------------
+        */
+        $text = 'PT Sinar Terang Fastener';
+        $fontPath = public_path('fonts/calibri-bold.ttf');
+        $fontSize = 24;
+
+        $bbox = imagettfbbox($fontSize, 0, $fontPath, $text);
+        $textWidth = $bbox[2] - $bbox[0];
+
+        $x = ($width - $textWidth) / 2;
+        $y = 35;
+
+        imagettftext(
+            $canvas,
+            $fontSize,
+            0,
+            $x,
+            $y,
+            $black,
+            $fontPath,
+            $text
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Logo tengah
+        |--------------------------------------------------------------------------
+        */
+        $logoPath = public_path('assets/img/logo/logoqr.png');
+
+        if (file_exists($logoPath)) {
+            $logo = imagecreatefrompng($logoPath);
+
+            $logoWidth  = imagesx($logo);
+            $logoHeight = imagesy($logo);
+
+            // resize logo
+            $newLogoSize = 100;
+            $logoResized = imagecreatetruecolor($logoWidth, $logoHeight);
+
+            imagealphablending($logoResized, false);
+            imagesavealpha($logoResized, true);
+
+            imagecopyresampled(
+                $logoResized,
+                $logo,
+                0, 0, 0, 0,
+                $newLogoSize, $newLogoSize,
+                $logoWidth, $logoHeight
+            );
+
+            // posisi tengah QR
+            $centerX = ($width / 2) - ($newLogoSize / 2);
+            $centerY = ($height / 2) - ($newLogoSize / 2) + $topPadding;
+
+            imagecopy(
+                $canvas,
+                $logoResized,
+                $centerX,
+                $centerY,
+                0,
+                0,
+                $newLogoSize,
+                $newLogoSize
+            );
+
+            imagedestroy($logo);
+            imagedestroy($logoResized);
+        }
+
+        ob_start();
+        imagepng($canvas);
+        $final = ob_get_clean();
+
+        imagedestroy($qrImage);
+        imagedestroy($canvas);
+
+        Storage::disk('public')->put('qrcode/'.$filename, $final);
+
+        $aset->updateQuietly([
+            'qrcode' => $filename
+        ]);
     }
 }

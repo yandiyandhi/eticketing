@@ -117,6 +117,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/aset', 'index')->name('aset.index');
         Route::get('/aset/create', 'create')->name('aset.create');
         Route::post('/aset/store', 'store')->name('aset.store');
+
+        Route::get('/aset/generate', 'generateQrcode')->name('aset.generateQrcode');
     });
 
     Route::controller(RoleController::class)->group(function () {

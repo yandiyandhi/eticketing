@@ -11,6 +11,8 @@ use App\Models\Kantor;
 use App\Models\KondisiAset;
 use App\Models\User;
 use App\Services\Aset\AsetService;
+use Illuminate\Support\Facades\Artisan;
+use App\Jobs\GenerateAssetQrJob;
 
 class AsetController extends Controller
 {
@@ -37,6 +39,19 @@ class AsetController extends Controller
     public function store(AsetRequest $request, AsetService $asetService)
     {
         $asetService->create($request->validated());
+
+        return redirect()->back()->with('success', 'Aset berhasil ditambahkan.');
+    }
+
+    public function generateQrcode(AsetService $asetService, Aset $aset)
+    {        
+        // $asetService->generateQrcode($aset);
+        // Artisan::queue('aset:generate-aset-qr');
+        // foreach (Aset::cursor() as $aset) {
+        //     GenerateAsetQrJob::dispatch($aset);
+        // }
+
+        GenerateAssetQrJob::dispatch();
 
         return redirect()->back()->with('success', 'Aset berhasil ditambahkan.');
     }
