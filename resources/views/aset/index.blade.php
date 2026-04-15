@@ -7,6 +7,119 @@
         <!-- Navbar -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row g-6">
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="card-title mb-0">
+                                <h5 class="mb-1">Aset Elektronik</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                @forelse ($countElektronik as $item)
+                                    <li class="mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="badge bg-label-success rounded p-1_5"><i
+                                                class="fa-solid fa-{{ match (strtolower($item->name)) {
+                                                    'hp' => 'mobile',
+                                                    'laptop' => 'laptop',
+                                                    'komputer' => 'desktop',
+                                                    'keyboard' => 'keyboard',
+                                                    'mouse' => 'computer-mouse',
+                                                    'printer' => 'print',
+                                                    'mobil' => 'car',
+                                                    'motor' => 'motorcycle',
+                                                    'tablet' => 'tablet',
+                                                    default => 'ban',
+                                                } }} ti-md"></i>
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100 flex-wrap">
+                                            <h6 class="mb-0 ms-4">{{ $item->name ? ucwords($item->name) : '' }}</h6>
+                                            <div class="d-flex">
+                                                <p class="mb-2">{{ $item->total ? $item->total : '0' }}</p>
+                                                <p class="ms-4 text-success mb-0">Jumlah</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @empty
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="card-title mb-0">
+                                <h5 class="mb-1">Aset Mobil & Motor</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                @forelse ($countMobil as $item)
+                                    <li class="mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="badge bg-label-success rounded p-1_5"><i
+                                                class="fa-solid fa-{{ match (strtolower($item->name)) {
+                                                    'hp' => 'mobile',
+                                                    'laptop' => 'laptop',
+                                                    'komputer' => 'desktop',
+                                                    'keyboard' => 'keyboard',
+                                                    'mouse' => 'computer-mouse',
+                                                    'printer' => 'print',
+                                                    'mobil' => 'car',
+                                                    'motor' => 'motorcycle',
+                                                    'tablet' => 'tablet',
+                                                    default => 'ban',
+                                                } }} ti-md"></i>
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100 flex-wrap">
+                                            <h6 class="mb-0 ms-4">{{ $item->name ? ucwords($item->name) : '' }}</h6>
+                                            <div class="d-flex">
+                                                <p class="mb-2">{{ $item->total ? $item->total : '0' }}</p>
+                                                <p class="ms-4 text-success mb-0">Jumlah</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @empty
+                                @endforelse
+                                @forelse ($infoKendaraan as $item)
+                                    <li class="mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="badge bg-label-danger rounded p-1_5">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100 flex-wrap">
+                                            <h6 class="mb-0 ms-4">{{ $item->merk ? ucwords($item->merk) : '' }}
+                                                {{ $item->model ? ucwords($item->model) : '' }}</h6>
+                                            <div class="d-flex">
+                                                @if ($item->pajak_stnk && $item->pajak_stnk <= now()->addDays(14))
+                                                    <p class="ms-4 text-danger mb-0" style="font-size: 10pt;">
+                                                        STNK :
+                                                        {{ \Carbon\Carbon::parse($item->pajak_stnk)->format('d M Y') }}
+                                                    </p>
+                                                @endif
+
+                                                @if ($item->pajak_bpkb && $item->pajak_bpkb <= now()->addDays(14))
+                                                    <p class="ms-4 text-danger mb-0" style="font-size: 10pt;">
+                                                        | BPKB :
+                                                        {{ \Carbon\Carbon::parse($item->pajak_bpkb)->format('d M Y') }}
+                                                    </p>
+                                                @endif
+
+                                                @if ($item->kir && $item->kir <= now()->addDays(14))
+                                                    <p class="ms-4 text-danger mb-0" style="font-size: 10pt;">
+                                                        | KIR : {{ \Carbon\Carbon::parse($item->kir)->format('d M Y') }}
+                                                    </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </li>
+                                @empty
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-xl-12 my-4">
                 <h6 class="text-body-secondary">List Request</h6>
                 <div class="nav-align-top nav-tabs-shadow">

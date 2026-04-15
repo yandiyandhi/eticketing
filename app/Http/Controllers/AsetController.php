@@ -11,7 +11,6 @@ use App\Models\Kantor;
 use App\Models\KondisiAset;
 use App\Models\User;
 use App\Services\Aset\AsetService;
-use Illuminate\Support\Facades\Artisan;
 use App\Jobs\GenerateAssetQrJob;
 
 class AsetController extends Controller
@@ -20,8 +19,11 @@ class AsetController extends Controller
     {
         $asetelektronik = $asetService->getDataElektronik();
         $asetelmobil = $asetService->getDataMobil();
-        // dd($asetelektronik);
-        return view('aset.index', compact('asetelektronik', 'asetelmobil'));
+        $countElektronik = $asetService->getCountDataElektronik();
+        $countMobil = $asetService->getCountDataMobil();
+        $infoKendaraan = $asetService->getInfoKendaraan();
+        // dd($infoKendaraan );
+        return view('aset.index', compact('asetelektronik', 'asetelmobil', 'countElektronik', 'countMobil', 'infoKendaraan'));
     }
 
     public function create()

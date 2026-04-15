@@ -3,6 +3,7 @@
 namespace App\Services\Aset;
 
 use App\Models\Aset;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -118,6 +119,54 @@ class AsetService
         }
 
         return $aset->paginate(10)->withQueryString();
+    }
+
+    public function getCountDataElektronik()
+    {
+       $aset = Aset::select(
+            'jenis_asets.name',
+            DB::raw('count(*) as total')
+        )
+        ->join('jenis_asets', 'jenis_asets.id', '=', 'asets.jenis_aset_id')
+        ->whereNotIn('asets.jenis_aset_id', ['5','6'])
+        ->groupBy('jenis_asets.name')
+        ->orderBy('jenis_asets.name', 'asc')
+        ->get();
+        
+        return $aset;
+    }
+    
+    public function getCountDataMobil()
+    {
+       $aset = Aset::select(
+            'jenis_asets.name',
+            DB::raw('count(*) as total')
+        )
+        ->join('jenis_asets', 'jenis_asets.id', '=', 'asets.jenis_aset_id')
+        ->whereIn('asets.jenis_aset_id', ['5','6'])
+        ->groupBy('jenis_asets.name')
+        ->orderBy('jenis_asets.name', 'asc')
+        ->get();
+        
+        return $aset;
+    }
+
+    public function getInfoKendaraan()
+    {
+        $now = Carbon::now();
+        $limit = Carbon::now()->addDays(14);
+
+        $jatuhTempo = Aset::with('jenis_aset')
+            ->whereIn('jenis_aset_id', ['5','6'])
+            ->where(function ($q) use ($now, $limit) {
+                $q->whereBetween('pajak_stnk', [$now, $limit])
+                ->orWhereBetween('pajak_bpkb', [$now, $limit])
+                ->orWhereBetween('kir', [$now, $limit]);
+            })
+            ->orderBy('pajak_stnk', 'asc')
+            ->get();
+
+        return $jatuhTempo;
     }
 
     public function generateQrcode($aset)
