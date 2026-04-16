@@ -21,6 +21,7 @@ kpi.edit
 kpi.update
 kpi.delete
 user.view
+user.create
 user.edit
 user.update
 user.password

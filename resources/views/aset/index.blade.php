@@ -8,7 +8,7 @@
 
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row g-6">
-                <div class="col-xxl-4 col-md-6">
+                <div class="col-xxl-6 col-md-6">
                     <div class="card h-100">
                         <div class="card-header d-flex justify-content-between">
                             <div class="card-title mb-0">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-4 col-md-6">
+                <div class="col-xxl-6 col-md-6">
                     <div class="card h-100">
                         <div class="card-header d-flex justify-content-between">
                             <div class="card-title mb-0">

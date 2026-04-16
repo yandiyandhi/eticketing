@@ -51,7 +51,7 @@
                     @endcan
                 </li>
                 <li class="menu-item {{ Route::is('department.index') ? 'active' : '' }}">
-                    @can('department.view')
+                    @can('departemen.view')
                         <a href="{{ route('department.index') }}" class="menu-link">
                             <div data-i18n="Departemen">Departemen</div>
                         </a>
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="menu-item {{ Route::is('category.index') ? 'active' : '' }}">
-                    @can('category.view')
+                    @can('kategori.view')
                         <a href="{{ route('category.index') }}" class="menu-link">
                             <div data-i18n="Kategori">Kategori</div>
                         </a>
