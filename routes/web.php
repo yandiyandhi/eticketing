@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\KantorController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -39,8 +40,15 @@ Route::middleware('auth')->group(function () {
         Route::put('/user/update/status/success/{id}', 'UserUpdateStatusSuccess')->name('ticketing.UserUpdateStatusSuccess');
         Route::put('/user/update/status/cancel/{id}', 'UserUpdateStatusCancel')->name('ticketing.UserUpdateStatusCancel');
 
-        Route::get('/request/export', 'exportRequest')->name('ticketing.exportRequest'); 
-        Route::get('/request/export/hr', 'exportRequestHr')->name('ticketing.exportRequestHr'); 
+        Route::get('/request/export', 'exportRequest')->name('ticketing.exportRequest');
+        Route::get('/request/export/hr', 'exportRequestHr')->name('ticketing.exportRequestHr');
+    });
+
+    Route::controller(KendaraanController::class)->group(function () {
+        Route::get('/list-service', 'index')->name('service.index');
+        Route::get('/request-service', 'create')->name('service.create');
+
+        Route::get('/get-data/{id}', 'getDataKendaraan')->name('service.getDataKendaraan');
     });
 
     Route::controller(KantorController::class)->group(function () {
@@ -59,15 +67,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('/departments/{department}', 'destroy')->name('department.destroy');
     });
 
-    Route::controller(DivisiController::class)->group(function ()
-    {
+    Route::controller(DivisiController::class)->group(function () {
         Route::get('/divisi', 'index')->name('divisi.index');
         Route::get('/divisi/create', 'create')->name('divisi.create');
         Route::post('/divisi/store', 'store')->name('divisi.store');
         Route::get('/divisi/edit/{id}', 'edit')->name('divisi.edit');
         Route::put('/divisi/{id}', 'update')->name('divisi.update');
         Route::delete('/divisi/{divisi}', 'destroy')->name('divisi.session_destroy');
-
     });
 
     Route::controller(StatusController::class)->group(function () {
@@ -138,7 +144,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
         Route::put('/permission/{id}', 'update')->name('permission.update');
         Route::delete('/permission/{id}', 'destroy')->name('permission.destroy');
-    });    
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

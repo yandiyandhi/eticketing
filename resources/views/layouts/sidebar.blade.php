@@ -130,7 +130,8 @@
         </li>
 
         <!-- Layouts -->
-        <li class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit') ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit', 'service.index', 'service.create') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-server"></i>
                 <div data-i18n="Master Data">Master Data</div>
@@ -144,8 +145,8 @@
                 </li>
             </ul>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ Route::is('service.index', 'service.create') ? 'active' : '' }}">
+                    <a href="{{ route('service.index') }}" class="menu-link">
                         <div data-i18n="Service Kendaraan">Service Kendaraan</div>
                     </a>
                 </li>
