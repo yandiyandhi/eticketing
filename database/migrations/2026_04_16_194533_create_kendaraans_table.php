@@ -23,6 +23,9 @@ return new class extends Migration
             $table->date('tanggal_service')->nullable();
             $table->date('tanggal_selesai')->nullable();
             $table->string('keluhan')->nullable();
+            $table->string('foto1')->nullable();
+            $table->string('foto2')->nullable();
+            $table->string('nama_vendor')->nullable();
             $table->foreignId('diajukan_oleh')->nullable()->constrained('users');
             $table->foreignId('disetujui_oleh')->nullable()->constrained('users');
             $table->foreignId('ditolak_oleh')->nullable()->constrained('users');

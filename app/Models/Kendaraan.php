@@ -19,6 +19,16 @@ class Kendaraan extends Model
         return $this->hasMany(KendaraanItem::class, 'kendaraan_id');
     }
 
+    public function aset()
+    {
+        return $this->belongsTo(Aset::class);
+    }
+
+    public function userPengajuan()
+    {
+        return $this->belongsTo(User::class, 'diajukan_oleh');
+    }
+
     public function getRouteKeyName()
     {
         return 'uuid';

@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/service/store', 'store')->name('service.store');
 
         Route::get('/get-data/{id}', 'getDataKendaraan')->name('service.getDataKendaraan');
+        Route::get('/detail/pengajuan', 'detailPengajuan')->name('service.detailPengajuan');
     });
 
     Route::controller(KantorController::class)->group(function () {

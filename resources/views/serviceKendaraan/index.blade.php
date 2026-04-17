@@ -38,82 +38,48 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Category</th>
-                                <th>Request By</th>
-                                <th>Request To</th>
-                                <th>Description</th>
-                                <th>Status</th>
+                                <th>Jenis</th>
+                                <th>Nama</th>
+                                <th>No Polisi</th>
+                                <th>Keluhan</th>
+                                <th>User</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Detail</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @forelse ($data as $item)
+                            @forelse ($data as $item)
                                 <tr>
                                     <th>{{ $data->firstItem() + $loop->index }}</th>
-                                    <td>{{ $item->category->task_name ?? ' ' }}</td>
-                                    <td>{{ $item->user->name ?? ' ' }}</td>
-                                    <td>{{ strtoupper($item->request_to) ?? ' ' }}</td>
-                                    <td>{{ $item->description ?? ' ' }}</td>
-                                    <td>{{ $item->status->name ?? ' ' }}</td>
+                                    <td>{{ $item->aset->jenis_aset ? ucwords($item->aset->jenis_aset->name) : ' ' }}</td>
+                                    <td>{{ $item->aset->nama_aset ? ucwords($item->aset->nama_aset) : ' ' }}</td>
+                                    <td>{{ $item->aset->no_polisi ? strtoupper($item->aset->no_polisi) : ' ' }}</td>
+                                    <td>{{ $item->keluhan ? ucwords($item->keluhan) : ' ' }}</td>
+                                    <td>{{ $item->userPengajuan ? ucwords($item->userPengajuan->name) : ' ' }}</td>
+                                    <td>{{ $item->tanggal_pengajuan ? $item->tanggal_pengajuan : ' ' }}</td>
+                                    <td><a href="{{ route('service.detailPengajuan') }}" target="_blank">Detail</a></td>
                                     <td>
-                                        <button type="button"
-                                            class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="icon-base ti ti-dots-vertical"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            @can('requesttiket.edit')
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('ticketing.edit', ['tiket' => $item->uuid]) }}"
-                                                        class="btn btn-sm btn-icon btn-warning">Edit</a>
-                                                </li>
-                                            @else
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)"
-                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                        data-name="Edit"><span class="text-danger">Edit</span></a>
-                                                </li>
-                                            @endcan
-                                            @can('requesttiket.success')
-                                                <li>
-                                                    <a class="dropdown-item StatusRequestSuccess" href="javascript:void(0)"
-                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                        data-name="Success">{{ $success->name ?? ' ' }}</a>
-                                                </li>
-                                            @else
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)"
-                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                        data-name="Success"><span
-                                                            class="text-danger">{{ $success->name ?? ' ' }}</span></a>
-                                                </li>
-                                            @endcan
-                                            @can('requesttiket.cancel')
-                                                <li>
-                                                    <a class="dropdown-item StatusRequestCancel" href="javascript:void(0)"
-                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                        data-name="{{ $cancel->name ?? ' ' }}">{{ $cancel->name ?? ' ' }}</a>
-                                                </li>
-                                            @else
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)"
-                                                        class="btn btn-sm btn-icon btn-warning" data-id="{{ $item->uuid }}"
-                                                        data-name="Cancel"><span
-                                                            class="text-danger">{{ $cancel->name ?? ' ' }}</span></a>
-                                                </li>
-                                            @endcan
-                                        </ul>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-info" title="Detail">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning" title="Edit">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger">
+                                            <i class="fa-solid fa-cancel"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="7" class="text-center">Data tidak ditemukan.</td>
                                 </tr>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
                     <div class="card-footer">
-                        {{-- {{ $data->links('pagination::bootstrap-5') }} --}}
+                        {{ $data->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
