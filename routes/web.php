@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(KendaraanController::class)->group(function () {
         Route::get('/list-service', 'index')->name('service.index');
         Route::get('/request-service', 'create')->name('service.create');
+        Route::post('/service/store', 'store')->name('service.store');
 
         Route::get('/get-data/{id}', 'getDataKendaraan')->name('service.getDataKendaraan');
     });

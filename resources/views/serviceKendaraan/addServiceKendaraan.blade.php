@@ -14,9 +14,9 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{ route('service.store') }}">
                         @csrf
-
+                        @method('post')
                         <div class="row g-4">
                             <div class="col-lg-4">
                                 <label class="form-label">Jenis Kendaraan</label>
@@ -33,13 +33,20 @@
 
                             <div class="col-lg-4">
                                 <label class="form-label">Kilometer Awal</label>
-                                <input type="number" name="kilometer_awal" class="form-control">
+                                <input type="text" name="kilometer_awal" id="kilometer_awal"
+                                    class="form-control kilometer_awal">
                             </div>
 
                             <div class="col-lg-4">
                                 <label class="form-label">Nama Kendaraan</label>
                                 <select id="aset_id" name="aset_id" class="form-control asetidselect2" required>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-2">
+                            <div class="col-lg-12">
+                                <label class="form-label">Keluhan</label>
+                                <input type="text" name="keluhan" class="form-control">
                             </div>
                         </div>
 
@@ -53,7 +60,7 @@
                                     <div class="row align-items-end">
 
                                         <div class="col-lg-3">
-                                            <label class="form-label">Item</label>
+                                            <label class="form-label">Nama Barang</label>
                                             <input type="text" name="nama_item" class="form-control">
                                         </div>
 
@@ -62,18 +69,27 @@
                                             <input type="text" name="keterangan" class="form-control">
                                         </div>
 
-                                        <div class="col-lg-2">
+                                        <div class="col-lg">
                                             <label class="form-label">Qty</label>
-                                            <input type="number" name="qty" class="form-control" value="1">
+                                            <input type="number" name="qty" id="qty" class="form-control qty"
+                                                value="1">
                                         </div>
 
-                                        <div class="col-lg-2">
+                                        <div class="col-lg">
                                             <label class="form-label">Harga</label>
-                                            <input type="number" name="harga" class="form-control" value="0">
+                                            <input type="text" name="harga" id="harga" class="form-control harga"
+                                                value="0">
                                         </div>
 
-                                        <div class="col-lg-2">
-                                            <button type="button" class="btn btn-label-danger w-100" data-repeater-delete>
+                                        <div class="col-lg">
+                                            <label class="form-label">Subtotal</label>
+                                            <input type="text" name="subtotal" id="subtotal"
+                                                class="form-control subtotal" value="0" readonly>
+                                        </div>
+
+                                        <div class="col-lg">
+                                            <button type="button" class="btn btn-label-danger w-100 mt-4"
+                                                data-repeater-delete>
                                                 Hapus
                                             </button>
                                         </div>
@@ -89,8 +105,8 @@
                         </div>
 
                         <div class="text-end mt-4">
-                            <button type="submit" class="btn btn-primary">
-                                Simpan Request Service
+                            <button type="submit" class="btn btn-primary w-100">
+                                Simpan
                             </button>
                         </div>
 
@@ -107,6 +123,38 @@
     <script src="{{ asset('js/script/script.js') }}"></script>
     <script>
         $('.asetidselect2, .jenisasetselect2').select2();
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            function formatRupiah(angka) {
+                return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            function bersihkan(angka) {
+                return angka.replace(/[^0-9]/g, "");
+            }
+
+            // format harga saat diketik (SEMUA ROW)
+            $(document).on('input', '.harga, .kilometer_awal', function() {
+                let angka = bersihkan($(this).val());
+                let formatted = formatRupiah(angka);
+
+                $(this).val(formatted);
+            });
+
+            // hitung subtotal per baris
+            $(document).on('input', '.qty, .harga', function() {
+                let row = $(this).closest('[data-repeater-item]');
+
+                let qty = parseFloat(row.find('.qty').val()) || 0;
+                let harga = parseFloat(bersihkan(row.find('.harga').val())) || 0;
+
+                let total = qty * harga;
+
+                row.find('.subtotal').val(formatRupiah(total));
+            });
+        })
     </script>
 
     <script>

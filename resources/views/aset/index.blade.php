@@ -174,7 +174,7 @@
                                     <tbody style="font-size: 10pt;">
                                         @forelse ($asetelektronik as $item)
                                             <tr>
-                                                <th>{{ $asetelektronik->firstItem() + $loop->index }}</th>
+                                                <th>{{ $asetelektronik->firstItem() + $loop->iteration }}</th>
                                                 <td>{{ $item->kode_aset ?? ' ' }}</td>
                                                 <td>{{ $item->nama_aset ?? ' ' }}</td>
                                                 <td>{{ $item->jenis_aset ? ucwords($item->jenis_aset->name) : '' }}</td>
@@ -243,7 +243,7 @@
                                     <tbody style="font-size: 10pt;">
                                         @forelse ($asetelmobil as $item)
                                             <tr>
-                                                <th>{{ $asetelektronik->firstItem() + $loop->index }}</th>
+                                                <th>{{ $asetelektronik->firstItem() + $loop->iteration }}</th>
                                                 <td>{{ $item->kode_aset ?? ' ' }}</td>
                                                 <td>{{ $item->nama_aset ?? ' ' }}</td>
                                                 <td>{{ $item->jenis_aset ? ucwords($item->jenis_aset->name) : '' }}</td>

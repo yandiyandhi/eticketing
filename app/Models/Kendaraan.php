@@ -14,9 +14,9 @@ class Kendaraan extends Model
     
     protected $guarded = ['id'];
 
-    public function ItemKendaraan()
+    public function items()
     {
-        return $this->oneToMany(KendaraanItem::class, 'kendaraan_id');
+        return $this->hasMany(KendaraanItem::class, 'kendaraan_id');
     }
 
     public function getRouteKeyName()

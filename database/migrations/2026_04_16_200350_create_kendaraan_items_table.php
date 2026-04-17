@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('kendaraan_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kendaraan_id');
-            $table->string('kode_service');
             $table->string('nama_item');
             $table->string('keterangan');
             $table->integer('qty');
