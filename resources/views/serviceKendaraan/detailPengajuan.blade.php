@@ -261,6 +261,86 @@
                     <td>Rp. 600.000</td>
                 </tr>
                 <tr>
+                    <td>1.</td>
+                    <td>Oli semi synthetic</td>
+                    <td>Oli Enduro</td>
+                    <td>1</td>
+                    <td>Rp. 450.000</td>
+                    <td>Rp. 450.000</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tune Up</td>
+                    <td>Tune Up</td>
+                    <td>1</td>
+                    <td>Rp. 600.000</td>
+                    <td>Rp. 600.000</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Oli semi synthetic</td>
+                    <td>Oli Enduro</td>
+                    <td>1</td>
+                    <td>Rp. 450.000</td>
+                    <td>Rp. 450.000</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tune Up</td>
+                    <td>Tune Up</td>
+                    <td>1</td>
+                    <td>Rp. 600.000</td>
+                    <td>Rp. 600.000</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Oli semi synthetic</td>
+                    <td>Oli Enduro</td>
+                    <td>1</td>
+                    <td>Rp. 450.000</td>
+                    <td>Rp. 450.000</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tune Up</td>
+                    <td>Tune Up</td>
+                    <td>1</td>
+                    <td>Rp. 600.000</td>
+                    <td>Rp. 600.000</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Oli semi synthetic</td>
+                    <td>Oli Enduro</td>
+                    <td>1</td>
+                    <td>Rp. 450.000</td>
+                    <td>Rp. 450.000</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tune Up</td>
+                    <td>Tune Up</td>
+                    <td>1</td>
+                    <td>Rp. 600.000</td>
+                    <td>Rp. 600.000</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Oli semi synthetic</td>
+                    <td>Oli Enduro</td>
+                    <td>1</td>
+                    <td>Rp. 450.000</td>
+                    <td>Rp. 450.000</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tune Up</td>
+                    <td>Tune Up</td>
+                    <td>1</td>
+                    <td>Rp. 600.000</td>
+                    <td>Rp. 600.000</td>
+                </tr>
+                <tr>
                     <td colspan="5" style="text-align: center; font-weight: bol">Total</td>
                     <td>Rp. 1.050.000</td>
                 </tr>

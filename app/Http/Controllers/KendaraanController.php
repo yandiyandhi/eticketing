@@ -7,6 +7,7 @@ use App\Models\Aset;
 use App\Models\JenisAset;
 use App\Models\Kendaraan;
 use App\Services\ServiceKendaraan\KendaraanService;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KendaraanController extends Controller
 {
@@ -39,6 +40,8 @@ class KendaraanController extends Controller
 
     public function detailPengajuan()
     {
-        return view('serviceKendaraan.detailPengajuan');
+        $pdf = Pdf::loadView('pdf.pengajuanService');
+
+        return $pdf->stream('pdf.pengajuanService');          
     }
 }
