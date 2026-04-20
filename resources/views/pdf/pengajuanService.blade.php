@@ -299,38 +299,38 @@
                 <tr>
                     <td>2.</td>
                     <td class="names" style="text-align:justify; font-size:14px; line-height: 1.6;">Pastikan alasan
-                        permintaan alat dijelaskan dengan jelas untuk mendukung
-                        persetujuan.</td>
+                        permintaan alat dijelaskan dengan jelas untuk mendukung persetujuan.</td>
                 </tr>
                 <tr>
                     <td>3.</td>
                     <td class="names" style="text-align:justify; font-size:14px; line-height: 1.6;">Lampirkan dokumen
-                        pendukung yang
-                        diperlukan untuk memvalidasi permintaan.</td>
+                        pendukung yang diperlukan untuk memvalidasi permintaan.</td>
                 </tr>
                 <tr>
                     <td>4.</td>
                     <td class="names" style="text-align:justify; font-size:14px; line-height: 1.6;">Serahkan formulir
-                        ini kepada manajer
-                        departemen untuk proses persetujuan awal.
+                        ini kepada manajer departemen untuk proses persetujuan awal.
                     </td>
                 </tr>
                 <tr>
                     <td>5.</td>
                     <td class="names" style="text-align:justify; font-size:14px; line-height: 1.6;">Setelah disetujui
-                        oleh manajer
-                        departemen, formulir akan diteruskan ke bagian
-                        Finance/ akunting untuk persetujuan keuangan yang nanti akan dilanjutkan ke bagian pengadaan
-                        untuk evaluasi lebih lanjut.</td>
+                        oleh manajer departemen, formulir akan diteruskan ke bagian Finance/ akunting untuk persetujuan
+                        keuangan yang nanti akan dilanjutkan ke bagian pengadaan untuk evaluasi lebih lanjut.</td>
                 </tr>
                 <tr>
                     <td>6.</td>
                     <td class="names" style="text-align:justify; font-size:14px; line-height: 1.6;">Setelah semua
-                        persetujuan diperoleh,
-                        penggantian/ service akan d acc dan d proses
-                        sesuai prosedur yang berlaku.</td>
+                        persetujuan diperoleh, penggantian/ service akan d acc dan d proses sesuai prosedur yang
+                        berlaku.</td>
                 </tr>
             </table>
+
+
+            <p style="margin-top: 70px;">Catatan :</p>
+            <p style="text-align: justify; line-height: 1.5;">Pengajuan permintaan penggantian/service harus sesuai
+                dengan kebijakan dan prosedur yang berlaku di perusahaan. Penyalahgunaan atau informasi yang tidak
+                akurat dapat berakibat pada tindakan disiplin.</p>
         </div>
 
 

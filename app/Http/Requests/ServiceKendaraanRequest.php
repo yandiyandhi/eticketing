@@ -27,6 +27,8 @@ class ServiceKendaraanRequest extends FormRequest
             'aset_id' => 'required|exists:asets,id',
             'kilometer_awal' => 'required|numeric',
             'keluhan' => 'nullable|string', 
+            'foto1' => 'nullable|mimes:jpg,jpeg,png|max:10240',
+            'foto2' => 'nullable|mimes:jpg,jpeg,png|max:10240',
 
             'items' => 'required|array|min:1',
 

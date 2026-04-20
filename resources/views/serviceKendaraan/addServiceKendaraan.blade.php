@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('service.store') }}">
+                    <form method="POST" action="{{ route('service.store') }}" enctype="multipart/form-data">
                         @csrf
                         @method('post')
                         <div class="row g-4">
@@ -34,7 +34,7 @@
                             <div class="col-lg-4">
                                 <label class="form-label">Kilometer Awal</label>
                                 <input type="text" name="kilometer_awal" id="kilometer_awal"
-                                    class="form-control kilometer_awal">
+                                    class="form-control kilometer_awal" value="{{ old('kilometer_awal') }}">
                             </div>
 
                             <div class="col-lg-4">
@@ -44,9 +44,17 @@
                             </div>
                         </div>
                         <div class="row g-4 mt-2">
-                            <div class="col-lg-12">
+                            <div class="col-lg-4">
                                 <label class="form-label">Keluhan</label>
-                                <input type="text" name="keluhan" class="form-control">
+                                <input type="text" name="keluhan" class="form-control" value="{{ old('keluhan') }}">
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="form-label">Foto 1</label>
+                                <input type="file" name="foto1" class="form-control" value="{{ old('foto1') }}">
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="form-label">Foto 2</label>
+                                <input type="file" name="foto2" class="form-control" value="{{ old('foto2') }}">
                             </div>
                         </div>
 

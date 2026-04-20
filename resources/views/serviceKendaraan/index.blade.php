@@ -44,6 +44,8 @@
                                 <th>Keluhan</th>
                                 <th>User</th>
                                 <th>Tanggal Pengajuan</th>
+                                <th>Foto 1</th>
+                                <th>Foto 2</th>
                                 <th>Detail</th>
                                 <th>Action</th>
                             </tr>
@@ -58,6 +60,22 @@
                                     <td>{{ $item->keluhan ? ucwords($item->keluhan) : ' ' }}</td>
                                     <td>{{ $item->userPengajuan ? ucwords($item->userPengajuan->name) : ' ' }}</td>
                                     <td>{{ $item->tanggal_pengajuan ? $item->tanggal_pengajuan : ' ' }}</td>
+                                    <td>
+                                        @if ($item->foto1)
+                                            <a href="{{ asset('storage/' . $item->foto1) }}" target="_blank">
+                                                <img src="{{ asset('storage/' . $item->foto1) }}" width="80"
+                                                    height="80" style="object-fit: cover;">
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->foto2)
+                                            <a href="{{ asset('storage/' . $item->foto2) }}" target="_blank">
+                                                <img src="{{ asset('storage/' . $item->foto2) }}" width="80"
+                                                    height="80" style="object-fit: cover;">
+                                            </a>
+                                        @endif
+                                    </td>
                                     <td><a href="{{ route('service.detailPengajuan') }}" target="_blank">Detail</a></td>
                                     <td>
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-info" title="Detail">
