@@ -46,7 +46,6 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th>Foto 1</th>
                                 <th>Foto 2</th>
-                                <th>Detail</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -76,9 +75,9 @@
                                             </a>
                                         @endif
                                     </td>
-                                    <td><a href="{{ route('service.detailPengajuan') }}" target="_blank">Detail</a></td>
                                     <td>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-info" title="Detail">
+                                        <a href="{{ route('service.detailPengajuan') }}"
+                                            class="btn btn-sm btn-icon btn-info" title="Detail" target="_blank">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning" title="Edit">
@@ -91,7 +90,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Data tidak ditemukan.</td>
+                                    <td colspan="15" class="text-center">Data tidak ditemukan.</td>
                                 </tr>
                             @endforelse
                         </tbody>
