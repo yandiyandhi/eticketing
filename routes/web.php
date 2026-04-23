@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\FronFEController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisAsetController;
 use App\Http\Controllers\KpiController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Jabatan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +26,10 @@ Route::get('/', function () {
 
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
+});
+
+Route::controller(FronFEController::class)->group(function(){
+    Route::get('/detail/{id}', 'detail')->name('aset.detail');
 });
 
 Route::middleware('auth')->group(function () {
@@ -50,7 +57,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/service/store', 'store')->name('service.store');
 
         Route::get('/get-data/{id}', 'getDataKendaraan')->name('service.getDataKendaraan');
-        Route::get('/detail/pengajuan', 'detailPengajuan')->name('service.detailPengajuan');
+        Route::get('/detail/pengajuan/{id}', 'detailPengajuan')->name('service.detailPengajuan');
     });
 
     Route::controller(KantorController::class)->group(function () {
@@ -76,6 +83,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/divisi/edit/{id}', 'edit')->name('divisi.edit');
         Route::put('/divisi/{id}', 'update')->name('divisi.update');
         Route::delete('/divisi/{divisi}', 'destroy')->name('divisi.session_destroy');
+    });
+
+    Route::controller(JabatanController::class)->group(function(){
+        Route::get('/jabatan', 'index')->name('jabatan.index');
+        Route::get('/jabatan/create', 'create')->name('jabatan.create');
+        Route::post('/jabatan/store', 'store')->name('jabatan.store');
     });
 
     Route::controller(StatusController::class)->group(function () {

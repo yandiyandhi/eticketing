@@ -136,7 +136,7 @@
             <tr>
                 <td width="38%">Nama Karyawan</td>
                 <td width="2%">:</td>
-                <td>Astri</td>
+                <td>{{ $kendaraan->userPengajuan->name }}</td>
             </tr>
             <tr>
                 <td>Jabatan</td>

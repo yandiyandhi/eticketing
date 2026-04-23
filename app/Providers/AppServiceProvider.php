@@ -4,12 +4,18 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Department;
+use App\Models\Divisi;
+use App\Models\JenisAset;
+use App\Models\Kantor;
 use App\Models\Kpi;
 use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Observers\CategoryObserver;
 use App\Observers\DepartmentObserver;
+use App\Observers\DivisiObserver;
+use App\Observers\JenisAsetObserver;
+use App\Observers\KantorObserver;
 use App\Observers\KpiObserver;
 use App\Observers\RoleObserver;
 use App\Observers\StatusObserver;
@@ -42,6 +48,10 @@ class AppServiceProvider extends ServiceProvider
         Kpi::observe(KpiObserver::class);
         Role::observe(RoleObserver::class);
         User::observe(UserObserver::class);
+        Divisi::observe(DivisiObserver::class);
+        Kantor::observe(KantorObserver::class);
+        JenisAset::observe(JenisAsetObserver::class);
+    
 
         Gate::before(function ($user, $ability) {
             if ($user->hasRole('Admin')) {

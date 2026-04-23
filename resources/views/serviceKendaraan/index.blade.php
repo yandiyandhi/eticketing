@@ -76,7 +76,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('service.detailPengajuan') }}"
+                                        <a href="{{ route('service.detailPengajuan', ['id' => $item->uuid]) }}"
                                             class="btn btn-sm btn-icon btn-info" title="Detail" target="_blank">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>

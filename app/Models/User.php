@@ -54,6 +54,16 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class);
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(jabatan::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'uuid';

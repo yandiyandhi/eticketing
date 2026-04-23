@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('department_id');
+            $table->foreignId('divisi_id');
+            $table->foreignId('jabatan_id');            
             $table->foreignId('kantor_id');
             $table->string('username')->unique();
             $table->string('name');            

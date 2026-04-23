@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Divisi')
+@section('title', 'Jabatan')
 @section('content')
     <div class="layout-page">
         <!-- Navbar -->
@@ -11,10 +11,10 @@
             <!-- Column Search -->
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">List Divisi</h5>
-                    <a href="{{ route('divisi.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
+                    <h5 class="mb-0">List Jabatan</h5>
+                    <a href="{{ route('jabatan.create') }}" class="btn btn-sm btn-primary"><i class="ti ti-plus me-1"></i>
                         Tambah
-                        Divisi</a>
+                        Jabatan</a>
                 </div>
 
                 <div class="table-responsive text-nowrap">

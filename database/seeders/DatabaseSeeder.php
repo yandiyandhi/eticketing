@@ -8,6 +8,7 @@ use App\Models\Kantor;
 use App\Models\Kpi;
 use App\Models\Status;
 use App\Models\Divisi;
+use App\Models\Jabatan;
 use App\Models\JenisAset;
 use App\Models\JensiAset;
 use App\Models\Kondisi;
@@ -54,31 +55,7 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
-
-        $user = User::create([
-            'uuid' => Str::uuid(),
-            'department_id' => '1',
-            'kantor_id' => '1',
-            'username' => 'admin',
-            'name' => 'Administrator',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('admin123*'),
-        ]);
-
-        $user->syncRoles('Admin');
-
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
-        User::create([
-            'uuid' => Str::uuid(),
-            'department_id' => '2',
-            'kantor_id' => '1',
-            'username' => 'yandi',
-            'name' => 'YandiYandhi',
-            'email' => 'yandi@example.com',
-            'password' => Hash::make('admin123*'),
-        ]);
-
+        
         Kpi::insert([
             [
                 'uuid' => Str::uuid(),
@@ -192,6 +169,56 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        Jabatan::Insert([
+            [
+                'uuid' => Str::uuid(),                
+                'name' => 'Staff',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'uuid' => Str::uuid(),                
+                'name' => 'Karyawan',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'uuid' => Str::uuid(),                
+                'name' => 'Sales',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        $user = User::create([
+            'uuid' => Str::uuid(),
+            'department_id' => '1',
+            'divisi_id' => '1',
+            'jabatan_id' => '1',
+            'kantor_id' => '1',
+            'username' => 'admin',
+            'name' => 'Administrator',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin123*'),
+        ]);
+
+        $user->syncRoles('Admin');
+
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+        User::create([
+            'uuid' => Str::uuid(),
+            'department_id' => '2',
+            'divisi_id' => '1',
+            'jabatan_id' => '1',
+            'kantor_id' => '1',
+            'username' => 'yandi',
+            'name' => 'YandiYandhi',
+            'email' => 'yandi@example.com',
+            'password' => Hash::make('admin123*'),
+        ]);
+
 
         $permissions = [
             'dashboardit.edit',
