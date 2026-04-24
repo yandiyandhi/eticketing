@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CRMController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DivisiController;
@@ -159,6 +160,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
         Route::put('/permission/{id}', 'update')->name('permission.update');
         Route::delete('/permission/{id}', 'destroy')->name('permission.destroy');
+    });
+
+    Route::controller(CRMController::class)->group(function(){
+    Route::get('/analytics', 'index')->name('analytic.index');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

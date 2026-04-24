@@ -211,6 +211,25 @@
         </li>
 
         <li class="menu-header small">
+            <span class="menu-header-text" data-i18n="Analytics">Analytics</span>
+        </li>
+
+        <li class="menu-item mb-6 {{ Route::is('analytic.index') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon ti ti-files"></i>
+                <div data-i18n="Analytics">Analytics</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('analytic.index') }}" class="menu-link">
+                        <div data-i18n="CRM">CRM</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Setting">Setting</span>
         </li>
 
