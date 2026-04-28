@@ -14,7 +14,7 @@ class KendaraanController extends Controller
     public function index()
     {
         $data = Kendaraan::with(['items', 'aset.jenis_aset', 'userPengajuan'])->where('status', ['diajukan', 'proses'])->orderBy('tanggal_pengajuan', 'desc')->paginate(10)->withQueryString();
-        
+
         return view('serviceKendaraan.index', compact('data'));
     }
 
@@ -33,23 +33,22 @@ class KendaraanController extends Controller
     }
 
     public function store(ServiceKendaraanRequest $request, KendaraanService $kendaraanService)
-    {                
+    {
         $kendaraanService->create($request->validated());
         return redirect()->back()->with("success", "Request berhasil disimpan.");
     }
 
     public function detailPengajuan($id)
     {
+        $kendaraan = Kendaraan::with(['items', 'aset', 'userPengajuan.jabatan', 'userPengajuan.department.divisi'])->where('uuid', $id)->first();
+        $pdf = Pdf::loadView('pdf.pengajuanService', [
+            'kendaraan' => $kendaraan
+        ]);
         try {
-            $kendaraan = Kendaraan::with(['items', 'aset', 'userPengajuan.department.divisi'])->where('uuid', $id)->first();
-            dd($kendaraan);
-            $pdf = Pdf::loadView('pdf.pengajuanService', [
-                'kendaraan' => $kendaraan
-            ]);
 
-            return $pdf->stream('pdf.pengajuanService'); 
+            return $pdf->stream('pdf.pengajuanService');
         } catch (\Throwable $th) {
             return abort(404, 'Not Found.');
-        }                 
+        }
     }
 }

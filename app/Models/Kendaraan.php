@@ -11,8 +11,12 @@ use Illuminate\Support\Str;
 class Kendaraan extends Model
 {
     use HasFactory, SoftDeletes;
-    
+
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'tanggal_pengajuan' => 'date',
+    ];
 
     public function items()
     {

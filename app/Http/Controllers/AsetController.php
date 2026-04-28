@@ -31,9 +31,9 @@ class AsetController extends Controller
         $kondisi = KondisiAset::orderBy('name', 'asc')->get();
         $jenisaset = JenisAset::orderBy('name', 'asc')->get();
         $kantors = Kantor::orderBy('name', 'asc')->get();
-        $users = User::orderBy('name', 'asc')->get();        
-        $divisi = Divisi::orderBy('name', 'asc')->get();        
-        $departemen = Department::orderBy('name', 'asc')->get();        
+        $users = User::orderBy('name', 'asc')->get();
+        $divisi = Divisi::orderBy('name', 'asc')->get();
+        $departemen = Department::orderBy('name', 'asc')->get();
 
         return view('dataRef.aset.createAset', compact('kondisi', 'jenisaset', 'kantors', 'users', 'divisi', 'departemen'));
     }
@@ -45,14 +45,8 @@ class AsetController extends Controller
         return redirect()->back()->with('success', 'Aset berhasil ditambahkan.');
     }
 
-    public function generateQrcode(AsetService $asetService, Aset $aset)
-    {        
-        // $asetService->generateQrcode($aset);
-        // Artisan::queue('aset:generate-aset-qr');
-        // foreach (Aset::cursor() as $aset) {
-        //     GenerateAsetQrJob::dispatch($aset);
-        // }
-
+    public function generateQrcode()
+    {
         GenerateAssetQrJob::dispatch();
 
         return redirect()->back()->with('success', 'Aset berhasil ditambahkan.');

@@ -22,7 +22,8 @@ return new class extends Migration
             $table->date('tanggal_approve')->nullable();
             $table->date('tanggal_service')->nullable();
             $table->date('tanggal_selesai')->nullable();
-            $table->string('keluhan')->nullable();
+            $table->string('deskripsi_service')->nullable();
+            $table->string('alasan_service')->nullable();
             $table->string('foto1')->nullable();
             $table->string('foto2')->nullable();
             $table->string('nama_vendor')->nullable();

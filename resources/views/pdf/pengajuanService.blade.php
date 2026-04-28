@@ -8,7 +8,7 @@
     <style>
         @page {
             size: A4;
-            margin: 130px 2cm 120px 2cm;
+            margin: 150px 2cm 120px 2cm;
         }
 
         body {
@@ -19,7 +19,7 @@
         /* HEADER FIXED */
         .header {
             position: fixed;
-            top: -110px;
+            top: -130px;
             left: 0;
             right: 0;
             text-align: center;
@@ -36,9 +36,11 @@
             font-size: 14px;
         }
 
+
         /* CONTENT */
         .content {
             width: 100%;
+            margin-top: 0;
         }
 
         .title {
@@ -63,14 +65,39 @@
             width: 70%;
         }
 
+        .tableItem {
+            width: 100%;
+        }
+
+        .tableItem thead {
+            display: table-header-group;
+        }
+
+        /* spacer header setiap page */
+        .tableItem thead::before {
+            content: "";
+            display: block;
+            height: 30px;
+        }
+
+        .tableItem tfoot {
+            display: table-row-group;
+        }
+
+        .tableItem tr {
+            page-break-inside: avoid;
+        }
+
+        .tableItem tbody::before {
+            content: "";
+            display: table-row;
+            height: 30px;
+        }
+
         .tableItem th,
         .tableItem td {
             border: 1px solid black;
             padding: 6px;
-        }
-
-        .tableItem {
-            width: 100%;
         }
 
         .names {
@@ -79,6 +106,11 @@
 
         tr {
             page-break-inside: avoid;
+        }
+
+        .img {
+            text-align: center;
+            margin-top: 10px;
         }
 
         /* APPROVAL */
@@ -136,57 +168,62 @@
             <tr>
                 <td width="38%">Nama Karyawan</td>
                 <td width="2%">:</td>
-                <td>{{ $kendaraan->userPengajuan->name }}</td>
+                <td>{{ $kendaraan->userPengajuan->name ?? '' }}</td>
             </tr>
             <tr>
                 <td>Jabatan</td>
                 <td>:</td>
-                <td>Caretacker</td>
+                <td>{{ $kendaraan->userPengajuan->jabatan->name ?? '' }}</td>
             </tr>
             <tr>
                 <td>Departemen</td>
                 <td>:</td>
-                <td>Logistik</td>
+                <td>{{ $kendaraan->userPengajuan->department->name ?? '' }}</td>
             </tr>
             <tr>
                 <td>Tanggal Pengajuan</td>
                 <td>:</td>
-                <td>11/04/2026</td>
+                <td>{{ $kendaraan->tanggal_pengajuan->format('d/m/Y') ?? '' }}</td>
             </tr>
         </table>
 
         <p style="margin-top:15px;"><b>Detail Kendaraan:</b></p>
 
         <table class="table">
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
             <tr>
                 <td width="2%">1.</td>
                 <td width="36%" class="names">Nama Kendaraan</td>
                 <td width="2%">:</td>
-                <td>Toyota Avanza</td>
+                <td>{{ ucwords($kendaraan->aset->nama_aset) ?? '' }}</td>
             </tr>
             <tr>
                 <td>2.</td>
                 <td class="names">Deskripsi Service</td>
                 <td>:</td>
-                <td>Ganti Oli dan Tune Up</td>
+                <td>{{ ucwords($kendaraan->deskripsi_service) ?? '' }}</td>
             </tr>
             <tr>
                 <td>3.</td>
                 <td class="names">Alasan</td>
                 <td>:</td>
-                <td>Sudah waktunya ganti oli</td>
+                <td>{{ ucwords($kendaraan->alasan_service) ?? '' }}</td>
             </tr>
             <tr>
                 <td>4.</td>
                 <td class="names">KM Sekarang</td>
                 <td>:</td>
-                <td>65628</td>
+                <td>{{ $kendaraan->kilometer_awal ?? '' }}</td>
             </tr>
             <tr>
                 <td>5.</td>
                 <td class="names">No Polisi</td>
                 <td>:</td>
-                <td>D 8937 FT</td>
+                <td>{{ Str::upper($kendaraan->aset->no_polisi) ?? '' }}</td>
             </tr>
         </table>
 
@@ -203,45 +240,34 @@
                     <th>Jumlah</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align: center;">1.</td>
-                    <td>Oli semi synthetic</td>
-                    <td>Oli Enduro</td>
-                    <td style="text-align: center;">1</td>
-                    <td>Rp. 450.000</td>
-                    <td>Rp. 450.000</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">2.</td>
-                    <td>Tune Up</td>
-                    <td>Tune Up</td>
-                    <td style="text-align: center;">1</td>
-                    <td>Rp. 600.000</td>
-                    <td>Rp. 600.000</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">1.</td>
-                    <td>Oli semi synthetic</td>
-                    <td>Oli Enduro</td>
-                    <td style="text-align: center;">1</td>
-                    <td>Rp. 450.000</td>
-                    <td>Rp. 450.000</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">2.</td>
-                    <td>Tune Up</td>
-                    <td>Tune Up</td>
-                    <td style="text-align: center;">1</td>
-                    <td>Rp. 600.000</td>
-                    <td>Rp. 600.000</td>
-                </tr>
 
-                <tr>
-                    <td colspan="5" style="text-align:center;"><b>Total</b></td>
-                    <td><b>Rp. 1.050.000</b></td>
-                </tr>
+            <tbody>
+                @forelse($kendaraan->items as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ucwords($item->nama_item) }}</td>
+                        <td>{{ ucwords($item->keterangan) }}</td>
+                        <td style="text-align:center">{{ $item->qty }}</td>
+                        <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6">Tidak ada item</td>
+                    </tr>
+                @endforelse
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align:center"><b>Total</b></td>
+                    <td>
+                        <b>
+                            Rp {{ number_format($kendaraan->items->sum('subtotal'), 0, ',', '.') }}
+                        </b>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 
         <!-- APPROVAL -->
@@ -269,6 +295,17 @@
 
         <div class="page-break">
             <p style="margin-top:50px;"><b>Dokumen Pendukung :</b></p>
+            <div class="img">
+                @if (!empty($kendaraan->foto1))
+                    <img src="{{ public_path('storage/' . $kendaraan->foto1) }}"
+                        style="margin-bottom: 20px; max-height: 300px;" width="100%">
+                @endif
+                <br>
+                @if (!empty($kendaraan->foto2))
+                    <img src="{{ public_path('storage/' . $kendaraan->foto2) }}"
+                        style="margin-bottom: 20px; max-height: 300px;" width="100%">
+                @endif
+            </div>
         </div>
 
         <div class="page-break">

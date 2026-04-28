@@ -39,11 +39,14 @@ class DivisiObserver
 
     public function saving(divisi $divisi): void
     {
-        $divisi->name = Str::title(
-            strtolower($divisi->name)
-        );
+        if (isset($divisi->name)) {
+            $length = strlen($divisi->name);
+
+            if ($length >= 2 && $length <= 3) {
+                $divisi->name = strtoupper($divisi->name);
+            } else {
+                $divisi->name = Str::title($divisi->name);
+            }
+        }
     }
-
-
-
 }

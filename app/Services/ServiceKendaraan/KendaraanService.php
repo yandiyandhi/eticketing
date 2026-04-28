@@ -91,7 +91,10 @@ class KendaraanService
                 imagecopyresampled(
                     $newImage,
                     $image,
-                    0, 0, 0, 0,
+                    0,
+                    0,
+                    0,
+                    0,
                     $newWidth,
                     $newHeight,
                     $width,
@@ -118,7 +121,7 @@ class KendaraanService
             ========================= */
             if (!empty($data['foto2']) && $data['foto2'] instanceof \Illuminate\Http\UploadedFile) {
                 $data['foto2'] = $compressImage($data['foto2'], 'foto2');
-            }                        
+            }
             /* =========================
             SAVE DATA
             ========================= */

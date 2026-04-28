@@ -25,9 +25,18 @@ class Divisi extends Model
 
     protected static function booted()
     {
-        static::creating(function($divisi) {
+        static::creating(function ($divisi) {
             $divisi->uuid = Str::uuid();
 
+            if (isset($divisi->name)) {
+                $length = strlen($divisi->name);
+
+                if ($length >= 2 && $length <= 3) {
+                    $divisi->name = strtoupper($divisi->name);
+                } else {
+                    $divisi->name = Str::title($divisi->name);
+                }
+            }
         });
     }
 }

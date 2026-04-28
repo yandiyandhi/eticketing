@@ -45,13 +45,21 @@
                         </div>
                         <div class="row g-4 mt-2">
                             <div class="col-lg-4">
-                                <label class="form-label">Keluhan</label>
-                                <input type="text" name="keluhan" class="form-control" value="{{ old('keluhan') }}">
+                                <label class="form-label">Deskripsi</label>
+                                <input type="text" name="deskripsi_service" class="form-control"
+                                    value="{{ old('deskripsi_service') }}">
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="form-label">Alasan</label>
+                                <input type="text" name="alasan_service" class="form-control"
+                                    value="{{ old('alasan_service') }}">
                             </div>
                             <div class="col-lg-4">
                                 <label class="form-label">Foto 1</label>
                                 <input type="file" name="foto1" class="form-control" value="{{ old('foto1') }}">
                             </div>
+                        </div>
+                        <div class="row g-4 mt-2">
                             <div class="col-lg-4">
                                 <label class="form-label">Foto 2</label>
                                 <input type="file" name="foto2" class="form-control" value="{{ old('foto2') }}">

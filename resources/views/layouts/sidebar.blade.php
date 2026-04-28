@@ -20,21 +20,22 @@
 
         <li class="menu-item {{ request()->routeIs('dashboard', 'ticketing.status') ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <i class="menu-icon fa-duotone fa-solid fa-house-chimney"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
             </a>
         </li>
 
         <!-- Main Menu -->
         <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Main Referensi">Main Referensi</span>
+            {{-- <span class="menu-header-text" data-i18n="Main Referensi">Main Referensi</span> --}}
+            <span class="menu-header-text" data-i18n="Main Menu">Main Menu</span>
         </li>
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'aset.create', 'jenisAset.index', 'aset.create', 'jabatan.create') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'jenisAset.index', 'jabatan.create', 'jabatan.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-package"></i>
+                <i class="menu-icon fa-solid fa-box"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
             </a>
 
@@ -121,24 +122,19 @@
                     <a href="{{ route('jenisAset.index') }}" class="menu-link">
                         <div data-i18n="Jenis Aset">Jenis Aset</div>
                     </a>
-                <li class="menu-item {{ Route::is('aset.create') ? 'active' : '' }}">
-                    <a href="{{ route('aset.create') }}" class="menu-link">
-                        <div data-i18n="Aset">Aset</div>
-                    </a>
-                </li>
             </ul>
         </li>
 
         <!-- Main Menu -->
-        <li class="menu-header small">
+        {{-- <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Main Menu">Main Menu</span>
-        </li>
+        </li> --}}
 
         <!-- Layouts -->
         <li
             class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit', 'service.index', 'service.create') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-server"></i>
+                <i class="menu-icon fa-solid fa-database"></i>
                 <div data-i18n="Master Data">Master Data</div>
             </a>
 
@@ -159,13 +155,13 @@
         </li>
 
 
-        <li class="menu-header small">
+        {{-- <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Report">Report</span>
-        </li>
+        </li> --}}
 
         <li class="menu-item {{ Route::is('ticketingit.reports', 'ticketinghr.reports') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-files"></i>
+                <i class="menu-icon fa-solid fa-chart-area"></i>
                 <div data-i18n="Laporan">Laporan</div>
             </a>
 
@@ -191,17 +187,22 @@
             </ul>
         </li>
 
-        <li class="menu-header small">
+        {{-- <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Inventory">Inventory</span>
-        </li>
+        </li> --}}
 
-        <li class="menu-item mb-6 {{ Route::is('aset.index') ? 'open' : '' }}">
+        <li class="menu-item mb-6 {{ Route::is('aset.index', 'aset.create') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-files"></i>
+                <i class="menu-icon fa-solid fa-toolbox"></i>
                 <div data-i18n="Inventory">Inventory</div>
             </a>
 
             <ul class="menu-sub">
+                <li class="menu-item {{ Route::is('aset.create') ? 'active' : '' }}">
+                    <a href="{{ route('aset.create') }}" class="menu-link">
+                        <div data-i18n="Tambah Aset">Tambah Aset</div>
+                    </a>
+                </li>
                 <li class="menu-item {{ Route::is('aset.index') ? 'active' : '' }}">
                     <a href="{{ route('aset.index') }}" class="menu-link">
                         <div data-i18n="Aset">Aset</div>
@@ -210,13 +211,13 @@
             </ul>
         </li>
 
-        <li class="menu-header small">
+        {{-- <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Analytics">Analytics</span>
         </li>
 
         <li class="menu-item mb-6 {{ Route::is('analytic.index') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-files"></i>
+                <i class="menu-icon fa-solid fa-chart-column"></i>
                 <div data-i18n="Analytics">Analytics</div>
             </a>
 
@@ -227,7 +228,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Setting">Setting</span>
@@ -236,7 +237,7 @@
         <li
             class="menu-item mb-6 {{ Route::is('ticketing.reports', 'role.index', 'role.edit', 'permission.index', 'permission.edit', 'role.permission', 'aset.generateQrcode') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-files"></i>
+                <i class="menu-icon fa-solid fa-gear"></i>
                 <div data-i18n="Role & Permissions">Role & Permissions</div>
             </a>
 

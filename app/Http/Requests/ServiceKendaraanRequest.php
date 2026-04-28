@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ServiceKendaraanRequest extends FormRequest
@@ -26,7 +25,8 @@ class ServiceKendaraanRequest extends FormRequest
             'jenis_aset_id' => 'required|exists:jenis_asets,id',
             'aset_id' => 'required|exists:asets,id',
             'kilometer_awal' => 'required|numeric',
-            'keluhan' => 'nullable|string', 
+            'deskripsi_service' => 'nullable|string',
+            'alasan_service' => 'nullable|string',
             'foto1' => 'nullable|mimes:jpg,jpeg,png|max:10240',
             'foto2' => 'nullable|mimes:jpg,jpeg,png|max:10240',
 
