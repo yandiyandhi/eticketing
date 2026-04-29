@@ -41,9 +41,10 @@
                                 <th>Jenis</th>
                                 <th>Nama</th>
                                 <th>No Polisi</th>
-                                <th>Keluhan</th>
+                                <th>Deskripsi</th>
+                                <th>Alasan</th>
                                 <th>User</th>
-                                <th>Tanggal Pengajuan</th>
+                                <th>Pengajuan</th>
                                 <th>Foto 1</th>
                                 <th>Foto 2</th>
                                 <th>Action</th>
@@ -56,9 +57,11 @@
                                     <td>{{ $item->aset->jenis_aset ? ucwords($item->aset->jenis_aset->name) : ' ' }}</td>
                                     <td>{{ $item->aset->nama_aset ? ucwords($item->aset->nama_aset) : ' ' }}</td>
                                     <td>{{ $item->aset->no_polisi ? strtoupper($item->aset->no_polisi) : ' ' }}</td>
-                                    <td>{{ $item->keluhan ? ucwords($item->keluhan) : ' ' }}</td>
+                                    <td>{{ $item->deskripsi_service ? ucwords($item->deskripsi_service) : ' ' }}</td>
+                                    <td>{{ $item->alasan_service ? ucwords($item->alasan_service) : ' ' }}</td>
                                     <td>{{ $item->userPengajuan ? ucwords($item->userPengajuan->name) : ' ' }}</td>
-                                    <td>{{ $item->tanggal_pengajuan ? $item->tanggal_pengajuan : ' ' }}</td>
+                                    <td>{{ $item->tanggal_pengajuan ? $item->tanggal_pengajuan->format('d-m-y') : ' ' }}
+                                    </td>
                                     <td>
                                         @if ($item->foto1)
                                             <a href="{{ asset('storage/' . $item->foto1) }}" target="_blank">
@@ -80,10 +83,17 @@
                                             class="btn btn-sm btn-icon btn-info" title="Detail" target="_blank">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-warning" title="Edit">
+                                        <a href="{{ route('service.editStatus', ['id' => $item->uuid]) }}"
+                                            class="btn btn-sm btn-icon btn-warning" title="Update Status">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger">
+                                        <a href="{{ route('service.editService', ['id' => $item->uuid]) }}"
+                                            class="btn btn-sm btn-icon btn-warning" title="Edit">
+                                            <i class="fa-solid fa-user-pen"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger batalService"
+                                            title="Batal" data-id="{{ $item->uuid }}"
+                                            data-name="{{ $item->aset->no_polisi }}">
                                             <i class="fa-solid fa-cancel"></i>
                                         </a>
                                     </td>
@@ -102,6 +112,10 @@
             </div>
             <!--/ Column Search -->
         </div>
+        <form id="formBatalService" method="POST">
+            @csrf
+            @method('put')
+        </form>
         @include('layouts.footercontent')
     </div>
 @endsection

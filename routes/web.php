@@ -57,8 +57,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/request-service', 'create')->name('service.create');
         Route::post('/service/store', 'store')->name('service.store');
 
+        Route::get('/edit/service/{id}', 'editService')->name('service.editService');
+        Route::put('/update/service/{id}', 'update')->name('service.update');
+
+        Route::get('/edit/status/{id}', 'editStatus')->name('service.editStatus');
+        Route::put('/update/status/{id}', 'updateStatus')->name('service.updateStatus');
+
         Route::get('/get-data/{id}', 'getDataKendaraan')->name('service.getDataKendaraan');
         Route::get('/detail/pengajuan/{id}', 'detailPengajuan')->name('service.detailPengajuan');
+        Route::put('/batal/service/{id}', 'batalService')->name('service.batalService');
     });
 
     Route::controller(KantorController::class)->group(function () {
@@ -90,6 +97,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/jabatan', 'index')->name('jabatan.index');
         Route::get('/jabatan/create', 'create')->name('jabatan.create');
         Route::post('/jabatan/store', 'store')->name('jabatan.store');
+        Route::get('/jabatan/edit/{id}', 'edit')->name('jabatan.edit');
+        Route::put('/jabatan/update/{id}', 'update')->name('jabatan.update');
+        Route::delete('/jabatan/{jabatan}', 'destroy')->name('divisi.session_destroy');
     });
 
     Route::controller(StatusController::class)->group(function () {

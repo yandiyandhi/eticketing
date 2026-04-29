@@ -39,12 +39,12 @@
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
 
-                                        <a href="{{ route('divisi.edit', ['id' => $item->uuid]) }}"
+                                        <a href="{{ route('jabatan.edit', ['id' => $item->uuid]) }}"
                                             class="btn btn-sm btn-icon btn-warning" title="Edit"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
-                                        @can('divisi.delete')
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteDivisi"
+                                        @can('jabatan.delete')
+                                            <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-danger deleteJabatan"
                                                 data-id="{{ $item->uuid }}" data-name="{{ $item->name }}" title="Hapus"
                                                 id="confirm-text">
                                                 <i class="fa-solid fa-trash"></i>
@@ -70,7 +70,7 @@
             <!--/ Column Search -->
         </div>
 
-        <form id="formDeleteDivisi" method="POST">
+        <form id="formDeleteJabatan" method="POST">
             @csrf
             @method('DELETE')
         </form>

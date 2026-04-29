@@ -14,13 +14,13 @@
                     <h5 class="modal-title">Tambah Jabatan</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('jabatan.store') }}">
+                    <form method="POST" action="{{ route('jabatan.update', ['id' => $jabatan->uuid]) }}">
                         @csrf
-                        @method('POST') <div class="modal-body">
+                        @method('put') <div class="modal-body">
 
                             <div class="mb-2">
                                 <label class="form-label">Nama Jabatan</label>
-                                <input type="text" name="name" class="form-control" value="{{ old('address') }}"
+                                <input type="text" name="name" class="form-control" value="{{ $jabatan->name ?? '' }}"
                                     required>
                             </div>
 

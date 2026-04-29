@@ -30,4 +30,35 @@ class JabatanController extends Controller
             return redirect()->back()->with('error', 'Data gagal ditambahkan');
         }
     }
+
+    public function edit($id)
+    {        
+        $jabatan = Jabatan::where('uuid', $id)->first();            
+        return view('dataRef.jabatan.editJabatan', compact('jabatan'));
+    }
+
+    public function update(RequestJabatan $request, $id, JabatanService $serviceJabatan)
+    {
+        try {
+            $serviceJabatan->update($id, $request->validated());
+    
+            return redirect()->back()->with('success', 'Data berhasil diupdate');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Data gagal diupdate');
+        }
+    }
+
+    public function destroy(Jabatan $jabatan, JabatanService $serviceJabatan)
+    {
+        try {                         
+            $serviceJabatan->delete($jabatan);
+            return redirect()
+                ->back()
+                ->with('success', 'Data berhasil dihapus');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->back()
+                ->with('error', 'Data gagal dihapus');
+        }
+    }
 }

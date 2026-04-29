@@ -298,9 +298,9 @@
             <div class="img">
                 @if (!empty($kendaraan->foto1))
                     <img src="{{ public_path('storage/' . $kendaraan->foto1) }}"
-                        style="margin-bottom: 20px; max-height: 300px;" width="100%">
+                        style="margin-bottom: 30px; max-height: 300px;" width="100%">
                 @endif
-                <br>
+
                 @if (!empty($kendaraan->foto2))
                     <img src="{{ public_path('storage/' . $kendaraan->foto2) }}"
                         style="margin-bottom: 20px; max-height: 300px;" width="100%">

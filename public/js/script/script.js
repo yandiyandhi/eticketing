@@ -70,6 +70,28 @@ $(document).on("click", ".deleteDivisi", function () {
     });
 });
 
+// Delete Jabatan
+$(document).on("click", ".deleteJabatan", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin menghapus?",
+        text: `Jabatan "${name}" akan dihapus`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formDeleteJabatan").attr("action", `/jabatan/${id}`);
+            $("#formDeleteJabatan").submit();
+        }
+    });
+});
+
+
 // Delete Kantor
 $(document).on("click", ".deleteKantor", function () {
     const id = $(this).data("id");
@@ -301,6 +323,27 @@ $(document).on("click", ".deleteRole", function () {
         if (result.isConfirmed) {
             $("#formDeleteRole").attr("action", `/role/${id}`);
             $("#formDeleteRole").submit();
+        }
+    });
+});
+
+
+$(document).on("click", ".batalService", function () {
+    const id = $(this).data("id");
+    const name = $(this).data("name");
+
+    Swal.fire({
+        title: "Yakin ingin membatalkan?",
+        text: `Service kendaraan "${name}" akan dibatalkan`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Batal",
+        cancelButtonText: "Batal",
+        confirmButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#formBatalService").attr("action", `/batal/service/${id}`);
+            $("#formBatalService").submit();
         }
     });
 });

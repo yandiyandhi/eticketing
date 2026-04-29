@@ -32,7 +32,7 @@
 
                             <div class="mb-2">
                                 <label class="form-label">Departemen</label>
-                                <select name="department_id" class="form-control deptselect2" required>
+                                <select name="department_id" id="department_id" class="form-control deptselect2" required>
                                     <option value="">-- Pilih Departemen --</option>
                                     @foreach ($departments as $department)
                                         <option value="{{ $department->id }}">
@@ -91,5 +91,40 @@
     <script src="{{ asset('js/script/script.js') }}"></script>
     <script>
         $('.deptselect2, .kantor').select2();
+    </script>
+
+    <script>
+        $('#jenis_aset_id').on('change', function() {
+
+            let jenis_id = $(this).val();
+
+            $('#aset_id').html('<option value="">Loading...</option>');
+
+            if (jenis_id) {
+                $.ajax({
+                    url: '/get-data/' + jenis_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+
+                        $('#aset_id').empty();
+                        $('#aset_id').append('<option value="">-- Pilih Kendaraan --</option>');
+
+                        $.each(data, function(key, value) {
+                            $('#aset_id').append(
+                                `<option value="${value.id}">
+                            ${(value.nama_aset ?? value.nama_aset).toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} - ${(value.no_polisi ?? value.no_polisi).toUpperCase()}
+                        </option>`
+                            );
+                        });
+
+                    }
+                });
+                $('#aset_id').trigger('change');
+            } else {
+                $('#aset_id').empty();
+            }
+
+        });
     </script>
 @endpush

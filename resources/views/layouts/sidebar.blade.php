@@ -33,7 +33,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'jenisAset.index', 'jabatan.create', 'jabatan.index') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('kantor.index', 'department.index', 'statuses.index', 'category.index', 'kpi.index', 'kantor.create', 'kantor.edit', 'user.index', 'user.create', 'user.edit', 'user.password', 'user.role', 'divisi.index', 'divisi.create', 'divisi.edit', 'jenisAset.index', 'jabatan.create', 'jabatan.index', 'jabatan.edit') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-box"></i>
                 <div data-i18n="Data Ref">Data Ref</div>
@@ -67,7 +67,8 @@
                         <div data-i18n="Divisi">Divisi</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Route::is('jabatan.index', 'jabatan.create') ? 'active' : '' }}">
+                <li
+                    class="menu-item {{ Route::is('jabatan.index', 'jabatan.create', 'jabatan.edit') ? 'active' : '' }}">
                     <a href="{{ route('jabatan.index') }}" class="menu-link">
                         <div data-i18n="Jabatan">Jabatan</div>
                     </a>
@@ -132,7 +133,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit', 'service.index', 'service.create') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit', 'service.index', 'service.create', 'service.editService') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-database"></i>
                 <div data-i18n="Master Data">Master Data</div>
@@ -144,9 +145,8 @@
                         <div data-i18n="Request Ticketing">Request Ticketing</div>
                     </a>
                 </li>
-            </ul>
-            <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('service.index', 'service.create') ? 'active' : '' }}">
+                <li
+                    class="menu-item {{ Route::is('service.index', 'service.create', 'service.editService') ? 'active' : '' }}">
                     <a href="{{ route('service.index') }}" class="menu-link">
                         <div data-i18n="Service Kendaraan">Service Kendaraan</div>
                     </a>

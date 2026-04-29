@@ -5,6 +5,7 @@ namespace App\Services\Department;
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 use DomainException;
+use Illuminate\Support\Str;
 
 class DepartmentService
 {
@@ -18,7 +19,6 @@ class DepartmentService
                 $department->restore();
                 return $department;
             }
-
             // Jika tidak ada buat baru
             return Department::create($data);
         });
@@ -26,7 +26,7 @@ class DepartmentService
 
     public function updateDepartment(Department $department, array $data): bool
     {
-        return DB::transaction(function () use ($department, $data) {
+        return DB::transaction(function () use ($department, $data) {                  
             $department->update($data);
             return $department->save();
         });

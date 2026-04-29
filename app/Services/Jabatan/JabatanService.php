@@ -23,4 +23,21 @@ class JabatanService
             return Jabatan::create($data);
         });
     }
+
+    public function update($id, array $data): Jabatan
+    {
+        return DB::transaction(function () use ($id, $data) {
+            $jabatan = Jabatan::where('uuid', $id)->firstOrFail();
+            $jabatan->update($data);
+            return $jabatan;
+        });
+    }
+
+    public function delete(Jabatan $jabatan): void
+    {
+        DB::transaction(function () use ($jabatan) {
+            // dd($jabatan);
+            $jabatan->delete();
+        });
+    }
 }

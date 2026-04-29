@@ -33,9 +33,9 @@ class DivisiController extends Controller
     }
 
     public function edit($id)
-    {
+    {        
         $divisi = Divisi::where('uuid', $id)->first();
-        $departments = Department::orderBy('name', 'asc')->get();
+        $departments = Department::orderBy('name', 'asc')->get();        
         return view('dataRef.divisi.editDivisi', compact('divisi', 'departments'));
     }
 

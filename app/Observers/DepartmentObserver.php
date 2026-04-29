@@ -40,8 +40,12 @@ class DepartmentObserver
 
     public function saving(Department $department): void
     {
-        $department->name = Str::title(
-            strtolower($department->name)
-        );
+        $length = strlen($department->name);
+        if ($length >= 2 && $length <= 3) {
+            $department->name = strtoupper($department->name);
+        } else {    
+                $department->name = Str::title(
+                strtolower($department->name));
+        }
     }
 }

@@ -23,7 +23,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|unique:users,username|max:255',
+            'username' => 'required|string|unique:users,username|max:255|lowercase',
             'department_id' => 'required|exists:departments,id',
             'kantor_id' => 'required|exists:kantors,id',
             'email' => 'required|email|unique:users,email',
