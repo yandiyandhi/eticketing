@@ -24,7 +24,8 @@ class EditUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
-            'department_id' => 'required|exists:departments,id',
+            'divisi_id' => 'required|exists:divisis,id',
+            'jabatan_id' => 'required|exists:jabatans,id',
             'kantor_id' => 'required|exists:kantors,id',
             'email' => 'required|email',
             'active' => 'required|boolean',            

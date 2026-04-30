@@ -31,12 +31,25 @@
                             </div>
 
                             <div class="mb-2">
-                                <label class="form-label">Departemen</label>
-                                <select name="department_id" id="department_id" class="form-control deptselect2" required>
-                                    <option value="">-- Pilih Departemen --</option>
-                                    @foreach ($departments as $department)
-                                        <option value="{{ $department->id }}">
-                                            {{ $department->name }}
+                                <label class="form-label">Divisi</label>
+                                <select name="divisi_id" id="divisi_id" class="form-control divisiselect2"
+                                    id="divisiselect2" required>
+                                    <option value="">-- Pilih Divisi --</option>
+                                    @foreach ($divisi as $div)
+                                        <option value="{{ $div->id }}">
+                                            {{ $div->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Jabatan</label>
+                                <select name="jabatan_id" id="jabatan_id" class="form-control jabatanselect2" required>
+                                    <option value="">-- Pilih Jabatan --</option>
+                                    @foreach ($jabatans as $jabatan)
+                                        <option value="{{ $jabatan->id }}">
+                                            {{ $jabatan->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -68,7 +81,7 @@
 
                             <div class="mb-2">
                                 <label class="form-label">Status</label>
-                                <select name="active" class="form-control" required>
+                                <select name="active" class="form-control status" required>
                                     <option value="">-- Pilih Status --</option>
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
@@ -90,7 +103,7 @@
 @push('myscript')
     <script src="{{ asset('js/script/script.js') }}"></script>
     <script>
-        $('.deptselect2, .kantor').select2();
+        $('.divisiselect2, .jabatanselect2, .kantor, .status').select2();
     </script>
 
     <script>

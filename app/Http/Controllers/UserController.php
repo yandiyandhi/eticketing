@@ -7,6 +7,8 @@ use App\Http\Requests\UserRequest;
 use Exception;
 use App\Models\User;
 use App\Models\Department;
+use App\Models\Divisi;
+use App\Models\Jabatan;
 use App\Models\Kantor;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
@@ -27,10 +29,11 @@ class UserController extends Controller
 
     public function create()
     {
-        $departments = Department::orderBy('name', 'asc')->get();
+        $divisi = Divisi::orderBy('name', 'asc')->get();
         $kantors = Kantor::orderBy('name', 'asc')->get();
+        $jabatans = Jabatan::orderBy('name', 'asc')->get();
 
-        return view('dataRef.users.createUser', compact('departments', 'kantors'));
+        return view('dataRef.users.createUser', compact('divisi', 'kantors', 'jabatans'));
     }
 
     public function store(UserRequest $request, UserService $userService)
@@ -46,10 +49,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('uuid', $id)->first();
-        $departments = Department::orderBy('name', 'asc')->get();
+        $divisi = Divisi::orderBy('name', 'asc')->get();
         $kantors = Kantor::orderBy('name', 'asc')->get();
+        $jabatans = Jabatan::orderBy('name', 'asc')->get();        
 
-        return view('dataRef.users.editUser', compact('user', 'departments', 'kantors'));
+        return view('dataRef.users.editUser', compact('user', 'divisi', 'kantors', 'jabatans'));
     }
 
     public function update(EditUserRequest $request, $id, UserService $userService)

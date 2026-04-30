@@ -24,7 +24,8 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users,username|max:255|lowercase',
-            'department_id' => 'required|exists:departments,id',
+            'divisi_id' => 'required|exists:divisis,id',
+            'jabatan_id' => 'required|exists:jabatans,id',
             'kantor_id' => 'required|exists:kantors,id',
             'email' => 'required|email|unique:users,email',
             'active' => 'required|boolean',

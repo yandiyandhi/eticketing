@@ -30,7 +30,8 @@
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>kantor</th>
-                                <th>Departemen</th>
+                                <th>Divisi</th>
+                                <th>Jabatan</th>
                                 <th>Role</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -44,7 +45,8 @@
                                     <td>{{ $item->username }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->kantor->name ?? 'N/A' }}</td>
-                                    <td>{{ $item->department->name ?? 'N/A' }}</td>
+                                    <td>{{ $item->divisi->name ?? 'N/A' }}</td>
+                                    <td>{{ $item->jabatan->name ?? 'N/A' }}</td>
                                     <td>
                                         @forelse ($item->roles as $role)
                                             {{ $role->name }}
