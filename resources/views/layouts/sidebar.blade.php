@@ -133,7 +133,7 @@
 
         <!-- Layouts -->
         <li
-            class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit', 'service.index', 'service.create', 'service.editService') ? 'open' : '' }}">
+            class="menu-item {{ Route::is('ticketing.index', 'ticketing.edit', 'service.index', 'service.create', 'service.editService', 'service.editStatus') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-database"></i>
                 <div data-i18n="Master Data">Master Data</div>
@@ -146,7 +146,7 @@
                     </a>
                 </li>
                 <li
-                    class="menu-item {{ Route::is('service.index', 'service.create', 'service.editService') ? 'active' : '' }}">
+                    class="menu-item {{ Route::is('service.index', 'service.create', 'service.editService', 'service.editStatus') ? 'active' : '' }}">
                     <a href="{{ route('service.index') }}" class="menu-link">
                         <div data-i18n="Service Kendaraan">Service Kendaraan</div>
                     </a>
